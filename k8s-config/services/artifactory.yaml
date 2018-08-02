@@ -8,6 +8,5 @@ spec:
   ports:
     - port: 8099
       name: frontend
-  clusterIP: None
   selector:
     app: artifactory

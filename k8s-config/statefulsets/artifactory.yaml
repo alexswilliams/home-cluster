@@ -16,22 +16,22 @@ spec:
         app: artifactory
     spec:
       containers:
-        - name: artifactory
-          image: docker.bintray.io/jfrog/artifactory-oss
-          ports:
-            - containerPort: 8081
-              name: frontend
-          volumeMounts:
-            - mountPath: /var/opt/jfrog/artifactory
-              name: artifactory-data
-
-  volumeClaimTemplates:
-    - metadata:
-        name: artifactory-data
-      spec:
-        accessModes:
-          - "ReadWriteOnce"
-        storageClassName: local-storage
-        resources:
-          requests:
-            storage: 512Mi
+      - name: artifactory
+        image: docker.bintray.io/jfrog/artifactory-oss
+        ports:
+        - containerPort: 8081
+          name: frontend
+#        volumeMounts:
+#        - mountPath: /var/opt/jfrog/artifactory
+#          name: artifactory-data
+#
+#  volumeClaimTemplates:
+#  - metadata:
+#      name: artifactory-data
+#    spec:
+#      accessModes:
+#      - ReadWriteOnce
+#      storageClassName: local-storage
+#      resources:
+#        requests:
+#          storage: 512Mi
