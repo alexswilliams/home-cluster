@@ -23,11 +23,11 @@ spec:
               name: frontend
           volumeMounts:
             - mountPath: /var/opt/jfrog/artifactory
-              name: artifactory_data
+              name: artifactory-data
 
   volumeClaimTemplates:
     - metadata:
-        name: artifactory_data
+        name: artifactory-data
       spec:
         accessModes:
           - "ReadWriteOnce"
