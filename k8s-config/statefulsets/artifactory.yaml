@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: artifactory
-  namespace: artifactory
 spec:
   serviceName: artifactory-service
   replicas: 1
