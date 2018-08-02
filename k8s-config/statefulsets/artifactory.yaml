@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: artifactory
+  namespace: artifactory
+spec:
+  serviceName: artifactory-service
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: artifactory
+
+  template:
+    metadata:
+      labels:
+        app: artifactory
+    spec:
+      containers:
+        - name: artifactory
+          image: docker.bintray.io/jfrog/artifactory-oss
+          ports:
+            - containerPort: 8081
+              name: frontend
+          volumeMounts:
+            - mountPath: /var/opt/jfrog/artifactory
+              name: artifactory_data
+
+  volumeClaimTemplates:
+    - metadata:
+        name: artifactory_data
+      spec:
+        accessModes:
+          - "ReadWriteOnce"
+        resources:
+          requests:
+            storage: 512MB
