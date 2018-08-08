@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: docker-registry
+spec:
+  serviceName: docker-registry-service
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: docker-registry
+
+  template:
+    metadata:
+      labels:
+        app: docker-registry
+    spec:
+      containers:
+      - name: docker-registry
+        image: registry
+        ports:
+        - containerPort: 5000
+          name: registry-port
+        volumeMounts:
+        - mountPath: /var/lib/registry
+          name: docker-registry-data
+        env:
+          - name: REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY
+            value: /var/lib/registry
+
+  volumeClaimTemplates:
+  - metadata:
+      name: docker-registry-data
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      storageClassName: local-storage
+      resources:
+        requests:
+          storage: 1Gi
