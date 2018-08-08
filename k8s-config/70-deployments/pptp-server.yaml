@@ -7,6 +7,10 @@ spec:
     matchLabels:
       app: pptp-server
 
+  replicas: 1
+  strategy:
+    type: Recreate
+
   template:
 
     metadata:
@@ -14,12 +18,22 @@ spec:
         app: pptp-server
 
     spec:
+      volumes:
+      - name: pptp-config
+        configMap:
+          name: pptp-config
+
       containers:
       - name: pptp-server
         image: pptp-server
+
         ports:
         - containerPort: 1723
           name: pptp-port
+
+        securityContext:
+          privileged: true
+
         volumeMounts:
         - mountPath: /etc/ppp/chap-secrets
           name: pptp-config
@@ -33,10 +47,6 @@ spec:
           name: pptp-config
           subPath: pptpd-options
           readOnly: true
-      volumes:
-      - name: pptp-config
-        configMap:
-          name: pptp-config
 ---
 apiVersion: v1
 kind: ConfigMap
