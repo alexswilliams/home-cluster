@@ -21,17 +21,17 @@ spec:
         ports:
         - containerPort: 8081
           name: frontend
-#        volumeMounts:
-#        - mountPath: /var/opt/jfrog/artifactory
-#          name: artifactory-data
-#
-#  volumeClaimTemplates:
-#  - metadata:
-#      name: artifactory-data
-#    spec:
-#      accessModes:
-#      - ReadWriteOnce
-#      storageClassName: local-storage
-#      resources:
-#        requests:
-#          storage: 512Mi
+        volumeMounts:
+        - mountPath: /var/opt/jfrog/artifactory
+          name: artifactory-data
+
+  volumeClaimTemplates:
+  - metadata:
+      name: artifactory-data
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      storageClassName: local-storage
+      resources:
+        requests:
+          storage: 512Mi

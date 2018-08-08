@@ -6,7 +6,7 @@ metadata:
     app: artifactory
 spec:
   ports:
-    - port: 8099
+    - port: 8081
       name: frontend
   selector:
     app: artifactory
