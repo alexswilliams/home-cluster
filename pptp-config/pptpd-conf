@@ -1,4 +1,0 @@
-# debug
-option /etc/ppp/pptpd-options
-delegate
-remoteip 10.254.1.2-254
