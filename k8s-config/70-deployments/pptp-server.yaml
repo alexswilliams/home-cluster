@@ -6,7 +6,13 @@ spec:
   selector:
     matchLabels:
       app: pptp-server
+
   template:
+
+    metadata:
+      labels:
+        app: pptp-server
+
     spec:
       containers:
       - name: pptp-server
@@ -27,6 +33,7 @@ spec:
           name: pptp-config
           subPath: pptpd-options
           readOnly: true
+
       volumes:
       - name: pptp-config
         configMap:
