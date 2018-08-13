@@ -3,6 +3,8 @@ kind: Deployment
 metadata:
   name: pptp-server
 spec:
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       app: pptp-server
@@ -16,10 +18,13 @@ spec:
     spec:
       containers:
       - name: pptp-server
-        image: pptp-server
+        image: docker-registry-service:5000/pptp-server
+        imagePullPolicy: Always
         ports:
         - containerPort: 1723
           name: pptp-port
+        securityContext:
+          privileged: true
         volumeMounts:
         - mountPath: /etc/ppp/chap-secrets
           name: pptp-config
@@ -33,6 +38,9 @@ spec:
           name: pptp-config
           subPath: pptpd-options
           readOnly: true
+      hostNetwork: true
+      dnsPolicy: ClusterFirstWithHostNet
+      restartPolicy: Always
       volumes:
       - name: pptp-config
         configMap:
