@@ -9,6 +9,10 @@ spec:
     matchLabels:
       app: pptp-server
 
+  replicas: 1
+  strategy:
+    type: Recreate
+
   template:
 
     metadata:
@@ -16,6 +20,11 @@ spec:
         app: pptp-server
 
     spec:
+      volumes:
+      - name: pptp-config
+        configMap:
+          name: pptp-config
+
       containers:
       - name: pptp-server
         image: docker-registry-service:5000/pptp-server
