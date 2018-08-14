@@ -1,0 +1,19 @@
+---
+- hosts: kube-admin
+  gather_facts: no
+  become: yes
+
+  pre_tasks:
+  - name: "Install Python2"
+    raw: test -e /usr/bin/python || (apt-get -y update && apt-get install -y python-minimal)
+    register: output
+    changed_when: output.stdout != ""
+    tags: always
+  - name: "Setting up Ansible"
+    setup:
+
+  roles:
+  - secure-transport
+  - docker-ce
+  - kubernetes-base
+  - kubernetes-admin

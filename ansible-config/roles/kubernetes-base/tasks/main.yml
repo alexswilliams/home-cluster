@@ -1,0 +1,21 @@
+- name: Install Kubernetes apt key
+  apt_key:
+    url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+    state: present
+
+- name: Install Kubernetes repository
+  apt_repository:
+    repo: deb http://apt.kubernetes.io/ kubernetes-xenial main
+    update_cache: yes
+    state: present
+
+- name: Install Kubernetes Base Packages
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    k8s_version: "1.10.6-00"
+    packages:
+    - "kubelet={{ k8s_version }}"
+    - "kubeadm={{ k8s_version }}"
+    - "kubectl={{ k8s_version }}"

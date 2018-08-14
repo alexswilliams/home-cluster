@@ -1,0 +1,16 @@
+- name: Install Docker apt key
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+
+- name: Install Docker repository
+  apt_repository:
+    repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable
+    update_cache: yes
+    state: present
+
+- name: Install Docker CE
+  apt:
+    name: docker-ce
+    state: present
+

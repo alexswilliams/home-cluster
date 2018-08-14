@@ -1,0 +1,16 @@
+- name: Has apt-transport-https
+  apt:
+    name: "apt-transport-https"
+    state: present
+- name: Has curl
+  apt:
+    name: "curl"
+    state: present
+- name: Has ca-certificates
+  apt:
+    name: "ca-certificates"
+    state: present
+- name: Has software-properties-common
+  apt:
+    name: "software-properties-common"
+    state: present
