@@ -49,9 +49,9 @@ spec:
           name: fluentd-udp
 
         volumeMounts:
-        - mountPath: /fluentd/etc/fluentd.conf
+        - mountPath: /fluentd/etc/fluent.conf
           name: fluentd-config
-          subPath: fluentd.conf
+          subPath: fluent.conf
           readOnly: true
 
 ---
@@ -60,7 +60,7 @@ kind: ConfigMap
 metadata:
   name: fluentd-config
 data:
-  fluentd.conf: |
+  fluent.conf: |
     <source>
       @type http
       port 9800
