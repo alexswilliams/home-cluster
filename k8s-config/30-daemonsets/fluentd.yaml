@@ -15,6 +15,7 @@ spec:
 
     spec:
       restartPolicy: Always
+      hostNetwork: true
 
       # tolerations:
       #   - key: node-role.kubernetes.io/master
