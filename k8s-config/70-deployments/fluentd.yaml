@@ -29,12 +29,19 @@ spec:
       - name: fluentd
         image: fluent/fluentd:stable
         ports:
+        - containerPort: 9800
+          hostPort: 9800
+          hostIP: 0.0.0.0
+          protocol: TCP
+          name: fluent-test
         - containerPort: 24224
           hostPort: 24224
+          hostIP: 0.0.0.0
           protocol: TCP
           name: fluentd-tcp
         - containerPort: 24224
           hostPort: 24224
+          hostIP: 0.0.0.0
           protocol: UDP
           name: fluentd-udp
 

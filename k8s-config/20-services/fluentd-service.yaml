@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: pptp-service
+  labels:
+    app: fluentd
+spec:
+  ports:
+  - port: 9800
+    name: fluent-test
+  selector:
+    app: fluentd
