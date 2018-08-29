@@ -19,6 +19,8 @@ spec:
         app: fluentd
 
     spec:
+      hostNetwork: true
+      dnsPolicy: ClusterFirstWithHostNet
       restartPolicy: Always
 
       volumes:
