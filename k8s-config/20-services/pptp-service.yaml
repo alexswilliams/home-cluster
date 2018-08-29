@@ -6,7 +6,7 @@ metadata:
     app: pptp-server
 spec:
   ports:
-    - port: 1723
-      name: pptp-port
+  - port: 1723
+    name: pptp-port
   selector:
     app: pptp-server

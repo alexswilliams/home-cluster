@@ -3,8 +3,6 @@ kind: Deployment
 metadata:
   name: pptp-server
 spec:
-  strategy:
-    type: Recreate
   selector:
     matchLabels:
       app: pptp-server
@@ -50,10 +48,6 @@ spec:
       hostNetwork: true
       dnsPolicy: ClusterFirstWithHostNet
       restartPolicy: Always
-      volumes:
-      - name: pptp-config
-        configMap:
-          name: pptp-config
 ---
 apiVersion: v1
 kind: ConfigMap

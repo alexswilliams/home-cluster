@@ -4,7 +4,7 @@ metadata:
   name: artifactory
 spec:
   serviceName: artifactory-service
-  replicas: 1
+  replicas: 0
 
   selector:
     matchLabels:

@@ -6,7 +6,7 @@ metadata:
     app: docker-registry
 spec:
   ports:
-    - port: 5000
-      name: registry-port
+  - port: 5000
+    name: registry-port
   selector:
     app: docker-registry
