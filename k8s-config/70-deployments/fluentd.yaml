@@ -9,7 +9,8 @@ spec:
 
   replicas: 1
   strategy:
-    type: RollingUpdate
+    # todo: maybe best to have this rolling.
+    type: Recreate
 
   template:
 
