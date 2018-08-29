@@ -10,6 +10,6 @@ spec:
   - port: 9800
     name: fluent-test-external
     targetPort: fluent-test
-    nodePort: 9800
+    nodePort: 30000
   selector:
     app: fluentd
