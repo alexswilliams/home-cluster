@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fluentd
+spec:
+  selector:
+    matchLabels:
+      app: fluentd
+
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+
+  template:
+
+    metadata:
+      labels:
+        app: fluentd
+
+    spec:
+      restartPolicy: Always
+      containers:
+      - name: fluentd
+        image: fluent/fluentd:stable
+        ports:
+        - containerPort: 24224
+          hostPort: 24224
+          protocol: TCP
+          name: fluentd-tcp
+        - containerPort: 24224
+          hostPort: 24224
+          protocol: UDP
+          name: fluentd-udp
+
+        volumeMounts:
+        - mountPath: /fluentd/etc/fluentd.conf
+          name: fluentd-config
+          subPath: fluentd.conf
+          readOnly: true
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: fluentd-config
+data:
+  fluentd.conf: |
+    <source>
+      @type http
+      port 9800
+      bind 0.0.0.0
+    </source>
+    <match **>
+      @type stdout
+    </match>

@@ -23,12 +23,15 @@ spec:
         configMap:
           name: pptp-config
 
+      restartPolicy: Always
+
       containers:
       - name: pptp-server
         image: docker-registry-service:5000/pptp-server
         imagePullPolicy: Always
         ports:
         - containerPort: 1723
+          hostPort: 1723
           name: pptp-port
         securityContext:
           privileged: true
@@ -45,9 +48,6 @@ spec:
           name: pptp-config
           subPath: pptpd-options
           readOnly: true
-      hostNetwork: true
-      dnsPolicy: ClusterFirstWithHostNet
-      restartPolicy: Always
 ---
 apiVersion: v1
 kind: ConfigMap
