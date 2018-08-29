@@ -67,6 +67,7 @@ data:
       port 5140
       protocol_type udp
       message_length_limit 4096
+      message_format auto
       tag from_syslog
     </source>
     <match **>
