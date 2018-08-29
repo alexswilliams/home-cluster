@@ -1,16 +1,11 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: DaemonSet
 metadata:
   name: fluentd
 spec:
   selector:
     matchLabels:
       app: fluentd
-
-  replicas: 1
-  strategy:
-    # todo: maybe best to have this rolling.
-    type: Recreate
 
   template:
 
@@ -20,6 +15,10 @@ spec:
 
     spec:
       restartPolicy: Always
+
+      # tolerations:
+      #   - key: node-role.kubernetes.io/master
+      #     effect: NoSchedule
 
       volumes:
       - name: fluentd-config
