@@ -63,9 +63,10 @@ data:
   fluent.conf: |
     <source>
       @type http
+      @id test_source
       port 9800
-      bind 0.0.0.0
     </source>
     <match **>
       @type stdout
+      @id console_out
     </match>
