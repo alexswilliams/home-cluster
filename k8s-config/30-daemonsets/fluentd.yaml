@@ -16,6 +16,7 @@ spec:
     spec:
       restartPolicy: Always
       hostNetwork: true
+      dnsPolicy: ClusterFirstWithHostNet
 
       # tolerations:
       #   - key: node-role.kubernetes.io/master
@@ -34,6 +35,14 @@ spec:
           protocol: TCP
           hostPort: 9800
           name: fluent-test
+        - containerPort: 5140
+          protocol: TCP
+          hostPort: 5140
+          name: fluent-syslog-tcp
+        - containerPort: 5140
+          protocol: UDP
+          hostPort: 5140
+          name: fluent-syslog-udp
 
         volumeMounts:
         - mountPath: /fluentd/etc/fluent.conf
@@ -52,6 +61,13 @@ data:
       @type http
       @id test_source
       port 9800
+    </source>
+    <source>
+      @type syslog
+      port 5140
+      protocol_type udp
+      message_length_limit 4096
+      tag from_syslog
     </source>
     <match **>
       @type stdout
