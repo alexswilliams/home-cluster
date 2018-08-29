@@ -5,9 +5,11 @@ metadata:
   labels:
     app: fluentd
 spec:
+  type: NodePort
   ports:
   - port: 9800
-    name: fluent-test
+    name: fluent-test-external
+    targetPort: fluent-test
     nodePort: 9800
   selector:
     app: fluentd
