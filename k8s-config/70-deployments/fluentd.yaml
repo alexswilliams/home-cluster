@@ -21,9 +21,9 @@ spec:
       restartPolicy: Always
 
       volumes:
-      - name: pptp-config
+      - name: fluentd-config
         configMap:
-          name: pptp-config
+          name: fluentd-config
 
       containers:
       - name: fluentd
