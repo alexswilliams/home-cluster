@@ -9,16 +9,16 @@ spec:
   ports:
   - port: 9800
     name: fluent-test-external
-    targetPort: fluent-test
+    targetPort: test
     nodePort: 30000
   - port: 5140
     name: fluent-syslog-tcp-external
-    targetPort: fluent-syslog-tcp
+    targetPort: syslog-tcp
     protocol: TCP
     nodePort: 30001
   - port: 5140
     name: fluent-syslog-tcp-external
-    targetPort: fluent-syslog-udp
+    targetPort: syslog-udp
     protocol: UDP
     nodePort: 30001
   selector:
