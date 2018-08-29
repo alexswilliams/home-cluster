@@ -18,12 +18,14 @@ spec:
         app: pptp-server
 
     spec:
+      hostNetwork: true
+      dnsPolicy: ClusterFirstWithHostNet
+      restartPolicy: Always
+
       volumes:
       - name: pptp-config
         configMap:
           name: pptp-config
-
-      restartPolicy: Always
 
       containers:
       - name: pptp-server
@@ -31,7 +33,6 @@ spec:
         imagePullPolicy: Always
         ports:
         - containerPort: 1723
-          hostPort: 1723
           name: pptp-port
         securityContext:
           privileged: true
