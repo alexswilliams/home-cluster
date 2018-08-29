@@ -31,17 +31,8 @@ spec:
         ports:
         - containerPort: 9800
           protocol: TCP
+          hostPort: 9800
           name: fluent-test
-        - containerPort: 24224
-          hostPort: 24224
-          hostIP: 0.0.0.0
-          protocol: TCP
-          name: fluentd-tcp
-        - containerPort: 24224
-          hostPort: 24224
-          hostIP: 0.0.0.0
-          protocol: UDP
-          name: fluentd-udp
 
         volumeMounts:
         - mountPath: /fluentd/etc/fluent.conf
