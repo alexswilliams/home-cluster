@@ -8,5 +8,6 @@ spec:
   ports:
   - port: 9800
     name: fluent-test
+    nodePort: 9800
   selector:
     app: fluentd
