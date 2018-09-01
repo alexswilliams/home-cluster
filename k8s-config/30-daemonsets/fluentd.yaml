@@ -31,14 +31,6 @@ spec:
       - name: fluentd
         image: fluent/fluentd:stable
         ports:
-        - containerPort: 9800
-          protocol: TCP
-          hostPort: 9800
-          name: test
-        - containerPort: 5140
-          protocol: TCP
-          hostPort: 5140
-          name: syslog-tcp
         - containerPort: 5140
           protocol: UDP
           hostPort: 5140
@@ -57,11 +49,6 @@ metadata:
   name: fluentd-config
 data:
   fluent.conf: |
-    <source>
-      @type http
-      @id test_source
-      port 9800
-    </source>
     <source>
       @type syslog
       port 5140
