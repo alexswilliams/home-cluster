@@ -49,3 +49,4 @@ data:
     server.port: 5601
     server.ssl.enabled: false
     server.name: London Kibana
+    server.basePath: http://london.alexswilliams.co.uk:30002
