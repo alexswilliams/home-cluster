@@ -57,7 +57,14 @@ data:
       message_format auto
       tag from_syslog
     </source>
-    <match **>
+    <filter **>
       @type stdout
       @id console_out
+    </match>
+    <match from_syslog.**>
+      @type elasticsearch
+      logstash_format true
+      <buffer>
+        flush_interval 10s
+      </buffer>
     </match>
