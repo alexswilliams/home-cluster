@@ -18,6 +18,12 @@ spec:
       hostNetwork: true
       dnsPolicy: ClusterFirstWithHostNet
 
+      volumes:
+      - name: letsencrypt
+        persistentVolumeClaim:
+          claimName: certificate-pvc
+          readOnly: true
+
       containers:
       - name: docker-registry
         image: registry
@@ -28,9 +34,17 @@ spec:
         volumeMounts:
         - mountPath: /var/lib/registry
           name: docker-registry-data
+        - mountPath: /etc/letsencrypt
+          name: letsencrypt
         env:
         - name: REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY
           value: /var/lib/registry
+        - name: REGISTRY_HTTP_ADDR
+          value: 0.0.0.0:5000
+        - name: REGISTRY_HTTP_TLS_CERTIFICATE
+          value: /etc/letsencrypt/live/london.alexswilliams.co.uk/fullchain.pem
+        - name: REGISTRY_HTTP_TLS_KEY
+          value: /etc/letsencrypt/live/london.alexswilliams.co.uk/privkey.pem
 
   volumeClaimTemplates:
   - metadata:
