@@ -93,9 +93,9 @@ data:
         location /elasticsearch {
           proxy_pass http://elasticsearch-service:9200/;
         }
-        location /artifactory {
-          proxy_pass http://artifactory-service:8081/;
-        }
+        #        location /artifactory {
+        #          proxy_pass http://artifactory-service:8081/;
+        #        }
 
         # Kibana handles its own proxy forward name stripping.
         location /kibana {
