@@ -34,11 +34,11 @@ spec:
         - containerPort: 5140
           protocol: UDP
           hostPort: 5140
-          name: syslog-udp-draytek
+          name: syslog-router
         - containerPort: 5141
           protocol: UDP
           hostPort: 5141
-          name: syslog-udp-accesspoint
+          name: syslog-ap
 
         volumeMounts:
         - mountPath: /fluentd/etc/fluent.conf
