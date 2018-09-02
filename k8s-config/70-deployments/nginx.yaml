@@ -96,9 +96,6 @@ data:
         location /artifactory {
           proxy_pass http://artifactory-service:8081/;
         }
-        location /docker {
-          proxy_pass http://docker-registry-service:5000/;
-        }
 
         # Kibana handles its own proxy forward name stripping.
         location /kibana {

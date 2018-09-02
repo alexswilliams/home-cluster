@@ -15,12 +15,16 @@ spec:
       labels:
         app: docker-registry
     spec:
+      hostNetwork: true
+      dnsPolicy: ClusterFirstWithHostNet
+
       containers:
       - name: docker-registry
         image: registry
         ports:
         - containerPort: 5000
           name: registry-port
+          hostPort: 5000
         volumeMounts:
         - mountPath: /var/lib/registry
           name: docker-registry-data
