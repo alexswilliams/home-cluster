@@ -60,7 +60,7 @@ data:
     <filter **>
       @type stdout
       @id console_out
-    </match>
+    </filter>
     <match from_syslog.**>
       @type elasticsearch
       logstash_format true
