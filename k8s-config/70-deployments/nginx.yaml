@@ -49,10 +49,18 @@ metadata:
   name: nginx-config
 data:
   nginx.conf: |
+    events { }
     http {
+      log_format   main '{"remoteAddr":"$remote_addr",'
+      '"remoteUser":"$remote_user","localTime":"$time_local",'
+      '"status":"$status","request":"$request","bodyBytesSent":$body_bytes_sent,'
+      '"httpReferer":"$http_referer","httpUserAgent":"$http_user_agent",'
+      '"httpXForwardedFor":"$http_x_forwarded_for"}';
+
       server {
         listen 80;
         #listen 443 ssl;
+        server_name london.alexswilliams.co.uk;
 
         #ssl_certificate       /etc/ssl/certs/server.crt;
         #ssl_certificate_key   /etc/ssl/certs/server.key;
