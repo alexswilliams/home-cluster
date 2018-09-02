@@ -18,6 +18,12 @@ spec:
 
     spec:
       terminationGracePeriodSeconds: 300
+
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: elasticsearch-pvc
+
       initContainers:
       - name: prepare-node-for-elasticsearch
         image: busybox
@@ -54,13 +60,3 @@ spec:
         volumeMounts:
         - name: data
           mountPath: /usr/share/elasticsearch/data
-  volumeClaimTemplates:
-  - metadata:
-      name: data
-    spec:
-      accessModes:
-      - ReadWriteOnce
-      storageClassName: local-storage
-      resources:
-        requests:
-          storage: 1Gi

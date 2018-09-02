@@ -23,6 +23,9 @@ spec:
         persistentVolumeClaim:
           claimName: certificate-pvc
           readOnly: true
+      - name: docker-registry-data
+        persistentVolumeClaim:
+          claimName: docker-registry-pvc
 
       containers:
       - name: docker-registry
@@ -45,14 +48,3 @@ spec:
           value: /etc/letsencrypt/live/london.alexswilliams.co.uk/fullchain.pem
         - name: REGISTRY_HTTP_TLS_KEY
           value: /etc/letsencrypt/live/london.alexswilliams.co.uk/privkey.pem
-
-  volumeClaimTemplates:
-  - metadata:
-      name: docker-registry-data
-    spec:
-      accessModes:
-      - ReadWriteOnce
-      storageClassName: local-storage
-      resources:
-        requests:
-          storage: 1Gi

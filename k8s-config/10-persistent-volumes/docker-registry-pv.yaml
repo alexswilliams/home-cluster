@@ -9,6 +9,9 @@ spec:
   accessModes:
   - ReadWriteOnce
   storageClassName: local-storage
+  claimRef:
+    namespace: default
+    name: docker-registry-pvc
   local:
     path: /mnt/k8s-pv/docker-registry-pv
   nodeAffinity:
@@ -19,3 +22,15 @@ spec:
           operator: In
           values:
           - london.alexswilliams.co.uk
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: docker-registry-pvc
+spec:
+  accessModes:
+  - ReadWriteMany
+  storageClassName: local-storage
+  resources:
+    requests:
+      storage: 1Gi
