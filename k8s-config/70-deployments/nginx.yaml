@@ -26,6 +26,10 @@ spec:
       - name: nginx-config
         configMap:
           name: nginx-config
+      - name: letsencrypt
+        persistentVolumeClaim:
+          claimName: certificate-pvc
+          readOnly: true
 
       containers:
       - name: nginx
@@ -42,6 +46,9 @@ spec:
         - mountPath: /etc/nginx/conf/htpasswd
           name: nginx-config
           subPath: htpasswd
+          readOnly: true
+        - mountPath: /etc/letsencrypt
+          name: letsencrypt
           readOnly: true
 ---
 apiVersion: v1
