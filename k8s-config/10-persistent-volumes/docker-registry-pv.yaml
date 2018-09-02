@@ -29,7 +29,7 @@ metadata:
   name: docker-registry-pvc
 spec:
   accessModes:
-  - ReadWriteMany
+  - ReadWriteOnce
   storageClassName: local-storage
   resources:
     requests:
