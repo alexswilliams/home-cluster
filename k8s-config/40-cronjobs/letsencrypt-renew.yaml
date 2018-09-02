@@ -5,7 +5,7 @@ kind: CronJob
 metadata:
   name: letsencrypt-renew-cronjob
 spec:
-  schedule: "27 5 * * *"
+  schedule: "27 3 * * *"
   jobTemplate:
     spec:
       template:
