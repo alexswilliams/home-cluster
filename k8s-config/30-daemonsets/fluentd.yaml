@@ -83,7 +83,6 @@ data:
       @type record_transformer
       <record>
         time_received ${time}
-        hostname ${hostname}
       </record>
     </filter>
 
@@ -91,7 +90,7 @@ data:
       @type elasticsearch
       host elasticsearch-service
       port 9200
-      logstash_format true
+      index_name fluentd-${tag}-%Y.%m.%d
       <buffer>
         flush_interval 10s
       </buffer>
