@@ -73,8 +73,8 @@ data:
     <filter syslog.draytek.**>
       @type record_transformer
       <record>
-        system ${tag_parts[0]}
-        subsystem ${tag_parts[1]}
+        logsource ${tag_parts[0]}
+        category ${tag_parts[1]}
         devicetype ${tag_parts[2]}
       </record>
     </filter>
@@ -84,6 +84,10 @@ data:
       <record>
         time_received ${time}
       </record>
+    </filter>
+
+    <filter **>
+      @type stdout
     </filter>
 
     <match **>
