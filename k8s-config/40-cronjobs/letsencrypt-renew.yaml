@@ -15,9 +15,9 @@ spec:
           dnsPolicy: ClusterFirstWithHostNet
 
           volumes:
-          - name: var-lib
-            persistentVolumeClaim:
-              claimName: letsencrypt-pvc
+#          - name: var-lib
+#            persistentVolumeClaim:
+#              claimName: letsencrypt-pvc
           - name: etc
             persistentVolumeClaim:
               claimName: certificate-pvc
@@ -38,7 +38,7 @@ spec:
                 memory: 128Mi
 
             volumeMounts:
-            - mountPath: /var/lib/letsencrypt
-              name: var-lib
+#            - mountPath: /var/lib/letsencrypt
+#              name: var-lib
             - mountPath: /etc/letsencrypt
               name: etc
