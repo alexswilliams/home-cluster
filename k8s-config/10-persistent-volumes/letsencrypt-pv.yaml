@@ -50,24 +50,24 @@ spec:
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
-- metadata:
-    name: letsencrypt-pvc
-  spec:
-    accessModes:
-    - ReadWriteMany
-    storageClassName: local-storage
-    resources:
-      requests:
-        storage: 100Mi
+metadata:
+  name: letsencrypt-pvc
+spec:
+  accessModes:
+  - ReadWriteMany
+  storageClassName: local-storage
+  resources:
+    requests:
+      storage: 100Mi
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
-- metadata:
-    name: certificate-pvc
-  spec:
-    accessModes:
-    - ReadWriteMany
-    storageClassName: local-storage
-    resources:
-      requests:
-        storage: 100Mi
+metadata:
+  name: certificate-pvc
+spec:
+  accessModes:
+  - ReadWriteMany
+  storageClassName: local-storage
+  resources:
+    requests:
+      storage: 100Mi
