@@ -33,7 +33,7 @@ spec:
 
       containers:
       - name: nginx
-        image: nginx:mainline
+        image: nginx:mainline-alpine
         ports:
         - containerPort: 443
           hostPort: 443

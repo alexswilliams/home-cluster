@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-docker build -t docker-registry-service:5000/pptp-server:latest .
-docker push docker-registry-service:5000/pptp-server
+docker build -t london.alexswilliams.co.uk:5000/pptp-server:latest .
+docker push london.alexswilliams.co.uk:5000/pptp-server
