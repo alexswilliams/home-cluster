@@ -88,15 +88,18 @@ data:
           auth_basic off;
           return 401 "401 Forbidden";
         }
+
         # The trailing / on these URIs is hella important, as it strips the matched prifix.
-        location /kibana {
-          proxy_pass http://kibana-service:5601/;
-        }
         location /elasticsearch {
           proxy_pass http://elasticsearch-service:9200/;
         }
         location /artifactory {
           proxy_pass http://artifactory-service:8081/;
+        }
+
+        # Kibana handles its own proxy forward name stripping.
+        location /kibana {
+          proxy_pass http://kibana-service:5601;
         }
       }
     }
