@@ -34,9 +34,6 @@ spec:
         - containerPort: 443
           hostPort: 443
           name: https
-        - containerPort: 80
-          hostPort: 80
-          name: http
         volumeMounts:
         - mountPath: /etc/nginx/nginx.conf
           name: nginx-config

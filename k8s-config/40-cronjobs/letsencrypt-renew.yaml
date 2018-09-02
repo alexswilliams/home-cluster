@@ -1,0 +1,39 @@
+# sudo docker run -it --rm --name certbot -p 80:80 -v "/mnt/k8s-pv/letsencrypt-pv:/var/lib/letsencrypt" -v "/mnt/k8s-pv/certificate-pv:/etc/letsencrypt" certbot/certbot certonly --standalone -d 'london.alexswilliams.co.uk'
+
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: letsencrypt-renew-cronjob
+spec:
+  schedule: "25 4 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: Never
+          hostNetwork: true
+          dnsPolicy: ClusterFirstWithHostNet
+
+          volumes:
+          - name: var-lib
+            persistentVolumeClaim:
+              claimName: letsencrypt-pvc
+          - name: etc
+            persistentVolumeClaim:
+              claimName: certificate-pvc
+
+          containers:
+          - name: letsencrypt-renew-job-container
+            image: certbot/certbot:latest
+            args:
+            - renew
+            - --standalone
+            ports:
+            - containerPort: 80
+              hostPort: 80
+
+            volumeMounts:
+            - mountPath: /var/lib/letsencrypt
+              name: var-lib
+            - mountPath: /etc/letsencrypt
+              name: etc
