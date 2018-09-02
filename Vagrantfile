@@ -1,6 +1,9 @@
 $kubeadmin_setup = <<-SCRIPT
 echo Provisioning Kube Admin
 set -ex
+
+sudo timedatectl set-timezone Etc/UTC
+
 # k8s initialisation
 
 # DEBIAN_FRONTEND=noninteractive sudo apt-get update && sudo apt-get install -y apt-transport-https curl ca-certificates software-properties-common

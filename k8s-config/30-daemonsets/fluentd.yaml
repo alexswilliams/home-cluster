@@ -34,7 +34,11 @@ spec:
         - containerPort: 5140
           protocol: UDP
           hostPort: 5140
-          name: syslog-udp
+          name: syslog-udp-draytek
+        - containerPort: 5141
+          protocol: UDP
+          hostPort: 5141
+          name: syslog-udp-accesspoint
 
         volumeMounts:
         - mountPath: /fluentd/etc/fluent.conf
@@ -55,14 +59,36 @@ data:
       protocol_type udp
       message_length_limit 4096
       message_format auto
-      tag from_syslog
+      tag syslog.draytek.router
     </source>
-    <filter **>
-      @type stdout
-      @id console_out
-      logstash_format true
+    <source>
+      @type syslog
+      port 5141
+      protocol_type udp
+      message_length_limit 4096
+      message_format auto
+      tag syslog.draytek.accesspoint
+    </source>
+
+    <filter syslog.draytek.**>
+      @type record_transformer
+      <record>
+        system ${tag_parts[0]}
+        subsystem ${tag_parts[1]}
+        devicetype ${tag_parts[2]}
+      </record>
     </filter>
-    <match from_syslog.**>
+
+    <filter **>
+      @type record_transformer
+      <record>
+        time_received ${time}
+        hostname ${hostname}
+      </record>
+    </filter>
+
+    <match **>
+    <match **>
       @type elasticsearch
       host elasticsearch-service
       port 9200
