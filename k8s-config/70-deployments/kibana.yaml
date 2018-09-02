@@ -45,6 +45,7 @@ data:
   kibana.yml: |
     console.enabled: true
     elasticsearch.url: http://elasticsearch-service:9200
+    server.basePath: /kibana
     server.host: 0.0.0.0
     server.port: 5601
     server.ssl.enabled: false
