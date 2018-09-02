@@ -29,7 +29,7 @@ spec:
 
       containers:
       - name: fluentd
-        image: fluent/fluentd:stable
+        image: docker-registry-service:5000/fluentd-es:latest
         ports:
         - containerPort: 5140
           protocol: UDP
@@ -60,11 +60,14 @@ data:
     <filter **>
       @type stdout
       @id console_out
+      logstash_format true
     </filter>
-    #    <match from_syslog.**>
-    #      @type elasticsearch
-    #      logstash_format true
-    #      <buffer>
-    #        flush_interval 10s
-    #      </buffer>
-    #    </match>
+    <match from_syslog.**>
+      @type elasticsearch
+      host elasticsearch-service
+      port 9200
+      logstash_format true
+      <buffer>
+        flush_interval 10s
+      </buffer>
+    </match>
