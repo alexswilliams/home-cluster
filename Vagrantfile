@@ -18,7 +18,8 @@ set -ex
 # DEBIAN_FRONTEND=noninteractive sudo apt-get -y install kubelet=1.10.6-00 kubectl=1.10.6-00 kubeadm=1.10.6-00 docker-ce
 # DEBIAN_FRONTEND=noninteractive sudo apt-mark hold kubelet kubeadm kubectl
 
-sudo kubeadm init
+sudo kubeadm init --apiserver-cert-extra-sans london.alexswilliams.co.uk
+rm -rf $HOME/.kube
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
@@ -37,7 +38,7 @@ printf "
 " >> $HOME/.bash_profile
 source $HOME/.bash_profile
 
-# kubectl taint nodes --all node-role.kubernetes.io/master:NoSchedule-
+kubectl taint nodes --all node-role.kubernetes.io/master:NoSchedule-
 
 SCRIPT
 
