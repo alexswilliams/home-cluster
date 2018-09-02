@@ -18,9 +18,9 @@ spec:
       hostNetwork: true
       dnsPolicy: ClusterFirstWithHostNet
 
-      # tolerations:
-      #   - key: node-role.kubernetes.io/master
-      #     effect: NoSchedule
+      tolerations:
+      - key: node-role.kubernetes.io/master
+        effect: NoSchedule
 
       volumes:
       - name: fluentd-config

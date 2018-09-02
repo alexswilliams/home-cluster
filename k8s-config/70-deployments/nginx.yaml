@@ -1,0 +1,82 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nxing
+spec:
+  selector:
+    matchLabels:
+      app: nginx
+
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+
+  template:
+
+    metadata:
+      labels:
+        app: nginx
+
+    spec:
+      hostNetwork: true
+      dnsPolicy: ClusterFirstWithHostNet
+      restartPolicy: Always
+
+      volumes:
+      - name: nginx-config
+        configMap:
+          name: nginx-config
+
+      containers:
+      - name: nginx
+        image: nginx:mainline
+        ports:
+        - containerPort: 443
+          hostPort: 443
+          name: https
+        - containerPort: 80
+          hostPort: 80
+          name: http
+        volumeMounts:
+        - mountPath: /etc/nginx/nginx.conf
+          name: nginx-config
+          subPath: nginx.conf
+          readOnly: true
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-config
+data:
+  nginx.conf: |
+    http {
+      server {
+        listen 80;
+        listen 443 ssl;
+
+        #ssl_certificate       /etc/ssl/certs/server.crt;
+        #ssl_certificate_key   /etc/ssl/certs/server.key;
+        ssl_protocols         TLSv1.2;
+        ssl_ciphers           HIGH:!aNULL:!MD5;
+        ssl_session_cache     shared:SSL:10m;
+        ssl_session_timeout   1h;
+        ssl_handshake_timeout 10s;
+
+        auth_basic "Please authenticate";
+        auth_basic_user_file "conf/htpasswd";
+
+        location / {
+          auth_basic off;
+          return 401 "401 Forbidden";
+        }
+        location /kibana {
+          proxy_pass http://kibana-service:5601;
+        }
+        location /elasticsearch {
+          proxy_pass http://elasticsearch-service:9200;
+        }
+        location /artifactory {
+          proxy_pass http://artifactory-service:8081;
+        }
+      }
+    }
