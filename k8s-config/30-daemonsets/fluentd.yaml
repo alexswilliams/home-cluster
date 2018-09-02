@@ -61,10 +61,10 @@ data:
       @type stdout
       @id console_out
     </filter>
-    <match from_syslog.**>
-      @type elasticsearch
-      logstash_format true
-      <buffer>
-        flush_interval 10s
-      </buffer>
-    </match>
+    #    <match from_syslog.**>
+    #      @type elasticsearch
+    #      logstash_format true
+    #      <buffer>
+    #        flush_interval 10s
+    #      </buffer>
+    #    </match>
