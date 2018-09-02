@@ -25,6 +25,18 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 kubectl version
 kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
 
+kubeadm completion bash > ~/.kube/kubeadm_completion.bash.inc
+printf "
+  # Kubeadm shell completion\
+  source '$HOME/.kube/kubeadm_completion.bash.inc'
+" >> $HOME/.bash_profile
+kubectl completion bash > ~/.kube/completion.bash.inc
+printf "
+  # Kubectl shell completion
+  source '$HOME/.kube/completion.bash.inc'
+" >> $HOME/.bash_profile
+source $HOME/.bash_profile
+
 # kubectl taint nodes --all node-role.kubernetes.io/master:NoSchedule-
 
 SCRIPT
