@@ -1,0 +1,22 @@
+# Limits and defaults per pod/container
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: default-limit-range
+spec:
+  limits:
+  - type: Pod
+
+    defaultRequest:
+      memory: 64Mi
+      cpu: 100m
+    default:  # default limit
+      memory: 512Mi
+      cpu: 1000m
+
+    min:
+      memory: 16Mi
+      cpu: 50m
+    max:
+      memory: 512Mi
+      cpu: 1000m

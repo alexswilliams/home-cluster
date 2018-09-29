@@ -1,0 +1,9 @@
+# Hard limits across the cluster.
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: default-resource-quota
+spec:
+  hard:
+    memory: 1512Mi
+    cpu: 1500m

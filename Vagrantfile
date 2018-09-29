@@ -18,7 +18,7 @@ sudo timedatectl set-timezone Etc/UTC
 # DEBIAN_FRONTEND=noninteractive sudo apt-get -y purge kubelet kubectl kubeadm
 # rm -rf ~/.kube
 
-# DEBIAN_FRONTEND=noninteractive sudo apt-get -y install kubelet=1.10.6-00 kubectl=1.10.6-00 kubeadm=1.10.6-00 docker-ce
+# DEBIAN_FRONTEND=noninteractive sudo apt-get -y install kubelet=1.12.0-00 kubectl=1.12.0-00 kubeadm=1.12.0-00 docker-ce
 # DEBIAN_FRONTEND=noninteractive sudo apt-mark hold kubelet kubeadm kubectl
 
 sudo kubeadm init --apiserver-cert-extra-sans london.alexswilliams.co.uk
