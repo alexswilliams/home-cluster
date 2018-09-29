@@ -89,7 +89,7 @@ data:
           return 401 "401 Forbidden";
         }
 
-        # The trailing / on these URIs is hella important, as it strips the matched prifix.
+        # The trailing / on these URIs is hella important, as it strips the matched prefix.
         location /elasticsearch {
           proxy_pass http://elasticsearch-service:9200/;
         }
