@@ -5,7 +5,7 @@ metadata:
   name: default-limit-range
 spec:
   limits:
-    defaultRequest:
+  - defaultRequest:
       memory: 64Mi
       cpu: 100m
     default:  # default limit
