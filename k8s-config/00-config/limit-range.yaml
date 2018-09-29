@@ -5,8 +5,6 @@ metadata:
   name: default-limit-range
 spec:
   limits:
-  - type: Pod
-
     defaultRequest:
       memory: 64Mi
       cpu: 100m
