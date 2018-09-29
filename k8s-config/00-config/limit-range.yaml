@@ -8,21 +8,21 @@ spec:
     - type: Pod
       min:
         memory: 16Mi
-        cpu: 50m
+        cpu: 10m
       max:
         memory: 512Mi
         cpu: 1000m
 
     - type: Container
       defaultRequest:
-        memory: 64Mi
-        cpu: 100m
+        memory: 32Mi
+        cpu: 20m
       default:  # default limit
         memory: 512Mi
         cpu: 1000m
       min:
         memory: 16Mi
-        cpu: 50m
+        cpu: 10m
       max:
         memory: 512Mi
         cpu: 1000m
