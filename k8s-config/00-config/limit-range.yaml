@@ -5,16 +5,24 @@ metadata:
   name: default-limit-range
 spec:
   limits:
-  - defaultRequest:
-      memory: 64Mi
-      cpu: 100m
-    default:  # default limit
-      memory: 512Mi
-      cpu: 1000m
+    - type: Pod
+      min:
+        memory: 16Mi
+        cpu: 50m
+      max:
+        memory: 512Mi
+        cpu: 1000m
 
-    min:
-      memory: 16Mi
-      cpu: 50m
-    max:
-      memory: 512Mi
-      cpu: 1000m
+    - type: Container
+      defaultRequest:
+        memory: 64Mi
+        cpu: 100m
+      default:  # default limit
+        memory: 512Mi
+        cpu: 1000m
+      min:
+        memory: 16Mi
+        cpu: 50m
+      max:
+        memory: 512Mi
+        cpu: 1000m
