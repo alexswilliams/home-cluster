@@ -23,33 +23,38 @@ spec:
       restartPolicy: Always
 
       volumes:
-      - name: nginx-config
-        configMap:
-          name: nginx-config
-      - name: letsencrypt
-        persistentVolumeClaim:
-          claimName: certificate-pvc
-          readOnly: true
+        - name: nginx-config
+          configMap:
+            name: nginx-config
+        - name: letsencrypt
+          persistentVolumeClaim:
+            claimName: certificate-pvc
+            readOnly: true
 
       containers:
-      - name: nginx
-        image: nginx:mainline-alpine
-        ports:
-        - containerPort: 443
-          hostPort: 443
-          name: https
-        volumeMounts:
-        - mountPath: /etc/nginx/nginx.conf
-          name: nginx-config
-          subPath: nginx.conf
-          readOnly: true
-        - mountPath: /etc/nginx/conf/htpasswd
-          name: nginx-config
-          subPath: htpasswd
-          readOnly: true
-        - mountPath: /etc/letsencrypt
-          name: letsencrypt
-          readOnly: true
+        - name: nginx
+          image: nginx:mainline-alpine
+          resources:
+            requests:
+              memory: 64Mi
+            limits:
+              memory: 192Mi
+          ports:
+            - containerPort: 443
+              hostPort: 443
+              name: https
+          volumeMounts:
+            - mountPath: /etc/nginx/nginx.conf
+              name: nginx-config
+              subPath: nginx.conf
+              readOnly: true
+            - mountPath: /etc/nginx/conf/htpasswd
+              name: nginx-config
+              subPath: htpasswd
+              readOnly: true
+            - mountPath: /etc/letsencrypt
+              name: letsencrypt
+              readOnly: true
 ---
 apiVersion: v1
 kind: ConfigMap
