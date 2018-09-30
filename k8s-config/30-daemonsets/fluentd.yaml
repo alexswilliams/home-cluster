@@ -37,7 +37,7 @@ spec:
               memory: 64Mi
           env:
             - name: RUBY_GC_HEAP_OLDOBJECT_LIMIT_FACTOR
-              value: 0.9
+              value: "0.9"
           ports:
             - containerPort: 5140
               protocol: UDP
