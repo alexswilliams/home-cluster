@@ -44,10 +44,10 @@ spec:
           image: docker.elastic.co/elasticsearch/elasticsearch-oss:6.4.0
           resources:
             requests:
-              memory: 296Mi
-              cpu: 100m
+              memory: 1Gi
+              cpu: 140m
             limits:
-              memory: 512Mi
+              memory: 1Gi
               cpu: 200m
           ports:
             - containerPort: 9200
@@ -66,7 +66,7 @@ spec:
             - name: discovery.type
               value: single-node
             - name: ES_JAVA_OPTS
-              value: -Xms256m -Xmx256m
+              value: -Xms386m -Xmx480m
           volumeMounts:
             - name: data
               mountPath: /usr/share/elasticsearch/data

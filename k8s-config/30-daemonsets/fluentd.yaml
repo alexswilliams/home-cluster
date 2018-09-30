@@ -88,13 +88,6 @@ data:
     </filter>
 
     <filter **>
-      @type record_transformer
-      <record>
-        time_received ${time}
-      </record>
-    </filter>
-
-    <filter **>
       @type stdout
     </filter>
 
