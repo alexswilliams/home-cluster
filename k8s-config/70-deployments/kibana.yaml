@@ -28,6 +28,12 @@ spec:
       containers:
       - name: kibana
         image: docker.elastic.co/kibana/kibana-oss:6.4.0
+        resources:
+          requests:
+            memory: 128Mi
+        env:
+          - name: NODE_OPTIONS
+            value: --max-old-space-size=96
         ports:
         - containerPort: 5601
           name: http
