@@ -30,6 +30,9 @@ spec:
       containers:
       - name: docker-registry
         image: registry
+        resources:
+          limits:
+            memory: 64Mi
         ports:
         - containerPort: 5000
           name: registry-port
