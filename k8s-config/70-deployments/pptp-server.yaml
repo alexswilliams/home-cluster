@@ -31,6 +31,13 @@ spec:
       - name: pptp-server
         image: docker-registry-service:5000/pptp-server
         imagePullPolicy: Always
+        resources:
+          requests:
+            cpu: 10m
+            memory: 16Mi
+          limits:
+            cpu: 50m
+            memory: 64Mi
         ports:
         - containerPort: 1723
           name: pptp-port
