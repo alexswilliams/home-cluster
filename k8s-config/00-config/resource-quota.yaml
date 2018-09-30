@@ -5,7 +5,7 @@ metadata:
   name: default-resource-quota
 spec:
   hard:
-    requests.memory: 1800Mi
+    requests.memory: 1850Mi
     requests.cpu: 1750m
-    limits.memory: 1792Mi
+    limits.memory: 1850Mi
     limits.cpu: 1750m
