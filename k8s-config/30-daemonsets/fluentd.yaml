@@ -19,32 +19,40 @@ spec:
       dnsPolicy: ClusterFirstWithHostNet
 
       tolerations:
-      - key: node-role.kubernetes.io/master
-        effect: NoSchedule
+        - key: node-role.kubernetes.io/master
+          effect: NoSchedule
 
       volumes:
-      - name: fluentd-config
-        configMap:
-          name: fluentd-config
+        - name: fluentd-config
+          configMap:
+            name: fluentd-config
 
       containers:
-      - name: fluentd
-        image: docker-registry-service:5000/fluentd-es:latest
-        ports:
-        - containerPort: 5140
-          protocol: UDP
-          hostPort: 5140
-          name: syslog-router
-        - containerPort: 5141
-          protocol: UDP
-          hostPort: 5141
-          name: syslog-ap
+        - name: fluentd
+          image: docker-registry-service:5000/fluentd-es:latest
+          resources:
+            requests:
+              memory: 42Mi
+            limits:
+              memory: 64Mi
+          env:
+            name: RUBY_GC_HEAP_OLDOBJECT_LIMIT_FACTOR
+            value: 0.9
+          ports:
+            - containerPort: 5140
+              protocol: UDP
+              hostPort: 5140
+              name: syslog-router
+            - containerPort: 5141
+              protocol: UDP
+              hostPort: 5141
+              name: syslog-ap
 
-        volumeMounts:
-        - mountPath: /fluentd/etc/fluent.conf
-          name: fluentd-config
-          subPath: fluent.conf
-          readOnly: true
+          volumeMounts:
+            - mountPath: /fluentd/etc/fluent.conf
+              name: fluentd-config
+              subPath: fluent.conf
+              readOnly: true
 
 ---
 apiVersion: v1
