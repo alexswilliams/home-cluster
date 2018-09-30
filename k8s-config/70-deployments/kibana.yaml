@@ -21,27 +21,29 @@ spec:
       restartPolicy: Always
 
       volumes:
-      - name: kibana-config
-        configMap:
-          name: kibana-config
+        - name: kibana-config
+          configMap:
+            name: kibana-config
 
       containers:
-      - name: kibana
-        image: docker.elastic.co/kibana/kibana-oss:6.4.0
-        resources:
-          requests:
-            memory: 128Mi
-        env:
-          - name: NODE_OPTIONS
-            value: --max-old-space-size=96
-        ports:
-        - containerPort: 5601
-          name: http
-        volumeMounts:
-        - mountPath: /usr/share/kibana/config/kibana.yml
-          name: kibana-config
-          subPath: kibana.yml
-          readOnly: true
+        - name: kibana
+          image: docker.elastic.co/kibana/kibana-oss:6.4.0
+          resources:
+            requests:
+              memory: 128Mi
+            limits:
+              memory: 192Mi
+          env:
+            - name: NODE_OPTIONS
+              value: --max-old-space-size=96
+          ports:
+            - containerPort: 5601
+              name: http
+          volumeMounts:
+            - mountPath: /usr/share/kibana/config/kibana.yml
+              name: kibana-config
+              subPath: kibana.yml
+              readOnly: true
 ---
 apiVersion: v1
 kind: ConfigMap
