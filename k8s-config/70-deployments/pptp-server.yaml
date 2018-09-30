@@ -23,39 +23,39 @@ spec:
       restartPolicy: Always
 
       volumes:
-      - name: pptp-config
-        configMap:
-          name: pptp-config
+        - name: pptp-config
+          configMap:
+            name: pptp-config
 
       containers:
-      - name: pptp-server
-        image: docker-registry-service:5000/pptp-server
-        imagePullPolicy: Always
-        resources:
-          requests:
-            cpu: 10m
-            memory: 16Mi
-          limits:
-            cpu: 50m
-            memory: 64Mi
-        ports:
-        - containerPort: 1723
-          name: pptp-port
-        securityContext:
-          privileged: true
-        volumeMounts:
-        - mountPath: /etc/ppp/chap-secrets
-          name: pptp-config
-          subPath: chap-secrets
-          readOnly: true
-        - mountPath: /etc/pptpd.conf
-          name: pptp-config
-          subPath: pptpd.conf
-          readOnly: true
-        - mountPath: /etc/ppp/pptpd-options
-          name: pptp-config
-          subPath: pptpd-options
-          readOnly: true
+        - name: pptp-server
+          image: docker-registry-service:5000/pptp-server
+          imagePullPolicy: Always
+          resources:
+            requests:
+              cpu: 10m
+              memory: 16Mi
+            limits:
+              cpu: 50m
+              memory: 64Mi
+          ports:
+            - containerPort: 1723
+              name: pptp-port
+          securityContext:
+            privileged: true
+          volumeMounts:
+            - mountPath: /etc/ppp/chap-secrets
+              name: pptp-config
+              subPath: chap-secrets
+              readOnly: true
+            - mountPath: /etc/pptpd.conf
+              name: pptp-config
+              subPath: pptpd.conf
+              readOnly: true
+            - mountPath: /etc/ppp/pptpd-options
+              name: pptp-config
+              subPath: pptpd-options
+              readOnly: true
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -94,4 +94,4 @@ data:
     ms-dns 8.8.8.8
     ms-dns 8.8.4.4
 
-    debug
+    # debug
