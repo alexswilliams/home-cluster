@@ -97,29 +97,16 @@ data:
       @type stdout
     </filter>
 
-    <match syslog.draytek.router>
+    <match **>
       @type file
-      path /var/log/fluent/syslog.draytek.router/log
+      path /var/log/fluent/all/
       time_slice_format %Y%m%d
       time_slice_wait 10m
       time_format %Y-%m-%d--%H-%M-%S--%z
       compress gzip
       append true
-      utc
       <buffer>
-        flush_interval 10s
-      </buffer>
-    </match>
-    <match syslog.draytek.accesspoint>
-      @type file
-      path /var/log/fluent/syslog.draytek.accesspoint/log
-      time_slice_format %Y%m%d
-      time_slice_wait 10m
-      time_format %Y-%m-%d--%H-%M-%S--%z
-      compress gzip
-      append true
-      utc
-      <buffer>
+        timekey_use_utc
         flush_interval 10s
       </buffer>
     </match>
