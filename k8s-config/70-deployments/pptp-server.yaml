@@ -26,10 +26,13 @@ spec:
         - name: pptp-config
           configMap:
             name: pptp-config
+        - name: pptp-chap-secrets
+          secret:
+            name: pptp-chap-secrets
 
       containers:
         - name: pptp-server
-          image: docker-registry-service:5000/pptp-server
+          image: docker-registry-service:5000/pptp-server:alpine-3.9.2--20190317-0245
           imagePullPolicy: Always
           resources:
             requests:
@@ -45,8 +48,8 @@ spec:
             privileged: true
           volumeMounts:
             - mountPath: /etc/ppp/chap-secrets
-              name: pptp-config
-              subPath: chap-secrets
+              name: pptp-chap-secrets
+              subPath: pptp-chap-secrets
               readOnly: true
             - mountPath: /etc/pptpd.conf
               name: pptp-config
@@ -62,12 +65,7 @@ kind: ConfigMap
 metadata:
   name: pptp-config
 data:
-  chap-secrets: |
-    ***REMOVED***
-    ***REMOVED***
-    ***REMOVED***
   pptpd.conf: |
-    # debug
     option /etc/ppp/pptpd-options
     delegate
     remoteip 10.254.1.2-254
@@ -93,5 +91,3 @@ data:
     netmask 255.255.255.0
     ms-dns 8.8.8.8
     ms-dns 8.8.4.4
-
-    # debug
