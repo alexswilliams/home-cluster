@@ -6,6 +6,11 @@ metadata:
   name: letsencrypt-renew-cronjob
 spec:
   schedule: "34 3 * * *"
+  startingDeadlineSeconds: 60
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 3
+
   jobTemplate:
     spec:
       template:
@@ -13,11 +18,6 @@ spec:
           restartPolicy: Never
           hostNetwork: true
           dnsPolicy: ClusterFirstWithHostNet
-
-          startingDeadlineSeconds: 60
-          concurrencyPolicy: Forbid
-          successfulJobsHistoryLimit: 3
-          failedJobsHistoryLimit: 3
 
           volumes:
             - name: etc
