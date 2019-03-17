@@ -28,7 +28,7 @@ spec:
             name: pptp-config
         - name: pptp-chap-secrets
           secret:
-            name: pptp-chap-secrets
+            secretName: pptp-chap-secrets
 
       containers:
         - name: pptp-server
