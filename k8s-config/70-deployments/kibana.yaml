@@ -1,61 +1,61 @@
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: kibana
-spec:
-  selector:
-    matchLabels:
-      app: kibana
-
-  replicas: 0
-  strategy:
-    type: RollingUpdate
-
-  template:
-
-    metadata:
-      labels:
-        app: kibana
-
-    spec:
-      restartPolicy: Always
-
-      volumes:
-        - name: kibana-config
-          configMap:
-            name: kibana-config
-
-      containers:
-        - name: kibana
-          image: docker.elastic.co/kibana/kibana-oss:6.4.0
-          resources:
-            requests:
-              memory: 128Mi
-            limits:
-              memory: 192Mi
-          env:
-            - name: NODE_OPTIONS
-              value: --max-old-space-size=96
-          ports:
-            - containerPort: 5601
-              name: http
-          volumeMounts:
-            - mountPath: /usr/share/kibana/config/kibana.yml
-              name: kibana-config
-              subPath: kibana.yml
-              readOnly: true
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: kibana-config
-data:
-  kibana.yml: |
-    console.enabled: true
-    elasticsearch.url: http://elasticsearch-service:9200
-    server.basePath: /kibana
-    server.rewriteBasePath: true
-    server.host: 0.0.0.0
-    server.port: 5601
-    server.ssl.enabled: false
-    server.name: London Kibana
+#apiVersion: apps/v1
+#kind: Deployment
+#metadata:
+#  name: kibana
+#spec:
+#  selector:
+#    matchLabels:
+#      app: kibana
+#
+#  replicas: 1
+#  strategy:
+#    type: RollingUpdate
+#
+#  template:
+#
+#    metadata:
+#      labels:
+#        app: kibana
+#
+#    spec:
+#      restartPolicy: Always
+#
+#      volumes:
+#        - name: kibana-config
+#          configMap:
+#            name: kibana-config
+#
+#      containers:
+#        - name: kibana
+#          image: docker.elastic.co/kibana/kibana-oss:6.4.0
+#          resources:
+#            requests:
+#              memory: 128Mi
+#            limits:
+#              memory: 192Mi
+#          env:
+#            - name: NODE_OPTIONS
+#              value: --max-old-space-size=96
+#          ports:
+#            - containerPort: 5601
+#              name: http
+#          volumeMounts:
+#            - mountPath: /usr/share/kibana/config/kibana.yml
+#              name: kibana-config
+#              subPath: kibana.yml
+#              readOnly: true
+#---
+#apiVersion: v1
+#kind: ConfigMap
+#metadata:
+#  name: kibana-config
+#data:
+#  kibana.yml: |
+#    console.enabled: true
+#    elasticsearch.url: http://elasticsearch-service:9200
+#    server.basePath: /kibana
+#    server.rewriteBasePath: true
+#    server.host: 0.0.0.0
+#    server.port: 5601
+#    server.ssl.enabled: false
+#    server.name: London Kibana

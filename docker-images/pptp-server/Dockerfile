@@ -1,4 +1,4 @@
-FROM alpine
+FROM alpine:3.9.2
 RUN apk --no-cache add pptpd ppp --update && \
     rm -rf /var/cache/apk/* && \
     mv -f /etc/pptpd.conf /etc/pptpd.conf.bak && \

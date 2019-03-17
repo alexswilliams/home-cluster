@@ -1,28 +1,3 @@
-#apiVersion: v1
-#kind: PersistentVolume
-#metadata:
-#  name: letsencrypt-pv
-#spec:
-#  capacity:
-#    storage: 100Mi
-#  volumeMode: Filesystem
-#  accessModes:
-#  - ReadWriteOnce
-#  storageClassName: local-storage
-#  claimRef:
-#    namespace: default
-#    name: letsencrypt-pvc
-#  local:
-#    path: /mnt/k8s-pv/letsencrypt-pv
-#  nodeAffinity:
-#    required:
-#      nodeSelectorTerms:
-#      - matchExpressions:
-#        - key: kubernetes.io/hostname
-#          operator: In
-#          values:
-#          - london.alexswilliams.co.uk
-#---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
@@ -47,18 +22,6 @@ spec:
           operator: In
           values:
           - london.alexswilliams.co.uk
-#---
-#apiVersion: v1
-#kind: PersistentVolumeClaim
-#metadata:
-#  name: letsencrypt-pvc
-#spec:
-#  accessModes:
-#  - ReadWriteMany
-#  storageClassName: local-storage
-#  resources:
-#    requests:
-#      storage: 100Mi
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim

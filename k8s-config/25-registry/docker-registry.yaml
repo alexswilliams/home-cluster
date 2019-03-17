@@ -29,7 +29,7 @@ spec:
 
       containers:
       - name: docker-registry
-        image: registry
+        image: registry:2.7.1
         resources:
           requests:
             memory: 16Mi

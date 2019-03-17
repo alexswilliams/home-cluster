@@ -32,7 +32,7 @@ spec:
 
       containers:
         - name: fluentd
-          image: fluent/fluentd:v1.3-debian
+          image: fluent/fluentd:v1.3.3-debian
           resources:
             requests:
               memory: 42Mi
