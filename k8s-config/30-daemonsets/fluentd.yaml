@@ -110,7 +110,6 @@ data:
       @type file
       path /var/log/fluent/all/
       time_slice_format %Y%m%d
-      time_slice_wait 10m
       compress gzip
       append true
       <buffer>

@@ -1,5 +1,7 @@
 FROM alpine:3.9.2
-RUN apk --no-cache add pptpd ppp --update && \
+RUN apk update && \
+    apk upgrade && \
+    apk --no-cache add pptpd ppp && \
     rm -rf /var/cache/apk/* && \
     mv -f /etc/pptpd.conf /etc/pptpd.conf.bak && \
     mv -f /etc/ppp/chap-secrets /etc/ppp/chap-secrets.bak
