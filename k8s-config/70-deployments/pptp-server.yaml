@@ -29,6 +29,7 @@ spec:
         - name: pptp-chap-secrets
           secret:
             secretName: pptp-chap-secrets
+            defaultMode: 0400
 
       containers:
         - name: pptp-server
