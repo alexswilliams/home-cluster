@@ -30,6 +30,19 @@ spec:
           persistentVolumeClaim:
             claimName: fluent-pvc
 
+      initContainers:
+        - name: prepare-node-for-fluent
+          image: busybox
+          command:
+            - sh
+            - -c
+            - chmod -R 0777 /var/log/fluent
+          volumeMounts:
+            - name: fluent-log-volume
+              mountPath: /var/log/fluent
+          resources:
+            requests:
+              memory: 32Mi
       containers:
         - name: fluentd
           image: fluent/fluentd:v1.3.2-debian
