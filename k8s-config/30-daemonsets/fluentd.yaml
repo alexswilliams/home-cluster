@@ -93,20 +93,14 @@ data:
       </record>
     </filter>
 
-    <filter **>
-      @type stdout
-    </filter>
-
     <match **>
       @type file
       path /var/log/fluent/all/
       time_slice_format %Y%m%d
       time_slice_wait 10m
-      time_format %Y-%m-%d--%H-%M-%S--%z
       compress gzip
       append true
       <buffer>
         timekey_use_utc
-        flush_interval 10s
       </buffer>
     </match>
