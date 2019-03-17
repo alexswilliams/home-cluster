@@ -57,7 +57,7 @@ spec:
               subPath: fluent.conf
               readOnly: true
             - name: fluent-log-volume
-              mountPath: /var/log/fluent
+              mountPath: /var/log/fluent/
 
 
 ---
@@ -99,7 +99,7 @@ data:
 
     <match syslog.draytek.router>
       @type file
-      path /var/log/fluent/syslog.draytek.router/
+      path /var/log/fluent/syslog.draytek.router/log
       time_slice_format %Y%m%d
       time_slice_wait 10m
       time_format %Y-%m-%d--%H-%M-%S--%z
@@ -112,7 +112,7 @@ data:
     </match>
     <match syslog.draytek.accesspoint>
       @type file
-      path /var/log/fluent/syslog.draytek.accesspoint/
+      path /var/log/fluent/syslog.draytek.accesspoint/log
       time_slice_format %Y%m%d
       time_slice_wait 10m
       time_format %Y-%m-%d--%H-%M-%S--%z

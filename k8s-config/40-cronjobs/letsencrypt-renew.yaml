@@ -14,10 +14,12 @@ spec:
           hostNetwork: true
           dnsPolicy: ClusterFirstWithHostNet
 
+          startingDeadlineSeconds: 60
+          concurrencyPolicy: Forbid
+          successfulJobsHistoryLimit: 3
+          failedJobsHistoryLimit: 3
+
           volumes:
-            #          - name: var-lib
-            #            persistentVolumeClaim:
-            #              claimName: letsencrypt-pvc
             - name: etc
               persistentVolumeClaim:
                 claimName: certificate-pvc
@@ -38,7 +40,5 @@ spec:
                   memory: 64Mi
 
               volumeMounts:
-                #            - mountPath: /var/lib/letsencrypt
-                #              name: var-lib
                 - mountPath: /etc/letsencrypt
                   name: etc
