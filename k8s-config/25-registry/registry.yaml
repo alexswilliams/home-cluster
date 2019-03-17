@@ -58,12 +58,16 @@ spec:
           value: /etc/letsencrypt/live/london.alexswilliams.co.uk/fullchain.pem
         - name: REGISTRY_HTTP_TLS_KEY
           value: /etc/letsencrypt/live/london.alexswilliams.co.uk/privkey.pem
-        - name: REGISTRY_AUTH
-          value: htpasswd
-        - name: REGISTRY_AUTH_HTPASSWD_REALM
-          value: Alex Registry
-        - name: REGISTRY_AUTH_HTPASSWD_PATH
-          value: /auth/htpasswd
+#        - name: REGISTRY_AUTH
+#          value: htpasswd
+#        - name: REGISTRY_AUTH_HTPASSWD_REALM
+#          value: Registry Realm
+#        - name: REGISTRY_AUTH_HTPASSWD_PATH
+#          value: /auth/htpasswd
+        - name: REGISTRY_LOG_LEVEL
+          value: debug
+#        - name: REGISTRY_DELETE_ENABLED
+#          value: true
 
   volumeClaimTemplates:
   - metadata:
