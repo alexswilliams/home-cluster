@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: docker-registry
+  name: registry
 spec:
-  serviceName: docker-registry-service
+  serviceName: registry-service
   replicas: 1
 
   selector:
     matchLabels:
-      app: docker-registry
+      app: registry
 
   template:
     metadata:
       labels:
-        app: docker-registry
+        app: registry
     spec:
       hostNetwork: true
       dnsPolicy: ClusterFirstWithHostNet
@@ -23,13 +23,13 @@ spec:
         persistentVolumeClaim:
           claimName: certificate-pvc
           readOnly: true
-      - name: nginx-htpasswd-volume
+      - name: registry-htpasswd-volume
         secret:
-          secretName: nginx-htpasswd
+          secretName: registry-htpasswd
           defaultMode: 0400
 
       containers:
-      - name: docker-registry
+      - name: registry
         image: registry:2.7.1
         resources:
           requests:
@@ -42,11 +42,11 @@ spec:
           hostPort: 5000
         volumeMounts:
         - mountPath: /var/lib/registry
-          name: docker-registry-data
+          name: registry-data
         - mountPath: /etc/letsencrypt
           name: letsencrypt
         - mountPath: /auth/htpasswd
-          name: nginx-htpasswd-volume
+          name: registry-htpasswd-volume
           subPath: htpasswd
           readOnly: true
         env:
@@ -67,7 +67,7 @@ spec:
 
   volumeClaimTemplates:
   - metadata:
-      name: docker-registry-data
+      name: registry-data
     spec:
       accessModes:
       - ReadWriteOnce

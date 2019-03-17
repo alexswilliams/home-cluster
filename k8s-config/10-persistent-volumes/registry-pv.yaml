@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: docker-registry-pv
+  name: registry-pv
 spec:
   capacity:
     storage: 1Gi
@@ -9,11 +9,8 @@ spec:
   accessModes:
   - ReadWriteOnce
   storageClassName: local-storage
-  #  claimRef:
-  #    namespace: default
-  #    name: docker-registry-pvc
   local:
-    path: /mnt/k8s-pv/docker-registry-pv
+    path: /mnt/k8s-pv/registry-pv
   nodeAffinity:
     required:
       nodeSelectorTerms:
@@ -22,15 +19,3 @@ spec:
           operator: In
           values:
           - london.alexswilliams.co.uk
-#---
-#apiVersion: v1
-#kind: PersistentVolumeClaim
-#metadata:
-#  name: docker-registry-pvc
-#spec:
-#  accessModes:
-#  - ReadWriteOnce
-#  storageClassName: local-storage
-#  resources:
-#    requests:
-#      storage: 1Gi
