@@ -26,6 +26,10 @@ spec:
         - name: nginx-config
           configMap:
             name: nginx-config
+        - name: nginx-htpasswd
+          secret:
+            secretName: nginx-htpasswd
+            defaultMode: 0400
         - name: letsencrypt
           persistentVolumeClaim:
             claimName: certificate-pvc
@@ -49,7 +53,7 @@ spec:
               subPath: nginx.conf
               readOnly: true
             - mountPath: /etc/nginx/conf/htpasswd
-              name: nginx-config
+              name: nginx-htpasswd
               subPath: htpasswd
               readOnly: true
             - mountPath: /etc/letsencrypt
@@ -108,5 +112,3 @@ data:
         #}
       }
     }
-  htpasswd: |
-    ***REMOVED***
