@@ -23,9 +23,10 @@ spec:
         persistentVolumeClaim:
           claimName: certificate-pvc
           readOnly: true
-      #      - name: docker-registry-data
-      #        persistentVolumeClaim:
-      #          claimName: docker-registry-pvc
+      - name: nginx-htpasswd-volume
+        secret:
+          secretName: nginx-htpasswd
+          defaultMode: 0400
 
       containers:
       - name: docker-registry
@@ -44,6 +45,10 @@ spec:
           name: docker-registry-data
         - mountPath: /etc/letsencrypt
           name: letsencrypt
+        - mountPath: /auth/htpasswd
+          name: nginx-htpasswd-volume
+          subPath: htpasswd
+          readOnly: true
         env:
         - name: REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY
           value: /var/lib/registry
@@ -53,6 +58,12 @@ spec:
           value: /etc/letsencrypt/live/london.alexswilliams.co.uk/fullchain.pem
         - name: REGISTRY_HTTP_TLS_KEY
           value: /etc/letsencrypt/live/london.alexswilliams.co.uk/privkey.pem
+        - name: REGISTRY_AUTH
+          value: htpasswd
+        - name: REGISTRY_AUTH_HTPASSWD_REALM
+          value: Alex Registry
+        - name: REGISTRY_AUTH_HTPASSWD_PATH
+          value: /auth/htpasswd
 
   volumeClaimTemplates:
   - metadata:
