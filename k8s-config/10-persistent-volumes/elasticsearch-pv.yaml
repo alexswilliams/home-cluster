@@ -1,36 +1,36 @@
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: elasticsearch-pv
-spec:
-  capacity:
-    storage: 1Gi
-  volumeMode: Filesystem
-  accessModes:
-  - ReadWriteOnce
-  storageClassName: local-storage
-  claimRef:
-    namespace: default
-    name: elasticsearch-pvc
-  local:
-    path: /mnt/k8s-pv/elasticsearch-pv
-  nodeAffinity:
-    required:
-      nodeSelectorTerms:
-      - matchExpressions:
-        - key: kubernetes.io/hostname
-          operator: In
-          values:
-          - london.alexswilliams.co.uk
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: elasticsearch-pvc
-spec:
-  accessModes:
-  - ReadWriteOnce
-  storageClassName: local-storage
-  resources:
-    requests:
-      storage: 1Gi
+#apiVersion: v1
+#kind: PersistentVolume
+#metadata:
+#  name: elasticsearch-pv
+#spec:
+#  capacity:
+#    storage: 1Gi
+#  volumeMode: Filesystem
+#  accessModes:
+#  - ReadWriteOnce
+#  storageClassName: local-storage
+#  claimRef:
+#    namespace: default
+#    name: elasticsearch-pvc
+#  local:
+#    path: /mnt/k8s-pv/elasticsearch-pv
+#  nodeAffinity:
+#    required:
+#      nodeSelectorTerms:
+#      - matchExpressions:
+#        - key: kubernetes.io/hostname
+#          operator: In
+#          values:
+#          - london.alexswilliams.co.uk
+#---
+#apiVersion: v1
+#kind: PersistentVolumeClaim
+#metadata:
+#  name: elasticsearch-pvc
+#spec:
+#  accessModes:
+#  - ReadWriteOnce
+#  storageClassName: local-storage
+#  resources:
+#    requests:
+#      storage: 1Gi

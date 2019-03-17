@@ -1,72 +1,72 @@
-apiVersion: apps/v1
-kind: StatefulSet
-metadata:
-  name: elasticsearch
-  labels:
-    app: elasticsearch
-spec:
-  serviceName: elasticsearch-service
-  replicas: 1
-  selector:
-    matchLabels:
-      app: elasticsearch
-
-  template:
-    metadata:
-      labels:
-        app: elasticsearch
-
-    spec:
-      terminationGracePeriodSeconds: 60
-
-      volumes:
-        - name: data
-          persistentVolumeClaim:
-            claimName: elasticsearch-pvc
-
-      initContainers:
-        - name: prepare-node-for-elasticsearch
-          image: busybox
-          command:
-            - sh
-            - -c
-            - ulimit -n 65536; chown -R 1000:1000 /usr/share/elasticsearch/data; sysctl -w vm.max_map_count=262144
-          securityContext:
-            privileged: true
-          volumeMounts:
-            - name: data
-              mountPath: /usr/share/elasticsearch/data
-          resources:
-            requests:
-              memory: 32Mi
-      containers:
-        - name: elasticsearch
-          image: docker.elastic.co/elasticsearch/elasticsearch-oss:6.4.0
-          resources:
-            requests:
-              memory: 1Gi
-              cpu: 140m
-            limits:
-              memory: 1Gi
-              cpu: 200m
-          ports:
-            - containerPort: 9200
-              name: http
-            - containerPort: 9300
-              name: tcp
-          env:
-            - name: cluster.name
-              value: london.alexswilliams.co.uk
-            - name: node.name
-              valueFrom:
-                fieldRef:
-                  fieldPath: metadata.name
-            - name: discovery.zen.ping.unicast.hosts
-              value: "elasticsearch-0.elasticsearch.default.svc.cluster.local"
-            - name: discovery.type
-              value: single-node
-            - name: ES_JAVA_OPTS
-              value: -Xms386m -Xmx480m
-          volumeMounts:
-            - name: data
-              mountPath: /usr/share/elasticsearch/data
+#apiVersion: apps/v1
+#kind: StatefulSet
+#metadata:
+#  name: elasticsearch
+#  labels:
+#    app: elasticsearch
+#spec:
+#  serviceName: elasticsearch-service
+#  replicas: 1
+#  selector:
+#    matchLabels:
+#      app: elasticsearch
+#
+#  template:
+#    metadata:
+#      labels:
+#        app: elasticsearch
+#
+#    spec:
+#      terminationGracePeriodSeconds: 60
+#
+#      volumes:
+#        - name: data
+#          persistentVolumeClaim:
+#            claimName: elasticsearch-pvc
+#
+#      initContainers:
+#        - name: prepare-node-for-elasticsearch
+#          image: busybox
+#          command:
+#            - sh
+#            - -c
+#            - ulimit -n 65536; chown -R 1000:1000 /usr/share/elasticsearch/data; sysctl -w vm.max_map_count=262144
+#          securityContext:
+#            privileged: true
+#          volumeMounts:
+#            - name: data
+#              mountPath: /usr/share/elasticsearch/data
+#          resources:
+#            requests:
+#              memory: 32Mi
+#      containers:
+#        - name: elasticsearch
+#          image: docker.elastic.co/elasticsearch/elasticsearch-oss:6.4.0
+#          resources:
+#            requests:
+#              memory: 1Gi
+#              cpu: 140m
+#            limits:
+#              memory: 1Gi
+#              cpu: 200m
+#          ports:
+#            - containerPort: 9200
+#              name: http
+#            - containerPort: 9300
+#              name: tcp
+#          env:
+#            - name: cluster.name
+#              value: london.alexswilliams.co.uk
+#            - name: node.name
+#              valueFrom:
+#                fieldRef:
+#                  fieldPath: metadata.name
+#            - name: discovery.zen.ping.unicast.hosts
+#              value: "elasticsearch-0.elasticsearch.default.svc.cluster.local"
+#            - name: discovery.type
+#              value: single-node
+#            - name: ES_JAVA_OPTS
+#              value: -Xms386m -Xmx480m
+#          volumeMounts:
+#            - name: data
+#              mountPath: /usr/share/elasticsearch/data
