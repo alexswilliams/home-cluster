@@ -9,7 +9,7 @@ spec:
 
   replicas: 1
   strategy:
-    type: Recreate
+    type: RollingUpdate
 
   template:
 
@@ -114,6 +114,7 @@ data:
         # What does grafana do?
         location /grafana {
           proxy_pass http://grafana-service:3000;
+          proxy_set_header Authorization "";
         }
       }
     }
