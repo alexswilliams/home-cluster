@@ -39,13 +39,13 @@ spec:
               value: /etc/grafana/grafana.ini
             - name: GF_PATHS_PROVISIONING
               value: /etc/grafana/provisioning
-            - name: GF_SECURITY_ADMIN_USER
+            - name: GF_ADMIN_USER
               valueFrom:
                 secretKeyRef:
                   optional: true
                   name: grafana-secrets
                   key: admin-user
-            - name: GF_SECURITY_ADMIN_PASSWORD
+            - name: GF_ADMIN_PASSWORD
               valueFrom:
                 secretKeyRef:
                   optional: true
