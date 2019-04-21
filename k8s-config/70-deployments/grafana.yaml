@@ -39,13 +39,13 @@ spec:
               value: /etc/grafana/grafana.ini
             - name: GF_PATHS_PROVISIONING
               value: /etc/grafana/provisioning
-            - name: GF_ADMIN_USER
+            - name: GF_SECURITY_ADMIN_USER
               valueFrom:
                 secretKeyRef:
                   optional: true
                   name: grafana-secrets
                   key: admin-user
-            - name: GF_ADMIN_PASSWORD
+            - name: GF_SECURITY_ADMIN_PASSWORD
               valueFrom:
                 secretKeyRef:
                   optional: true
@@ -94,6 +94,8 @@ data:
 
     [session]
     provider = memory
+
+    [security]
     cookie_secure = true
 ---
 apiVersion: v1
@@ -110,6 +112,9 @@ data:
         orgId: 1
         url: http://prometheus-service:9090
         isDefault: true
+        jsonData:
+          timeInterval: "10s"
+          httpMethod: GET
 ---
 apiVersion: v1
 kind: ConfigMap
