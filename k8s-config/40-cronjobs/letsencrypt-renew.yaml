@@ -27,6 +27,7 @@ spec:
           containers:
             - name: letsencrypt-renew-job-container
               image: certbot/certbot:latest
+              imagePullPolicy: Always
               args:
                 - renew
                 - --standalone
