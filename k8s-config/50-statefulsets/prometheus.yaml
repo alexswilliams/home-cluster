@@ -1,0 +1,84 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: prometheus
+  labels:
+    app: prometheus
+spec:
+  serviceName: prometheus-service
+  selector:
+    matchLabels:
+      app: prometheus
+
+  updateStrategy:
+    type: RollingUpdate
+  replicas: 1
+
+  template:
+    metadata:
+      labels:
+        app: prometheus
+
+    spec:
+      terminationGracePeriodSeconds: 60
+
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: prometheus-pvc
+        - name: config
+          configMap:
+            name: prometheus-config
+            defaultMode: 0444
+
+      containers:
+        - name: prometheus
+          image: prom/prometheus:v2.9.1
+          resources:
+            requests:
+              memory: 32Mi
+              cpu: 100m
+            limits:
+              memory: 128Mi
+              cpu: 200m
+          ports:
+            - containerPort: 9090
+              name: http
+          volumeMounts:
+            - name: data
+              mountPath: /prometheus
+            - name: config
+              mountPath: /etc/prometheus/prometheus.yml
+              subPath: prometheus.yml
+              readOnly: true
+          args:
+            - --config.file=/etc/prometheus/prometheus.yml
+            - --storage.tsdb.path=/prometheus
+            - --storage.tsdb.retention.time=1y
+            - --storage.tsdb.retention.size=4GB
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prometheus-config
+data:
+  prometheus.yml: |
+    global:
+      scrape_interval:     10s
+      evaluation_interval: 30s
+      # scrape_timeout is set to the global default (10s).
+
+    scrape_configs:
+      - job_name: prometheus-push-gateway
+        scrape_interval: 5s
+        metrics_path: /metrics
+        static_configs:
+          - targets:
+              - prom-push-gw:9091
+
+      - job_name: prometheus-node-exporter
+        scrape_interval: 10s
+        metrics_path: /metrics
+        static_configs:
+          - targets:
+              - prom-node-exporter:9100

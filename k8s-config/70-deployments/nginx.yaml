@@ -109,6 +109,9 @@ data:
           proxy_pass http://grafana-service:3000/;
           proxy_set_header Authorization "";
         }
+        location /prometheus/ {
+          proxy_pass http://prometheus-service:9090/;
+        }
 
         # Kibana handles its own proxy forward name stripping.
         #location /kibana {
