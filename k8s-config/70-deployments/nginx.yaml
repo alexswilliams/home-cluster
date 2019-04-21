@@ -29,7 +29,7 @@ spec:
         - name: nginx-htpasswd
           secret:
             secretName: nginx-htpasswd
-            defaultMode: 0400
+            defaultMode: 0444
         - name: letsencrypt
           persistentVolumeClaim:
             claimName: certificate-pvc
