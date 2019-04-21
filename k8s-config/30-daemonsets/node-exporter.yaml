@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: node-exporter
+spec:
+  selector:
+    matchLabels:
+      app: node-exporter
+
+  template:
+
+    metadata:
+      labels:
+        app: node-exporter
+
+    spec:
+      restartPolicy: Always
+      hostNetwork: true
+      dnsPolicy: ClusterFirstWithHostNet
+
+      tolerations:
+        - key: node-role.kubernetes.io/master
+          effect: NoSchedule
+
+      volumes:
+        - name: proc
+          hostPath:
+            path: /proc
+        - name: sys
+          hostPath:
+            path: /sys
+        - name: root
+          hostPath:
+            path: /
+      containers:
+        - name: node-exporter
+          image: prom/node-exporter:v0.17.0
+          volumeMounts:
+            - mountPath: /host/rootfs
+              name: root
+              readOnly: true
+            - mountPath: /host/sysfs
+              name: sys
+              readOnly: true
+            - mountPath: /host/procfs
+              name: proc
+              readOnly: true
+          args:
+            - --collector.filesystem.ignored-mount-points=^/(sys|proc|dev|host|etc|var/lib/docker/.+)($$|/)
+            - --path.procfs=/host/procfs
+            - --path.sysfs=/host/sysfs
+            - --path.rootfs=/host/rootfs
+          securityContext:
+            privileged: true
+            runAsUser: 0
+            runAsGroup: 0
+            readOnlyRootFilesystem: true
+            procMount: Unmasked
+          resources:
+            requests:
+              memory: 16Mi
+              cpu: 20m
+            limits:
+              memory: 64Mi
+              cpu: 100m
+          ports:
+            - containerPort: 9100
+              name: http

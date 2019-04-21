@@ -2,8 +2,6 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: prometheus
-  labels:
-    app: prometheus
 spec:
   serviceName: prometheus-service
   selector:
@@ -66,19 +64,18 @@ data:
     global:
       scrape_interval:     10s
       evaluation_interval: 30s
-      # scrape_timeout is set to the global default (10s).
 
     scrape_configs:
-      - job_name: prometheus-push-gateway
-        scrape_interval: 5s
-        metrics_path: /metrics
-        static_configs:
-          - targets:
-              - prom-push-gw:9091
+#      - job_name: prometheus-push-gateway
+#        scrape_interval: 5s
+#        metrics_path: /metrics
+#        static_configs:
+#          - targets:
+#              - prom-push-gw:9091
 
-      - job_name: prometheus-node-exporter
+      - job_name: node-exporter-vps
         scrape_interval: 10s
         metrics_path: /metrics
         static_configs:
           - targets:
-              - prom-node-exporter:9100
+              - node-exporter-service:9100
