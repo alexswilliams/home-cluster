@@ -105,7 +105,7 @@ data:
         #location /artifactory {
         #  proxy_pass http://artifactory-service:8081/;
         #}
-        location /grafana {
+        location /grafana/ {
           proxy_pass http://grafana-service:3000/;
           proxy_set_header Authorization "";
         }
