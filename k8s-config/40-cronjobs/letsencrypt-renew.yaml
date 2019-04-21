@@ -1,4 +1,4 @@
-# sudo docker run -it --rm --name certbot -p 80:80 -v "/mnt/k8s-pv/letsencrypt-pv:/var/lib/letsencrypt" -v "/mnt/k8s-pv/certificate-pv:/etc/letsencrypt" certbot/certbot certonly --standalone -d 'london.alexswilliams.co.uk'
+# sudo docker run -it --rm --name certbot -p 80:80 -v "/mnt/k8s-pv/certificate-pv:/etc/letsencrypt" certbot/certbot certonly --standalone -d 'london.alexswilliams.co.uk'
 
 apiVersion: batch/v1beta1
 kind: CronJob
