@@ -23,6 +23,10 @@ spec:
               secret:
                 secretName: aws-fluent-credentials
                 defaultMode: 0444
+            - name: log-sync-s3-config
+              configMap:
+                name: log-sync-s3-config
+                defaultMode: 0444
 
           containers:
             - name: log-sync-s3-job-container
@@ -33,13 +37,8 @@ spec:
                 - name: AWS_SHARED_CREDENTIALS_FILE
                   value: /credentials.json
               command:
-                - aws
-                - s3
-                - sync
-                - /fluent-logs/all/
-                - s3://alexswilliams-fluent-logs/fluentd/all/
-                - --exclude="buffer.*"
-                - --storage-class=STANDARD_IA
+                - sh
+                - /entrypoint.sh
               resources:
                 requests:
                   memory: 64Mi
@@ -53,3 +52,18 @@ spec:
                   name: aws-credentials
                   subPath: credentials.json
                   readOnly: true
+                - mountPath: /entrypoint.sh
+                  name: log-sync-s3-config
+                  subPath: entrypoint.sh
+                  readOnly: true
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: log-sync-s3-config
+data:
+  entrypoint.sh: |
+    #!/bin/sh
+
+    cd /fluent-logs/all/
+    aws s3 sync . s3://alexswilliams-fluent-logs/fluentd/all/ --exclude="buffer.*" --storage-class=STANDARD_IA
