@@ -1,0 +1,55 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: log-sync-s3-cronjob
+spec:
+  schedule: "56 2 * * *"
+  startingDeadlineSeconds: 60
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 3
+
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: Never
+
+          volumes:
+            - name: fluent-logs
+              persistentVolumeClaim:
+                claimName: fluent-pvc
+            - name: aws-credentials
+              secret:
+                secretName: aws-fluent-credentials
+                defaultMode: 0444
+
+          containers:
+            - name: log-sync-s3-job-container
+              image: london.alexswilliams.co.uk:5000/awscli:alpine-3.9.3--20190421-0249
+              env:
+                - name: AWS_DEFAULT_REGION
+                  value: eu-west-2
+                - name: AWS_SHARED_CREDENTIALS_FILE
+                  value: /credentials.json
+              command:
+                - aws
+                - s3
+                - sync
+                - /fluent-logs/all/
+                - s3://alexswilliams-fluent-logs/fluentd/all/
+                - --exclude="buffer.*"
+                - --storage-class=STANDARD_IA
+              resources:
+                requests:
+                  memory: 64Mi
+                limits:
+                  memory: 64Mi
+
+              volumeMounts:
+                - mountPath: /fluent-logs
+                  name: fluent-logs
+                - mountPath: /credentials.json
+                  name: aws-credentials
+                  subPath: credentials.json
+                  readOnly: true
