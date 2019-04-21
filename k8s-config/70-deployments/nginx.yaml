@@ -110,5 +110,10 @@ data:
         #location /kibana {
         #  proxy_pass http://kibana-service:5601;
         #}
+
+        # What does grafana do?
+        location /grafana {
+          proxy_pass http://grafana-service:3000;
+        }
       }
     }
