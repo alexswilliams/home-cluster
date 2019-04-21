@@ -46,7 +46,7 @@ spec:
               name: proc
               readOnly: true
           args:
-            - --collector.filesystem.ignored-mount-points=^/(sys|proc|dev|host|etc|var/lib/docker/.+)($$|/)
+            - --collector.filesystem.ignored-mount-points=^/(sys|proc|dev|host|etc|var/lib/docker/.+|var/lib/kubelet/.+)($$|/)
             - --path.procfs=/host/procfs
             - --path.sysfs=/host/sysfs
             - --path.rootfs=/host/rootfs
