@@ -49,8 +49,10 @@ spec:
           resources:
             requests:
               memory: 42Mi
+              cpu: 20m
             limits:
               memory: 64Mi
+              cpu: 50m
           env:
             - name: RUBY_GC_HEAP_OLDOBJECT_LIMIT_FACTOR
               value: "0.9"
@@ -63,6 +65,8 @@ spec:
               protocol: UDP
               hostPort: 5141
               name: syslog-ap
+            - containerPort: 24231
+              name: metrics
 
           volumeMounts:
             - mountPath: /fluentd/etc/fluent.conf
@@ -107,12 +111,63 @@ data:
     </filter>
 
     <match **>
-      @type file
-      path /var/log/fluent/all/
-      time_slice_format %Y%m%d
-      compress gzip
-      append true
-      <buffer>
-        timekey_use_utc
-      </buffer>
+      @type copy
+
+      <store>
+        @type file
+        path /var/log/fluent/all/
+        time_slice_format %Y%m%d
+        compress gzip
+        append true
+        <buffer>
+          timekey_use_utc
+        </buffer>
+      </store>
+
+      <store ignore_error>
+        # count number of outgoing records per tag
+        @type prometheus
+        <metric>
+          name fluentd_output_status_num_records_total
+          type counter
+          desc The total number of outgoing records
+          <labels>
+            tag ${tag}
+            hostname ${hostname}
+          </labels>
+        </metric>
+      </store>
     </match>
+
+
+
+
+    # Monitoring #
+
+    # count number of incoming records per tag
+    <filter **>
+      @type prometheus
+      <metric>
+        name fluentd_input_status_num_records_total
+        type counter
+        desc The total number of incoming records
+        <labels>
+          tag ${tag}
+          hostname ${hostname}
+        </labels>
+      </metric>
+    </filter>
+
+    <source>
+      @type prometheus
+      bind 0.0.0.0
+      port 24231
+      metrics_path /metrics
+    </source>
+    <source>
+      @type prometheus_output_monitor
+      interval 10
+      <labels>
+        hostname ${hostname}
+      </labels>
+    </source>
