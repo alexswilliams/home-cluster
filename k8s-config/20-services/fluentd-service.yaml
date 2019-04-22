@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: fluentd-service
+spec:
+  type: ClusterIP
+  ports:
+  - port: 24231
+    name: metrics
+    targetPort: metrics
+  selector:
+    app: fluentd
