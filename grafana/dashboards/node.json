@@ -15,7 +15,6 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 2,
   "links": [],
   "panels": [
     {
@@ -118,95 +117,69 @@
       }
     },
     {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "fill": 1,
+      "cards": {
+        "cardPadding": null,
+        "cardRound": null
+      },
+      "color": {
+        "cardColor": "#b4ff00",
+        "colorScale": "sqrt",
+        "colorScheme": "interpolateSpectral",
+        "exponent": 0.5,
+        "min": null,
+        "mode": "opacity"
+      },
+      "dataFormat": "timeseries",
       "gridPos": {
         "h": 9,
         "w": 12,
         "x": 12,
         "y": 1
       },
+      "heatmap": {},
+      "hideZeroBuckets": false,
+      "highlightCards": true,
       "id": 18,
       "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
+        "show": false
       },
-      "lines": true,
-      "linewidth": 1,
       "links": [],
-      "nullPointMode": "null",
-      "percentage": false,
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
+      "reverseYBuckets": false,
       "targets": [
         {
           "expr": "sum(node_procs_running)",
-          "format": "time_series",
+          "format": "heatmap",
+          "instant": false,
           "intervalFactor": 1,
           "legendFormat": "Running",
           "refId": "A"
-        },
-        {
-          "expr": "sum(node_procs_blocked)",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "Blocked",
-          "refId": "B"
         }
       ],
-      "thresholds": [],
       "timeFrom": null,
-      "timeRegions": [],
       "timeShift": null,
       "title": "Running Processes",
       "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
         "show": true,
-        "values": []
+        "showHistogram": true
       },
-      "yaxes": [
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      "type": "heatmap",
+      "xAxis": {
+        "show": true
+      },
+      "xBucketNumber": 200,
+      "xBucketSize": "",
+      "yAxis": {
+        "decimals": null,
+        "format": "short",
+        "logBase": 1,
+        "max": null,
+        "min": null,
+        "show": true,
+        "splitFactor": null
+      },
+      "yBucketBound": "auto",
+      "yBucketNumber": null,
+      "yBucketSize": null
     },
     {
       "aliasColors": {},
@@ -445,7 +418,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "increase(node_network_receive_bytes{device='eth0'}[1m])/60",
+          "expr": "increase(node_network_receive_bytes_total[1m])/60",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -453,7 +426,7 @@
           "refId": "C"
         },
         {
-          "expr": "increase(node_network_transmit_bytes{device='eth0'}[1m])/60",
+          "expr": "increase(node_network_transmit_bytes_total[1m])/60",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -468,7 +441,7 @@
       "title": "Network Traffic (eth0)",
       "tooltip": {
         "shared": true,
-        "sort": 0,
+        "sort": 2,
         "value_type": "individual"
       },
       "type": "graph",
@@ -765,6 +738,7 @@
         {
           "expr": "node_memory_SwapCached_bytes / node_memory_SwapTotal_bytes",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 1,
           "legendFormat": "Percentage Swap Usage",
           "refId": "A"
@@ -921,6 +895,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
+      "description": "",
       "fill": 1,
       "gridPos": {
         "h": 9,
@@ -929,14 +904,17 @@
         "y": 49
       },
       "id": 4,
+      "interval": "10s",
       "legend": {
+        "alignAsTable": true,
         "avg": false,
-        "current": false,
-        "max": false,
+        "current": true,
+        "max": true,
         "min": false,
+        "rightSide": false,
         "show": true,
         "total": false,
-        "values": false
+        "values": true
       },
       "lines": true,
       "linewidth": 1,
@@ -957,15 +935,17 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "irate(node_disk_bytes_read{device=~'mmcblk0p.+'}[1m])",
+          "expr": "increase(node_disk_read_bytes_total[1m])",
           "format": "time_series",
+          "interval": "30s",
           "intervalFactor": 1,
           "legendFormat": "Read - {{device}}",
           "refId": "A"
         },
         {
-          "expr": "irate(node_disk_bytes_written{device=~'mmcblk0p.+'}[1m]) ",
+          "expr": "increase(node_disk_written_bytes_total[1m]) ",
           "format": "time_series",
+          "interval": "30s",
           "intervalFactor": 1,
           "legendFormat": "Write - {{device}}",
           "refId": "B"
@@ -975,7 +955,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Reads and Writes per Second",
+      "title": "Bytes Reads and Writes per Minute",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -992,7 +972,7 @@
       "yaxes": [
         {
           "format": "bytes",
-          "label": "Throughput per Second",
+          "label": "Throughput per Minute",
           "logBase": 1,
           "max": null,
           "min": null,
@@ -1004,7 +984,7 @@
           "logBase": 1,
           "max": null,
           "min": null,
-          "show": true
+          "show": false
         }
       ],
       "yaxis": {
@@ -1048,8 +1028,9 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "node_filesystem_free",
+          "expr": "node_filesystem_free_bytes",
           "format": "time_series",
+          "interval": "1m",
           "intervalFactor": 1,
           "legendFormat": "{{mountpoint}}",
           "refId": "A"
@@ -1194,7 +1175,9 @@
         "y": 58
       },
       "id": 6,
+      "interval": "",
       "legend": {
+        "alignAsTable": false,
         "avg": false,
         "current": false,
         "max": false,
@@ -1219,6 +1202,8 @@
         {
           "expr": "node_filefd_allocated / node_filefd_maximum",
           "format": "time_series",
+          "instant": false,
+          "interval": "30s",
           "intervalFactor": 1,
           "legendFormat": "Percentage FDs Allocated",
           "refId": "A"
@@ -1266,7 +1251,7 @@
       }
     }
   ],
-  "schemaVersion": 16,
+  "schemaVersion": 18,
   "style": "dark",
   "tags": [],
   "templating": {
@@ -1304,5 +1289,5 @@
   "timezone": "",
   "title": "Node Stats",
   "uid": "LYGVlMRRk",
-  "version": 5
+  "version": 1
 }
