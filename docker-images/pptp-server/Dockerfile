@@ -1,4 +1,4 @@
-FROM alpine:3.9.3
+FROM alpine:3.9.4
 RUN apk update && \
     apk upgrade && \
     apk --no-cache add pptpd ppp && \

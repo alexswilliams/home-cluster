@@ -1,4 +1,4 @@
-FROM fluent/fluentd:v1.4.2-debian-1.0
+FROM fluent/fluentd:v1.4.2-debian-2.0
 
 # Use root account to use apt
 USER root

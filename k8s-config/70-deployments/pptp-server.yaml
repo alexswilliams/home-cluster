@@ -33,7 +33,7 @@ spec:
 
       containers:
         - name: pptp-server
-          image: london.alexswilliams.co.uk:5000/pptp-server:alpine-3.9.3--20190421-0318
+          image: london.alexswilliams.co.uk:5000/pptp-server:alpine-3.9.4--20190512-0307
           imagePullPolicy: Always
           resources:
             requests:

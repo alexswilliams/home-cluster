@@ -1,6 +1,6 @@
-FROM alpine:3.9.3
+FROM alpine:3.9.4
 
-RUN apk --no-cache add py3-pip jq groff && \
+RUN apk --no-cache add py3-pip groff && \
     pip3 install awscli --upgrade && \
     adduser -D -h /home/awsuser awsuser
 

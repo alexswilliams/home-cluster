@@ -31,10 +31,10 @@ spec:
 
       containers:
         - name: prometheus
-          image: prom/prometheus:v2.9.1
+          image: prom/prometheus:v2.9.2
           resources:
             requests:
-              memory: 64Mi
+              memory: 48Mi
               cpu: 100m
             limits:
               memory: 128Mi
