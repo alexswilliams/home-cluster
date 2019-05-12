@@ -41,10 +41,10 @@ spec:
           resources:
             requests:
               memory: 32Mi
-              cpu: 10
+              cpu: 10m
             limits:
               memory: 192Mi
-              cpu: 50
+              cpu: 50m
           ports:
             - containerPort: 443
               hostPort: 443
