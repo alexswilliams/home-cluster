@@ -42,8 +42,10 @@ spec:
               resources:
                 requests:
                   memory: 64Mi
+                  cpu: 50
                 limits:
                   memory: 64Mi
+                  cpu: 50
 
               volumeMounts:
                 - mountPath: /fluent-logs
