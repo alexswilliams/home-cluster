@@ -89,7 +89,7 @@ data:
               - 10.254.1.20:30001
 
       - job_name: 88bl-pi-push-gateway
-        scrape_interval: 5s
+        scrape_interval: 60s
         scrape_timeout: 60s
         metrics_path: /metrics
         static_configs:
