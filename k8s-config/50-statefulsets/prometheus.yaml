@@ -86,7 +86,7 @@ data:
         metrics_path: /metrics
         static_configs:
           - targets:
-              - 10.254.1.20:30001
+              - 2.24.113.244:30001
 
       - job_name: 88bl-pi-push-gateway
         scrape_interval: 5s
@@ -94,4 +94,4 @@ data:
         metrics_path: /metrics
         static_configs:
           - targets:
-              - 10.254.1.20:30002
+              - 2.24.113.244:30002
