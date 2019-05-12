@@ -66,4 +66,4 @@ data:
     #!/bin/sh
 
     cd /fluent-logs/all/
-    aws s3 sync . s3://alexswilliams-fluent-logs/fluentd/all/ --exclude="buffer.*" --storage-class=STANDARD_IA
+    aws s3 sync . s3://alexswilliams-co-uk-backups/fluentd/all/ --exclude="buffer.*" --storage-class=STANDARD_IA
