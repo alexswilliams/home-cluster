@@ -28,20 +28,22 @@ start)
     iptables -N ${CHAIN_NAME} || iptables -F ${CHAIN_NAME}
     iptables -A ${CHAIN_NAME} -m state --state ESTABLISHED,RELATED -j ACCEPT
 
+    # Kubernetes Services
+    iptables -A ${CHAIN_NAME} -p tcp --dport 443 -j RETURN # HTTPS
+    iptables -A ${CHAIN_NAME} -p tcp --dport 1723 -j RETURN # PPTP
+    iptables -A ${CHAIN_NAME} -s 10.254.0.0/16 -p udp --dport 5140 -j RETURN # Syslog (new)
+    iptables -A ${CHAIN_NAME} -s 10.254.0.0/16 -p udp --dport 5141 -j RETURN # Syslog (old)
+
+    # Host Services
+    iptables -A ${CHAIN_NAME} -p icmp -j ACCEPT
+    iptables -A ${CHAIN_NAME} -p tcp --dport 8443 -j ACCEPT
+
     # Filtering
     iptables -A ${CHAIN_NAME} -m conntrack --ctstate INVALID -j DROP
     iptables -A ${CHAIN_NAME} -s 10.0.0.0/8 -j DROP
     iptables -A ${CHAIN_NAME} -s 172.16.0.0/12 -j DROP
     iptables -A ${CHAIN_NAME} -s 192.168.0.0/16 -j DROP
     iptables -A ${CHAIN_NAME} -s 224.0.0.0/4 -j DROP
-
-    # Kubernetes Services
-    iptables -A ${CHAIN_NAME} -p tcp --dport 443 -j RETURN # HTTPS
-    iptables -A ${CHAIN_NAME} -p tcp --dport 1723 -j RETURN # PPTP
-
-    # Host Services
-    iptables -A ${CHAIN_NAME} -p icmp -j ACCEPT
-    iptables -A ${CHAIN_NAME} -p tcp --dport 8443 -j ACCEPT
 
     # Default Policy
     iptables -A ${CHAIN_NAME} -j LOG --log-prefix "Rejected external packet: "
