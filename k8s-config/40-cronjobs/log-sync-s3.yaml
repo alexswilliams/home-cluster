@@ -30,7 +30,7 @@ spec:
 
           containers:
             - name: log-sync-s3-job-container
-              image: london.alexswilliams.co.uk:5000/awscli:alpine-3.9.4--20190512-0302
+              image: london.alexswilliams.co.uk:5000/awscli:alpine-3.9.4--20190518-0134
               env:
                 - name: AWS_DEFAULT_REGION
                   value: eu-west-2
