@@ -1,5 +1,13 @@
 FROM fluent/fluentd:v1.4.2-debian-2.0
 
+LABEL org.label-schema.build-date=$BUILD_DATE \
+      org.label-schema.name="FluentD with Prometheus Plugin" \
+      org.label-schema.description="FluentD with the prometheus plugin pre-bundled" \
+      org.label-schema.vcs-ref=$VCS_REF \
+      org.label-schema.vcs-url="https://github.com/alexswilliams/home-cluster" \
+      org.label-schema.schema-version="1.0"
+
+
 # Use root account to use apt
 USER root
 
