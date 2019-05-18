@@ -29,6 +29,7 @@ start)
     iptables -A ${CHAIN_NAME} -m state --state ESTABLISHED,RELATED -j ACCEPT
 
     # Kubernetes Services
+    iptables -A ${CHAIN_NAME} -p gre -j RETURN # PPTP VPN
     iptables -A ${CHAIN_NAME} -p tcp --dport 443 -j RETURN # HTTPS
     iptables -A ${CHAIN_NAME} -p tcp --dport 1723 -j RETURN # PPTP
     iptables -A ${CHAIN_NAME} -s 10.254.0.0/16 -p udp --dport 5140 -j RETURN # Syslog (new)
