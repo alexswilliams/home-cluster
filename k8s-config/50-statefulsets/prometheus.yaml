@@ -31,7 +31,7 @@ spec:
 
       containers:
         - name: prometheus
-          image: prom/prometheus:v2.9.2
+          image: prom/prometheus:v2.10.0
           resources:
             requests:
               memory: 32Mi
@@ -51,6 +51,8 @@ spec:
               readOnly: true
           args:
             - --config.file=/etc/prometheus/prometheus.yml
+            - --web.external-url=/prometheus/
+            - --web.route-prefix=/
             - --storage.tsdb.path=/prometheus
             - --storage.tsdb.retention.time=1y
             - --storage.tsdb.retention.size=4GB
