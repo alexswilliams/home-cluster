@@ -190,7 +190,7 @@ data:
         emit_invalid_record_to_error    false
         <parse>
             @type       regexp
-            expression  /^ADSL_Status:\[Mode=(?<adsl_mode>[^ ]+) States=(?<adsl_states>[^ ]+) UpSpeed=(?<adsl_upspeed>[^ ]+) DownSpeed=(?<adsl_downspeed>[^ ]+) SNR=(?<adsl_snr>[^ ]+) Atten=(?<adsl_atten>[^ ]+) ]$/
+            expression  /^ADSL_Status:\[Mode=(?<adsl_mode>[^ ]+) States=(?<adsl_states>[^ ]+) UpSpeed=(?<adsl_upspeed>[^ ]+) DownSpeed=(?<adsl_downspeed>[^ ]+) SNR=(?<adsl_snr>[^ ]+) Atten=(?<adsl_atten>[^ ]+) \]$/
             types       adsl_upspeed:integer,adsl_downspeed:integer,adsl_snr:integer,adsl_atten:integer
         </parse>
     </filter>
