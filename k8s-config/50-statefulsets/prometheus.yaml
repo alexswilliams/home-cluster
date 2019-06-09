@@ -29,6 +29,19 @@ spec:
             name: prometheus-config
             defaultMode: 0444
 
+      initContainers:
+        - name: prepare-volume-for-prometheus
+          image: busybox
+          command:
+            - sh
+            - -c
+            - chmod -R 0777 /prometheus
+          volumeMounts:
+            - name: data
+              mountPath: /prometheus
+          resources:
+            requests:
+              memory: 32Mi
       containers:
         - name: prometheus
           image: prom/prometheus:v2.10.0
