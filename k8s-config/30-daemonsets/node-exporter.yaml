@@ -34,7 +34,7 @@ spec:
             path: /
       containers:
         - name: node-exporter
-          image: prom/node-exporter:v0.18.0
+          image: prom/node-exporter:v0.18.1
           volumeMounts:
             - mountPath: /host/rootfs
               name: root
