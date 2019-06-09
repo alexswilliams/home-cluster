@@ -46,6 +46,8 @@ spec:
               name: proc
               readOnly: true
           args:
+            - --web.telemetry-path="metrics"
+            - --web.disable-exporter-metrics
             - --collector.filesystem.ignored-mount-points=^/(sys|proc|dev|host|etc|var/lib/docker/.+|var/lib/kubelet/.+)($$|/)
             - --path.procfs=/host/procfs
             - --path.sysfs=/host/sysfs
