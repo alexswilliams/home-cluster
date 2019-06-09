@@ -84,61 +84,134 @@ metadata:
   name: fluentd-config
 data:
   fluent.conf: |
+    <system>
+        log_level    debug
+    </system>
+
     <source>
-      @type syslog
-      port 5140
-      protocol_type udp
-      message_length_limit 4096
-      message_format auto
-      tag syslog.draytek.router
-    </source>
-    <source>
-      @type syslog
-      port 5141
-      protocol_type udp
-      message_length_limit 4096
-      message_format auto
-      tag syslog.draytek.accesspoint
+        @type udp
+        port 5140
+        message_length_limit 4096
+        source_address_key      syslog_host
+        <parse>
+            @type regexp
+            expression    /^\<(?<pri>[^>]+)\>(?<timestamp>(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) ([ ][1-9]|[1-2][0-9]|30|31) [0-2][0-9]:[0-5][0-9]:[0-5][0-9]) (?<hostname>[^ :]+):? (?<message>.*)$/
+            time_key        timestamp
+            time_format     %b %e %H:%M:%S
+            localtime       true
+            keep_time_key   true
+            types           pri:integer
+        </parse>
+        tag from.draytek
     </source>
 
-    <filter syslog.draytek.**>
-      @type record_transformer
-      <record>
-        logsource ${tag_parts[0]}
-        category ${tag_parts[1]}
-        devicetype ${tag_parts[2]}
-      </record>
-    </filter>
-
-    # count number of incoming records per tag
-    <filter **>
-      @type prometheus
-      <metric>
-        name fluentd_input_status_num_records_total
-        type counter
-        desc The total number of incoming records
+    # Monitoring #
+    <source>
+        @type prometheus
+        bind 0.0.0.0
+        port 24231
+        metrics_path /metrics
+    </source>
+    <source>
+        @type prometheus_output_monitor
+        interval 10
         <labels>
-          tag ${tag}
-          hostname ${hostname}
+            hostname ${hostname}
         </labels>
-      </metric>
+    </source>
+    <filter **>
+        @type prometheus
+        <metric>
+            name fluentd_input_status_num_records_total
+            type counter
+            desc The total number of incoming records
+            <labels>
+                tag ${tag}
+                hostname ${hostname}
+            </labels>
+        </metric>
     </filter>
+
+
+    # <150>Jun  5 02:28:45 88BL: Local User (MAC=B0-2A-43-48-A8-95): 192.168.1.32 DNS -> 8.8.8.8 inquire connectivitycheck.gstatic.com
+    <filter from.draytek>
+        @type           parser
+        key_name        message
+        reserve_data    true
+        emit_invalid_record_to_error    false
+        <parse>
+            @type       regexp
+            expression  /^Local User .MAC=(?<lu_mac>[^)]+).: (?<lu_source_ip>[0-9.]+) DNS -> (?<lu_dns_server>[0-9.]+) inquire (?<lu_dns_inquire_hostname>.*)$/
+        </parse>
+    </filter>
+
+    # <150>Jun  5 02:28:33 88BL: Local User (MAC=78-4F-43-69-61-9B): 192.168.1.23:54381 -> 192.0.78.33:443 (TCP) close connection
+    <filter from.draytek>
+        @type           parser
+        key_name        message
+        reserve_data    true
+        emit_invalid_record_to_error    false
+        <parse>
+            @type       regexp
+            expression  /^Local User .MAC=(?<lu_mac>[^)]+).: (?<lu_source_ip>[0-9.]+):(?<lu_source_port>[0-9]+) -> (?<lu_dest_ip>[0-9.]+):(?<lu_dest_port>[0-9]+) \(TCP\).*$/
+            types       lu_source_port:integer,lu_dest_port:integer
+        </parse>
+    </filter>
+
+    # <150>Jun  5 02:28:38 88BL: Local User (MAC=00-1D-AA-3D-4F-86): 192.168.1.254 -> 8.8.8.8 (ICMP) Echo
+    <filter from.draytek>
+        @type           parser
+        key_name        message
+        reserve_data    true
+        emit_invalid_record_to_error    false
+        <parse>
+            @type       regexp
+            expression  /^Local User .MAC=(?<lu_mac>[^)]+).: (?<lu_source_ip>[0-9.]+) -> (?<lu_dest_ip>[0-9.]+) \(ICMP\) (?<lu_icmp_verb>.*)$/
+        </parse>
+    </filter>
+
+    # <150>Jun  5 02:28:38 88BL: Local User: 8.8.8.8 -> 192.168.1.254 (ICMP) Echo Reply
+    <filter from.draytek>
+        @type           parser
+        key_name        message
+        reserve_data    true
+        emit_invalid_record_to_error    false
+        <parse>
+            @type       regexp
+            expression  /^Local User: (?<lu_source_ip>[0-9.]+) -> (?<lu_dest_ip>[0-9.]+) \(ICMP\) (?<lu_icmp_verb>.*)$/
+        </parse>
+    </filter>
+
+    # <174>Jun  5 02:28:46 88BL: ADSL_Status:[Mode=17A States=SHOWTIME UpSpeed=5414000 DownSpeed=26016000 SNR=7 Atten=25 ]
+    <filter from.draytek>
+        @type           parser
+        key_name        message
+        reserve_data    true
+        emit_invalid_record_to_error    false
+        <parse>
+            @type       regexp
+            expression  /^ADSL_Status:\[Mode=(?<adsl_mode>[^ ]+) States=(?<adsl_states>[^ ]+) UpSpeed=(?<adsl_upspeed>[^ ]+) DownSpeed=(?<adsl_downspeed>[^ ]+) SNR=(?<adsl_snr>[^ ]+) Atten=(?<adsl_atten>[^ ]+) ]$/
+            types       adsl_upspeed:integer,adsl_downspeed:integer,adsl_snr:integer,adsl_atten:integer
+        </parse>
+    </filter>
+
 
     <match **>
-      @type copy
+        @type copy
 
-      <store>
-        @type file
-        path /var/log/fluent/all/
-        time_slice_format %Y%m%d
-        compress gzip
-        append true
-        <buffer>
-          timekey_use_utc
-        </buffer>
-      </store>
+        <store>
+            @type file
+            path /var/log/fluent/all/
+            time_slice_format %Y%m%d
+            compress gzip
+            append true
+            <buffer>
+                timekey_use_utc
+            </buffer>
+        </store>
 
-      <store ignore_error>
+        # Monitoring
+        <store ignore_error>
         # count number of outgoing records per tag
         @type prometheus
         <metric>
@@ -150,23 +223,5 @@ data:
             hostname ${hostname}
           </labels>
         </metric>
-      </store>
+        </store>
     </match>
-
-
-
-
-    # Monitoring #
-    <source>
-      @type prometheus
-      bind 0.0.0.0
-      port 24231
-      metrics_path /metrics
-    </source>
-    <source>
-      @type prometheus_output_monitor
-      interval 10
-      <labels>
-        hostname ${hostname}
-      </labels>
-    </source>
