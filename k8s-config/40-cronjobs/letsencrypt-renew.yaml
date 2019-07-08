@@ -5,7 +5,7 @@ kind: CronJob
 metadata:
   name: letsencrypt-renew-cronjob
 spec:
-  schedule: "34 3 * * *"
+  schedule: "34 3 * * 3" # only update on wednesdays
   startingDeadlineSeconds: 60
   concurrencyPolicy: Forbid
   successfulJobsHistoryLimit: 3
