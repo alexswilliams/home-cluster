@@ -18,10 +18,10 @@ sudo timedatectl set-timezone Etc/UTC
 # DEBIAN_FRONTEND=noninteractive sudo apt-get -y purge kubelet kubectl kubeadm
 # rm -rf ~/.kube
 
-# DEBIAN_FRONTEND=noninteractive sudo apt-get -y install kubelet=1.12.0-00 kubectl=1.12.0-00 kubeadm=1.12.0-00 docker-ce
-# DEBIAN_FRONTEND=noninteractive sudo apt-mark hold kubelet kubeadm kubectl
+# DEBIAN_FRONTEND=noninteractive sudo apt-get -y install kubelet=1.15.2-00 kubectl=1.15.2-00 kubeadm=1.15.2-00 docker-ce
+# DEBIAN_FRONTEND=noninteractive sudo apt-mark hold kubelet
 
-sudo kubeadm init --apiserver-cert-extra-sans london.alexswilliams.co.uk
+sudo kubeadm init --apiserver-cert-extra-sans london.alexswilliams.co.uk --ignore-preflight-errors=NumCPU
 rm -rf $HOME/.kube
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
@@ -30,15 +30,17 @@ kubectl version
 kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
 
 kubeadm completion bash > ~/.kube/kubeadm_completion.bash.inc
-printf "
-  # Kubeadm shell completion\
-  source '$HOME/.kube/kubeadm_completion.bash.inc'
-" >> $HOME/.bash_profile
+cat >>$HOME/.bash_profile <<EOF
+# Kubeadm shell completion\
+source '$HOME/.kube/kubeadm_completion.bash.inc'
+EOF
+
 kubectl completion bash > ~/.kube/completion.bash.inc
-printf "
-  # Kubectl shell completion
-  source '$HOME/.kube/completion.bash.inc'
-" >> $HOME/.bash_profile
+cat >>$HOME/.bash_profile <<EOF
+# Kubectl shell completion
+source '$HOME/.kube/completion.bash.inc'
+EOF
+
 source $HOME/.bash_profile
 
 kubectl taint nodes --all node-role.kubernetes.io/master:NoSchedule-
