@@ -14,8 +14,8 @@ sudo timedatectl set-timezone Etc/UTC
 # DEBIAN_FRONTEND=noninteractive sudo apt-get update
 # DEBIAN_FRONTEND=noninteractive sudo apt-get -y dist-upgrade
 
-# sudo kubeadm reset || true
-# DEBIAN_FRONTEND=noninteractive sudo apt-get -y purge kubelet kubectl kubeadm
+# sudo kubeadm reset -f || true
+# DEBIAN_FRONTEND=noninteractive sudo apt-get -y purge kubelet kubectl kubeadm --allow-change-held-packages
 # rm -rf ~/.kube
 
 # DEBIAN_FRONTEND=noninteractive sudo apt-get -y install kubelet=1.15.2-00 kubectl=1.15.2-00 kubeadm=1.15.2-00 docker-ce
