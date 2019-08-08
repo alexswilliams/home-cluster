@@ -56,13 +56,13 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 kubectl version
 kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
 
-# kubeadm completion bash > ~/.kube/kubeadm_completion.bash.inc
+kubeadm completion bash > ~/.kube/kubeadm_completion.bash.inc
 # cat >>$HOME/.bash_profile <<EOF
 # # Kubeadm shell completion\
 # source '$HOME/.kube/kubeadm_completion.bash.inc'
 # EOF
 
-# kubectl completion bash > ~/.kube/completion.bash.inc
+kubectl completion bash > ~/.kube/completion.bash.inc
 # cat >>$HOME/.bash_profile <<EOF
 # # Kubectl shell completion
 # source '$HOME/.kube/completion.bash.inc'
