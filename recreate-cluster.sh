@@ -39,11 +39,16 @@ echo """
   "storage-driver": "overlay2"
 }
 """ | sudo tee /etc/docker/daemon.json
+mkdir -p /etc/systemd/system/docker.service.d
+systemctl daemon-reload
+systemctl restart docker
+
 
 echo Installing kubeadm, kubelet and kubectl
 sudo apt-get -y install kubelet=1.15.1-00 kubectl=1.15.1-00 kubeadm=1.15.1-00
 sudo apt-mark hold kubelet
 
+sudo kubeadm config images pull
 sudo kubeadm init --apiserver-cert-extra-sans london.alexswilliams.co.uk --ignore-preflight-errors=NumCPU
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
