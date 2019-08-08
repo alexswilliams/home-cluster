@@ -28,7 +28,7 @@ sudo apt-get update
 sudo apt-get -y dist-upgrade
 sudo apt-get install docker-ce
 
-echo """
+echo '
 {
   "insecure-registries":["docker-registry-service:5000"],
   "exec-opts": ["native.cgroupdriver=systemd"],
@@ -38,7 +38,7 @@ echo """
   },
   "storage-driver": "overlay2"
 }
-""" | sudo tee /etc/docker/daemon.json
+' | sudo tee /etc/docker/daemon.json
 mkdir -p /etc/systemd/system/docker.service.d
 systemctl daemon-reload
 systemctl restart docker
