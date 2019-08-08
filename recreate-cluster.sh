@@ -27,11 +27,11 @@ sudo add-apt-repository -y "deb [arch=amd64] https://download.docker.com/linux/u
 sudo apt-get update
 sudo apt-get -y dist-upgrade
 sudo apt-get install docker-ce
-
+# Set cgroup driver to cgroupfs - systemd doesn't work for me!
 echo '
 {
   "insecure-registries":["docker-registry-service:5000"],
-  "exec-opts": ["native.cgroupdriver=systemd"],
+  "exec-opts": ["native.cgroupdriver=cgroupfs"],
   "log-driver": "json-file",
   "log-opts": {
     "max-size": "100m"
@@ -47,6 +47,10 @@ systemctl restart docker
 echo Installing kubeadm, kubelet and kubectl
 sudo apt-get -y install kubelet=1.15.1-00 kubectl=1.15.1-00 kubeadm=1.15.1-00
 sudo apt-mark hold kubelet
+
+echo '
+KUBELET_EXTRA_ARGS="--cgroup-driver=cgroupfs --max-pods=300 --allow-privileged=true"
+' | sudo tee /etc/default/kubelet
 
 sudo kubeadm config images pull
 sudo kubeadm init --apiserver-cert-extra-sans london.alexswilliams.co.uk --ignore-preflight-errors=NumCPU
