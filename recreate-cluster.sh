@@ -49,7 +49,7 @@ sudo apt-get -y install kubelet=1.15.1-00 kubectl=1.15.1-00 kubeadm=1.15.1-00
 sudo apt-mark hold kubelet
 
 echo '
-KUBELET_EXTRA_ARGS="--cgroup-driver=cgroupfs --max-pods=300 --allow-privileged=true"
+KUBELET_EXTRA_ARGS="--cgroup-driver=cgroupfs"
 ' | sudo tee /etc/default/kubelet
 
 sudo kubeadm config images pull
