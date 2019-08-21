@@ -1,4 +1,4 @@
-FROM fluentd:v1.6.2-debian-1.0
+FROM fluent/fluentd:v1.6.3-debian-1.0
 
 LABEL org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.name="FluentD with Prometheus Plugin" \
