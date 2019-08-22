@@ -34,7 +34,7 @@
           ],
           "defaults": {
             "mappings": [],
-            "max": 35000000,
+            "max": 4587520,
             "min": 0,
             "thresholds": [
               {
@@ -43,7 +43,7 @@
               },
               {
                 "color": "semi-dark-orange",
-                "value": 30000000
+                "value": 4000000
               }
             ],
             "title": "",
@@ -86,7 +86,7 @@
           ],
           "defaults": {
             "mappings": [],
-            "max": 6000000,
+            "max": 688128,
             "min": 0,
             "thresholds": [
               {
@@ -95,7 +95,7 @@
               },
               {
                 "color": "semi-dark-orange",
-                "value": 5000000
+                "value": 600000
               }
             ],
             "title": "",
@@ -555,5 +555,5 @@
   "timezone": "",
   "title": "Router",
   "uid": "VXzvkqdZz",
-  "version": 8
+  "version": 9
 }
