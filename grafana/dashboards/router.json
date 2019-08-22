@@ -15,8 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 5,
-  "iteration": 1566432772200,
+  "iteration": 1566433760028,
   "links": [],
   "panels": [
     {
@@ -34,7 +33,7 @@
           ],
           "defaults": {
             "mappings": [],
-            "max": 4587520,
+            "max": 35000000,
             "min": 0,
             "thresholds": [
               {
@@ -43,11 +42,11 @@
               },
               {
                 "color": "semi-dark-orange",
-                "value": 4000000
+                "value": 30000000
               }
             ],
             "title": "",
-            "unit": "Bps"
+            "unit": "bps"
           },
           "override": {},
           "values": false
@@ -59,7 +58,7 @@
       "pluginVersion": "6.3.3",
       "targets": [
         {
-          "expr": "irate(interface_ifInOctets{ifDescr=\"VDSL\",hostname=\"$Hostname\"}[1m])",
+          "expr": "irate(interface_ifInOctets{ifDescr=\"VDSL\",hostname=\"$Hostname\"}[1m])*8",
           "instant": false,
           "interval": "20s",
           "legendFormat": "{{ifDescr}}",
@@ -86,7 +85,7 @@
           ],
           "defaults": {
             "mappings": [],
-            "max": 688128,
+            "max": 6000000,
             "min": 0,
             "thresholds": [
               {
@@ -95,11 +94,11 @@
               },
               {
                 "color": "semi-dark-orange",
-                "value": 600000
+                "value": 5500000
               }
             ],
             "title": "",
-            "unit": "Bps"
+            "unit": "bps"
           },
           "override": {},
           "values": false
@@ -111,7 +110,7 @@
       "pluginVersion": "6.3.3",
       "targets": [
         {
-          "expr": "irate(interface_ifOutOctets{ifDescr=\"VDSL\",hostname=\"$Hostname\"}[1m])",
+          "expr": "irate(interface_ifOutOctets{ifDescr=\"VDSL\",hostname=\"$Hostname\"}[1m])*8",
           "instant": false,
           "interval": "20s",
           "legendFormat": "{{ifDescr}}",
@@ -555,5 +554,5 @@
   "timezone": "",
   "title": "Router",
   "uid": "VXzvkqdZz",
-  "version": 9
+  "version": 12
 }
