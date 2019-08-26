@@ -15,12 +15,12 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1566433760028,
+  "iteration": 1566824078994,
   "links": [],
   "panels": [
     {
       "gridPos": {
-        "h": 8,
+        "h": 6,
         "w": 5,
         "x": 0,
         "y": 0
@@ -33,7 +33,7 @@
           ],
           "defaults": {
             "mappings": [],
-            "max": 35000000,
+            "max": 4587520,
             "min": 0,
             "thresholds": [
               {
@@ -42,11 +42,11 @@
               },
               {
                 "color": "semi-dark-orange",
-                "value": 30000000
+                "value": 4000000
               }
             ],
             "title": "",
-            "unit": "bps"
+            "unit": "Bps"
           },
           "override": {},
           "values": false
@@ -58,7 +58,7 @@
       "pluginVersion": "6.3.3",
       "targets": [
         {
-          "expr": "irate(interface_ifInOctets{ifDescr=\"VDSL\",hostname=\"$Hostname\"}[1m])*8",
+          "expr": "irate(interface_ifInOctets{ifDescr=\"VDSL\",hostname=\"$Hostname\"}[1m])",
           "instant": false,
           "interval": "20s",
           "legendFormat": "{{ifDescr}}",
@@ -72,7 +72,7 @@
     },
     {
       "gridPos": {
-        "h": 8,
+        "h": 6,
         "w": 5,
         "x": 5,
         "y": 0
@@ -85,7 +85,7 @@
           ],
           "defaults": {
             "mappings": [],
-            "max": 6000000,
+            "max": 688128,
             "min": 0,
             "thresholds": [
               {
@@ -94,11 +94,11 @@
               },
               {
                 "color": "semi-dark-orange",
-                "value": 5500000
+                "value": 600000
               }
             ],
             "title": "",
-            "unit": "bps"
+            "unit": "Bps"
           },
           "override": {},
           "values": false
@@ -110,7 +110,7 @@
       "pluginVersion": "6.3.3",
       "targets": [
         {
-          "expr": "irate(interface_ifOutOctets{ifDescr=\"VDSL\",hostname=\"$Hostname\"}[1m])*8",
+          "expr": "irate(interface_ifOutOctets{ifDescr=\"VDSL\",hostname=\"$Hostname\"}[1m])",
           "instant": false,
           "interval": "20s",
           "legendFormat": "{{ifDescr}}",
@@ -245,10 +245,10 @@
         "thresholdMarkers": true
       },
       "gridPos": {
-        "h": 8,
+        "h": 3,
         "w": 5,
         "x": 0,
-        "y": 8
+        "y": 6
       },
       "id": 7,
       "interval": null,
@@ -330,10 +330,10 @@
         "thresholdMarkers": true
       },
       "gridPos": {
-        "h": 8,
+        "h": 3,
         "w": 5,
         "x": 5,
-        "y": 8
+        "y": 6
       },
       "id": 8,
       "interval": null,
@@ -432,7 +432,7 @@
       "percentage": false,
       "pluginVersion": "6.3.3",
       "pointradius": 2,
-      "points": true,
+      "points": false,
       "renderer": "flot",
       "seriesOverrides": [
         {
@@ -462,7 +462,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "VDSL Transfer",
+      "title": "VDSL Line Rate",
       "tooltip": {
         "shared": true,
         "sort": 1,
@@ -478,7 +478,7 @@
       },
       "yaxes": [
         {
-          "format": "Bps",
+          "format": "bps",
           "label": "Download Line Rate",
           "logBase": 1,
           "max": null,
@@ -486,12 +486,280 @@
           "show": true
         },
         {
-          "format": "Bps",
+          "format": "bps",
           "label": "Upload Line Rate",
           "logBase": 1,
           "max": null,
           "min": null,
           "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {
+        "{agent_host=\"192.168.1.1\",host=\"raspi\",hostname=\"88BL\",instance=\"2.24.113.179:30005\",job=\"88bl-router-telegraf\"}": "dark-red"
+      },
+      "bars": true,
+      "dashLength": 10,
+      "dashes": false,
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 10,
+        "x": 0,
+        "y": 9
+      },
+      "id": 13,
+      "interval": "1m",
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": false,
+        "total": false,
+        "values": false
+      },
+      "lines": false,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "increase(snmp_tcpInErrs[1m])/increase(snmp_tcpInSegs[1m])",
+          "hide": false,
+          "interval": "1m",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "TCP Rx Error Rate",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": "Errors per Segment",
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": false
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": true,
+      "dashLength": 10,
+      "dashes": false,
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 4,
+        "w": 5,
+        "x": 0,
+        "y": 16
+      },
+      "id": 11,
+      "interval": "2m",
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": false,
+        "total": false,
+        "values": false
+      },
+      "lines": false,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "repeat": null,
+      "repeatDirection": "h",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "resets(snmp_uptime{hostname=\"$Hostname\"}[5m])",
+          "interval": "2m",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Router Reboots",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "transparent": true,
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": "1",
+          "min": "0",
+          "show": false
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": false
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {
+        "{agent_host=\"192.168.1.1\",host=\"raspi\",hostname=\"88BL\",ifDescr=\"WAN1\",ifIndex=\"20\",instance=\"2.24.113.179:30005\",job=\"88bl-router-telegraf\"}": "dark-red"
+      },
+      "bars": true,
+      "dashLength": 10,
+      "dashes": false,
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 4,
+        "w": 5,
+        "x": 5,
+        "y": 16
+      },
+      "id": 15,
+      "interval": "4m",
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": false,
+        "total": false,
+        "values": false
+      },
+      "lines": false,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "changes(interface_ifOperStatus{hostname=\"$Hostname\",ifDescr=\"WAN1\"}[5m])",
+          "interval": "4m",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "DSL Resets",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "transparent": true,
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": "1",
+          "min": "0",
+          "show": false
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": false
         }
       ],
       "yaxis": {
@@ -534,7 +802,7 @@
     ]
   },
   "time": {
-    "from": "now-30m",
+    "from": "now-6h",
     "to": "now"
   },
   "timepicker": {
