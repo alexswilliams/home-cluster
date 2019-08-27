@@ -45,14 +45,14 @@ spec:
               memory: 32Mi
       containers:
         - name: fluentd
-          image: london.alexswilliams.co.uk:5000/fluentd-custom:fluentd-v1.6.3-debian-1.0--20190822-0020
+          image: london.alexswilliams.co.uk:5000/fluentd-custom:fluentd-v1.7.0-debian-1.0--20190827-2349
           resources:
             requests:
-              memory: 42Mi
-              cpu: 20m
+              memory: 65Mi
+              cpu: 75m
             limits:
-              memory: 64Mi
-              cpu: 50m
+              memory: 80Mi
+              cpu: 100m
           env:
             - name: RUBY_GC_HEAP_OLDOBJECT_LIMIT_FACTOR
               value: "0.9"
