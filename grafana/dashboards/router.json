@@ -43,7 +43,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 1,
-  "iteration": 1566945530878,
+  "iteration": 1566957383580,
   "links": [],
   "panels": [
     {
@@ -741,7 +741,7 @@
         "y": 13
       },
       "id": 19,
-      "interval": null,
+      "interval": "1m",
       "links": [],
       "mappingType": 1,
       "mappingTypes": [
@@ -782,6 +782,7 @@
         {
           "expr": "snmp_adslAturCurrSnrMgn{hostname=\"$Hostname\"}",
           "instant": false,
+          "interval": "1m",
           "refId": "A"
         }
       ],
@@ -3592,5 +3593,5 @@
   "timezone": "",
   "title": "Router",
   "uid": "VXzvkqdZz",
-  "version": 13
+  "version": 14
 }
