@@ -17,20 +17,16 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 1,
-  "id": 1,
+  "iteration": 1567202135957,
   "links": [],
   "panels": [
     {
-      "aliasColors": {
-        "Power - bedroom switch 1": "#e24d42",
-        "State - bedroom switch 1": "#fce2de",
-        "bedroom switch 1": "#ba43a9"
-      },
       "bars": true,
       "dashLength": 10,
       "dashes": false,
       "datasource": "Prometheus",
       "fill": 1,
+      "fillGradient": 0,
       "gridPos": {
         "h": 9,
         "w": 12,
@@ -38,6 +34,7 @@
         "y": 0
       },
       "id": 4,
+      "interval": "30s",
       "legend": {
         "alignAsTable": true,
         "avg": false,
@@ -52,13 +49,16 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
       "percentage": false,
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
       "seriesOverrides": [
         {
-          "alias": "State - bedroom switch 1",
+          "alias": "/State - .*/",
           "bars": false,
           "hideTooltip": true,
           "legend": false,
@@ -74,16 +74,17 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "power_mw",
+          "expr": "power_mw{alias=~\"$Socket\"}",
           "format": "time_series",
-          "interval": "",
+          "interval": "30s",
           "intervalFactor": 1,
           "legendFormat": "Power - {{alias}}",
           "refId": "A"
         },
         {
-          "expr": "state",
+          "expr": "state{alias=~\"$Socket\"}",
           "format": "time_series",
+          "interval": "30s",
           "intervalFactor": 1,
           "legendFormat": "State - {{alias}}",
           "refId": "B"
@@ -131,16 +132,12 @@
       }
     },
     {
-      "aliasColors": {
-        "Current - bedroom switch 1": "#508642",
-        "State - bedroom switch 1": "#fce2de",
-        "bedroom switch 1": "#5195ce"
-      },
       "bars": true,
       "dashLength": 10,
       "dashes": false,
       "datasource": "Prometheus",
       "fill": 1,
+      "fillGradient": 0,
       "gridPos": {
         "h": 9,
         "w": 12,
@@ -148,6 +145,7 @@
         "y": 0
       },
       "id": 6,
+      "interval": "30s",
       "legend": {
         "alignAsTable": true,
         "avg": false,
@@ -163,13 +161,16 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
       "percentage": false,
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
       "seriesOverrides": [
         {
-          "alias": "State - bedroom switch 1",
+          "alias": "/State - .*/",
           "bars": false,
           "hideTooltip": true,
           "legend": false,
@@ -185,18 +186,18 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "current_ma",
+          "expr": "current_ma{alias=~\"$Socket\"}",
           "format": "time_series",
-          "interval": "",
+          "interval": "30s",
           "intervalFactor": 1,
           "legendFormat": "Current - {{alias}}",
           "refId": "A"
         },
         {
-          "expr": "state",
+          "expr": "state{alias=~\"$Socket\"}",
           "format": "time_series",
           "instant": false,
-          "interval": "",
+          "interval": "30s",
           "intervalFactor": 1,
           "legendFormat": "State - {{alias}}",
           "refId": "B"
@@ -253,8 +254,7 @@
         "rgba(237, 129, 40, 0.89)",
         "#d44a3a"
       ],
-      "datasource": "Prometheus",
-      "format": "watth",
+      "format": "none",
       "gauge": {
         "maxValue": 100,
         "minValue": 0,
@@ -268,91 +268,6 @@
         "x": 0,
         "y": 9
       },
-      "id": 2,
-      "interval": null,
-      "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
-      "maxDataPoints": 100,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "N/A",
-          "to": "null"
-        }
-      ],
-      "sparkline": {
-        "fillColor": "rgba(31, 118, 189, 0.18)",
-        "full": false,
-        "lineColor": "rgb(31, 120, 193)",
-        "show": false
-      },
-      "tableColumn": "",
-      "targets": [
-        {
-          "expr": "max_over_time(total_wh[$__range])",
-          "format": "time_series",
-          "instant": true,
-          "interval": "1s",
-          "intervalFactor": 1,
-          "refId": "A"
-        }
-      ],
-      "thresholds": "",
-      "title": "Total Power Consumed",
-      "type": "singlestat",
-      "valueFontSize": "80%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "N/A",
-          "value": "null"
-        }
-      ],
-      "valueName": "current"
-    },
-    {
-      "cacheTimeout": null,
-      "colorBackground": false,
-      "colorPrefix": false,
-      "colorValue": true,
-      "colors": [
-        "#d44a3a",
-        "rgba(237, 129, 40, 0.89)",
-        "#299c46"
-      ],
-      "datasource": "Prometheus",
-      "decimals": null,
-      "format": "none",
-      "gauge": {
-        "maxValue": 100,
-        "minValue": 0,
-        "show": false,
-        "thresholdLabels": false,
-        "thresholdMarkers": true
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 6,
-        "x": 6,
-        "y": 9
-      },
-      "hideTimeOverride": true,
       "id": 10,
       "interval": null,
       "links": [],
@@ -370,6 +285,102 @@
       "maxDataPoints": 100,
       "nullPointMode": "connected",
       "nullText": null,
+      "options": {},
+      "pluginVersion": "6.3.3",
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": true,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": true,
+        "ymax": null,
+        "ymin": null
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "expr": "clamp_max(sum(state{alias=~\"$Socket\"}),1)",
+          "interval": "30s",
+          "legendFormat": "Any Socket Powered",
+          "refId": "A"
+        }
+      ],
+      "thresholds": "",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "State",
+      "type": "singlestat",
+      "valueFontSize": "80%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "Off",
+          "value": "null"
+        },
+        {
+          "op": "=",
+          "text": "Off",
+          "value": "0"
+        },
+        {
+          "op": "=",
+          "text": "On",
+          "value": "1"
+        }
+      ],
+      "valueName": "current"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorValue": false,
+      "colors": [
+        "#299c46",
+        "rgba(237, 129, 40, 0.89)",
+        "#d44a3a"
+      ],
+      "format": "watth",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 6,
+        "y": 9
+      },
+      "id": 12,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "options": {},
       "postfix": "",
       "postfixFontSize": "50%",
       "prefix": "",
@@ -385,22 +396,22 @@
         "fillColor": "rgba(31, 118, 189, 0.18)",
         "full": false,
         "lineColor": "rgb(31, 120, 193)",
-        "show": false
+        "show": false,
+        "ymax": null,
+        "ymin": null
       },
       "tableColumn": "",
       "targets": [
         {
-          "expr": "state",
-          "format": "time_series",
+          "expr": "sum(total_wh{alias=~\"$Socket\"})",
           "instant": false,
-          "intervalFactor": 1,
           "refId": "A"
         }
       ],
-      "thresholds": "0.5,1",
-      "timeFrom": "30s",
-      "title": "Power State",
-      "transparent": false,
+      "thresholds": "",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Total Power in Window",
       "type": "singlestat",
       "valueFontSize": "80%",
       "valueMaps": [
@@ -408,29 +419,16 @@
           "op": "=",
           "text": "N/A",
           "value": "null"
-        },
-        {
-          "op": "=",
-          "text": "On",
-          "value": "1"
-        },
-        {
-          "op": "=",
-          "text": "Off",
-          "value": "0"
         }
       ],
-      "valueName": "current"
+      "valueName": "diff"
     },
     {
-      "aliasColors": {
-        "Voltage - bedroom switch 1": "#e5ac0e",
-        "bedroom switch 1": "#f2c96d"
-      },
       "bars": false,
       "dashLength": 10,
       "dashes": false,
       "fill": 0,
+      "fillGradient": 0,
       "gridPos": {
         "h": 8,
         "w": 12,
@@ -452,6 +450,9 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
       "percentage": false,
       "pointradius": 5,
       "points": false,
@@ -462,7 +463,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "voltage_mv",
+          "expr": "voltage_mv{alias=~\"$Socket\"}",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Voltage - {{alias}}",
@@ -510,184 +511,44 @@
         "align": false,
         "alignLevel": null
       }
-    },
-    {
-      "cacheTimeout": null,
-      "colorBackground": false,
-      "colorPostfix": false,
-      "colorPrefix": false,
-      "colorValue": false,
-      "colors": [
-        "#299c46",
-        "rgba(237, 129, 40, 0.89)",
-        "#d44a3a"
-      ],
-      "decimals": 1,
-      "format": "watth",
-      "gauge": {
-        "maxValue": 100,
-        "minValue": 0,
-        "show": false,
-        "thresholdLabels": false,
-        "thresholdMarkers": true
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 6,
-        "x": 0,
-        "y": 13
-      },
-      "id": 12,
-      "interval": "",
-      "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
-      "maxDataPoints": 100,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "N/A",
-          "to": "null"
-        }
-      ],
-      "sparkline": {
-        "fillColor": "rgba(31, 118, 189, 0.18)",
-        "full": false,
-        "lineColor": "rgb(31, 120, 193)",
-        "show": true
-      },
-      "tableColumn": "__name__",
-      "targets": [
-        {
-          "expr": "total_wh",
-          "format": "time_series",
-          "instant": false,
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "",
-          "refId": "A"
-        }
-      ],
-      "thresholds": "",
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Power Consumed in Window",
-      "type": "singlestat",
-      "valueFontSize": "80%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "N/A",
-          "value": "null"
-        }
-      ],
-      "valueName": "diff"
-    },
-    {
-      "cacheTimeout": null,
-      "colorBackground": false,
-      "colorValue": false,
-      "colors": [
-        "#299c46",
-        "rgba(237, 129, 40, 0.89)",
-        "#d44a3a"
-      ],
-      "datasource": "Prometheus",
-      "decimals": 3,
-      "format": "currencyGBP",
-      "gauge": {
-        "maxValue": 100,
-        "minValue": 0,
-        "show": false,
-        "thresholdLabels": false,
-        "thresholdMarkers": true
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 6,
-        "x": 6,
-        "y": 13
-      },
-      "id": 14,
-      "interval": "",
-      "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
-      "maxDataPoints": 100,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "N/A",
-          "to": "null"
-        }
-      ],
-      "sparkline": {
-        "fillColor": "rgba(31, 118, 189, 0.18)",
-        "full": false,
-        "lineColor": "rgb(31, 120, 193)",
-        "show": true
-      },
-      "tableColumn": "",
-      "targets": [
-        {
-          "expr": "((total_wh * 14.3861) / 1000) / 100",
-          "format": "time_series",
-          "instant": false,
-          "interval": "",
-          "intervalFactor": 1,
-          "refId": "A"
-        }
-      ],
-      "thresholds": "",
-      "title": "Cost in Window",
-      "type": "singlestat",
-      "valueFontSize": "80%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "N/A",
-          "value": "null"
-        }
-      ],
-      "valueName": "diff"
     }
   ],
   "refresh": "1m",
-  "schemaVersion": 16,
+  "schemaVersion": 19,
   "style": "dark",
   "tags": [],
   "templating": {
-    "list": []
+    "list": [
+      {
+        "allValue": null,
+        "current": {
+          "tags": [],
+          "text": "Computer + Heater Plug",
+          "value": [
+            "Computer",
+            "Heater Plug"
+          ]
+        },
+        "datasource": "Prometheus",
+        "definition": "label_values(current_ma, alias)",
+        "hide": 0,
+        "includeAll": true,
+        "label": null,
+        "multi": true,
+        "name": "Socket",
+        "options": [],
+        "query": "label_values(current_ma, alias)",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 5,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      }
+    ]
   },
   "time": {
     "from": "now/d",
@@ -719,7 +580,7 @@
     ]
   },
   "timezone": "browser",
-  "title": "Heater",
+  "title": "Power Sockets",
   "uid": "TRPm-skgk",
-  "version": 32
+  "version": 1
 }
