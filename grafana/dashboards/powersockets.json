@@ -17,10 +17,11 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 1,
-  "iteration": 1567202135957,
+  "iteration": 1567295493477,
   "links": [],
   "panels": [
     {
+      "aliasColors": {},
       "bars": true,
       "dashLength": 10,
       "dashes": false,
@@ -74,7 +75,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "power_mw{alias=~\"$Socket\"}",
+          "expr": "max(power_mw{alias=~\"$Socket\"}) by (alias)",
           "format": "time_series",
           "interval": "30s",
           "intervalFactor": 1,
@@ -82,7 +83,7 @@
           "refId": "A"
         },
         {
-          "expr": "state{alias=~\"$Socket\"}",
+          "expr": "max(state{alias=~\"$Socket\"}) by (alias)",
           "format": "time_series",
           "interval": "30s",
           "intervalFactor": 1,
@@ -132,6 +133,7 @@
       }
     },
     {
+      "aliasColors": {},
       "bars": true,
       "dashLength": 10,
       "dashes": false,
@@ -186,7 +188,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "current_ma{alias=~\"$Socket\"}",
+          "expr": "max(current_ma{alias=~\"$Socket\"}) by (alias)",
           "format": "time_series",
           "interval": "30s",
           "intervalFactor": 1,
@@ -194,7 +196,7 @@
           "refId": "A"
         },
         {
-          "expr": "state{alias=~\"$Socket\"}",
+          "expr": "max(state{alias=~\"$Socket\"}) by (alias)",
           "format": "time_series",
           "instant": false,
           "interval": "30s",
@@ -309,7 +311,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "clamp_max(sum(state{alias=~\"$Socket\"}),1)",
+          "expr": "max(state{alias=~\"$Socket\"})",
           "interval": "30s",
           "legendFormat": "Any Socket Powered",
           "refId": "A"
@@ -424,6 +426,7 @@
       "valueName": "diff"
     },
     {
+      "aliasColors": {},
       "bars": false,
       "dashLength": 10,
       "dashes": false,
@@ -463,7 +466,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "voltage_mv{alias=~\"$Socket\"}",
+          "expr": "max(voltage_mv{alias=~\"$Socket\"}) by (alias)",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Voltage - {{alias}}",
@@ -522,7 +525,6 @@
       {
         "allValue": null,
         "current": {
-          "tags": [],
           "text": "Computer + Heater Plug",
           "value": [
             "Computer",
