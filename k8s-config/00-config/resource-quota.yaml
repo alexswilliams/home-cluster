@@ -1,11 +1,12 @@
-# Hard limits across the cluster.
+# Hard limits across the namespace.
 apiVersion: v1
 kind: ResourceQuota
 metadata:
   name: default-resource-quota
+  namespace: default
 spec:
   hard:
-    requests.memory: 1850Mi
-    requests.cpu: 1750m
-    limits.memory: 1850Mi
-    limits.cpu: 1750m
+    requests.memory: 256Mi
+    requests.cpu: 200m
+    limits.memory: 256Mi
+    limits.cpu: 200m

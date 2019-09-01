@@ -75,3 +75,6 @@ kubectl completion bash > ~/.kube/completion.bash.inc
 source $HOME/.bash_profile
 
 kubectl taint nodes --all node-role.kubernetes.io/master:NoSchedule-
+
+bash ./k8s-config/make-kube-system-coredns-smaller.sh
+

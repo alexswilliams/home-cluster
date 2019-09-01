@@ -33,11 +33,11 @@ spec:
         image: registry:2.7.1
         resources:
           requests:
-            memory: 16Mi
-            cpu: 10m
+            memory: 32Mi
+            cpu: 20m
           limits:
-            memory: 64Mi
-            cpu: 50m
+            memory: 32Mi
+            cpu: 20m
         ports:
         - containerPort: 5000
           name: registry-port

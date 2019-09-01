@@ -62,8 +62,8 @@ spec:
               memory: 16Mi
               cpu: 20m
             limits:
-              memory: 64Mi
-              cpu: 50m
+              memory: 16Mi
+              cpu: 20m
           ports:
             - containerPort: 9100
               name: http

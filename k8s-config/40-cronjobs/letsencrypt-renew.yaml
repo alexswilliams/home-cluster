@@ -36,11 +36,11 @@ spec:
                   hostPort: 80
               resources:
                 requests:
-                  memory: 64Mi
-                  cpu: 50m
+                  memory: 32Mi
+                  cpu: 20m
                 limits:
-                  memory: 64Mi
-                  cpu: 50m
+                  memory: 32Mi
+                  cpu: 20m
 
               volumeMounts:
                 - mountPath: /etc/letsencrypt

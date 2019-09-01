@@ -37,11 +37,11 @@ spec:
           imagePullPolicy: Always
           resources:
             requests:
-              cpu: 10m
               memory: 16Mi
+              cpu: 10m
             limits:
-              cpu: 50m
-              memory: 64Mi
+              memory: 16Mi
+              cpu: 10m
           ports:
             - containerPort: 1723
               name: pptp-port
