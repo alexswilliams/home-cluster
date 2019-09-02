@@ -6,7 +6,7 @@ metadata:
   namespace: default
 spec:
   hard:
-    requests.memory: 256Mi
-    requests.cpu: 200m
-    limits.memory: 256Mi
-    limits.cpu: 200m
+    requests.memory: 1800Mi
+    requests.cpu: 950m
+    limits.memory: 1800Mi
+    limits.cpu: 950m
