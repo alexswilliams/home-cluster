@@ -48,11 +48,11 @@ spec:
           image: london.alexswilliams.co.uk:5000/fluentd-custom:fluentd-v1.7.0-debian-1.0--20190827-2349
           resources:
             requests:
-              memory: 64Mi
-              cpu: 70m
+              memory: 96Mi
+              cpu: 100m
             limits:
-              memory: 64Mi
-              cpu: 70m
+              memory: 96Mi
+              cpu: 100m
           env:
             - name: RUBY_GC_HEAP_OLDOBJECT_LIMIT_FACTOR
               value: "0.9"
