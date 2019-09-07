@@ -41,10 +41,10 @@ spec:
                 - /entrypoint.sh
               resources:
                 requests:
-                  memory: 32Mi
+                  memory: 92Mi
                   cpu: 20m
                 limits:
-                  memory: 32Mi
+                  memory: 92Mi
                   cpu: 20m
 
               volumeMounts:
