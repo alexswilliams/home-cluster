@@ -101,7 +101,7 @@
       "targets": [
         {
           "expr": "irate(interface_ifInOctets{ifDescr=\"VDSL\",hostname=\"$Hostname\"}[1m])",
-          "instant": false,
+          "instant": true,
           "interval": "30s",
           "legendFormat": "{{ifDescr}}",
           "refId": "A"
@@ -154,7 +154,7 @@
       "targets": [
         {
           "expr": "irate(interface_ifOutOctets{ifDescr=\"VDSL\",hostname=\"$Hostname\"}[1m])",
-          "instant": false,
+          "instant": true,
           "interval": "30s",
           "legendFormat": "{{ifDescr}}",
           "refId": "A"
@@ -216,14 +216,14 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "irate(interface_ifInOctets{ifDescr=\"VDSL\",hostname=\"$Hostname\"}[1m])",
+          "expr": "max(irate(interface_ifInOctets{ifDescr=\"VDSL\",hostname=\"$Hostname\"}[1m]))",
           "format": "time_series",
           "interval": "60s",
           "legendFormat": "Download",
           "refId": "A"
         },
         {
-          "expr": "irate(interface_ifOutOctets{ifDescr=\"VDSL\",hostname=\"$Hostname\"}[1m])",
+          "expr": "max(irate(interface_ifOutOctets{ifDescr=\"VDSL\",hostname=\"$Hostname\"}[1m]))",
           "interval": "60s",
           "legendFormat": "Upload",
           "refId": "B"
@@ -492,14 +492,14 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "snmp_adslAturCurrAttainableRate{hostname=\"$Hostname\"}",
+          "expr": "max(snmp_adslAturCurrAttainableRate{hostname=\"$Hostname\"})",
           "format": "time_series",
           "interval": "60s",
           "legendFormat": "Download",
           "refId": "A"
         },
         {
-          "expr": "snmp_adslAturChanCurrTxRate{hostname=\"$Hostname\"}",
+          "expr": "max(snmp_adslAturChanCurrTxRate{hostname=\"$Hostname\"})",
           "interval": "60s",
           "legendFormat": "Upload",
           "refId": "B"
@@ -3592,7 +3592,7 @@
       "1d"
     ]
   },
-  "timezone": "",
+  "timezone": "browser",
   "title": "Router",
   "uid": "VXzvkqdZz",
   "version": 1
