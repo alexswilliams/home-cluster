@@ -86,8 +86,8 @@ data:
     lock
     nologfd
     noipx
-    mtu 1490
-    mru 1490
+    mtu 1376
+    mru 1376
 
     netmask 255.255.255.0
     ms-dns 8.8.8.8
