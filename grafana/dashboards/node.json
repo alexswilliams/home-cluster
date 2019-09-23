@@ -15,7 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1567211660189,
+  "iteration": 1569280741994,
   "links": [],
   "panels": [
     {
@@ -70,7 +70,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(irate(node_cpu_seconds_total{mode!='idle'}[1m])) by (instance, mode)",
+              "expr": "sum(irate(node_cpu_seconds_total{job=\"$Job\",mode!='idle'}[1m])) by (instance, mode)",
               "format": "time_series",
               "intervalFactor": 1,
               "legendFormat": "{{mode}}",
@@ -150,7 +150,7 @@
           "reverseYBuckets": false,
           "targets": [
             {
-              "expr": "sum(node_procs_running)",
+              "expr": "sum(node_procs_running{job=\"$Job\"})",
               "format": "heatmap",
               "instant": false,
               "intervalFactor": 1,
@@ -225,21 +225,21 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(node_load1)",
+              "expr": "sum(node_load1{job=\"$Job\"})",
               "format": "time_series",
               "intervalFactor": 1,
               "legendFormat": "Load Avg (1m)",
               "refId": "A"
             },
             {
-              "expr": "sum(node_load5)",
+              "expr": "sum(node_load5{job=\"$Job\"})",
               "format": "time_series",
               "intervalFactor": 1,
               "legendFormat": "Load Avg (5m)",
               "refId": "B"
             },
             {
-              "expr": "sum(node_load15)",
+              "expr": "sum(node_load15{job=\"$Job\"})",
               "format": "time_series",
               "intervalFactor": 1,
               "legendFormat": "Load Avg (15m)",
@@ -653,7 +653,7 @@
             },
             "orientation": "vertical"
           },
-          "pluginVersion": "6.3.3",
+          "pluginVersion": "6.3.5",
           "targets": [
             {
               "expr": "1 - ((node_memory_MemFree_bytes{job=\"$Job\"} + node_memory_Buffers_bytes{job=\"$Job\"}) / node_memory_MemTotal_bytes{job=\"$Job\"})",
@@ -917,7 +917,7 @@
             },
             "orientation": "vertical"
           },
-          "pluginVersion": "6.3.3",
+          "pluginVersion": "6.3.5",
           "targets": [
             {
               "expr": "node_memory_SwapCached_bytes{job=\"node-exporter-vps\"} / clamp_min(node_memory_SwapTotal_bytes{job=\"node-exporter-vps\"},1)",
@@ -1295,7 +1295,7 @@
         },
         "orientation": "horizontal"
       },
-      "pluginVersion": "6.3.3",
+      "pluginVersion": "6.3.5",
       "targets": [
         {
           "expr": "1-(node_filesystem_avail_bytes{job=\"$Job\"}/node_filesystem_size_bytes{job=\"$Job\"})",
