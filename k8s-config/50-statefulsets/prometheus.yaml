@@ -105,7 +105,7 @@ data:
         metrics_path: /metrics
         static_configs:
           - targets:
-              - 2.24.116.170:30001
+              - 10.254.1.20:20001
 
       - job_name: 88bl-pi-push-gateway
         scrape_interval: 5s
@@ -113,7 +113,7 @@ data:
         metrics_path: /metrics
         static_configs:
           - targets:
-              - 2.24.116.170:20002
+              - 10.254.1.20:20002
 
       - job_name: alex-minecraft-desktop
         scrape_interval: 10s
@@ -121,7 +121,7 @@ data:
         metrics_path: /metrics
         static_configs:
           - targets:
-              - 2.24.116.170:30004
+              - 10.254.1.20:20004
 
       - job_name: 88bl-router-telegraf
         scrape_interval: 10s
@@ -129,4 +129,4 @@ data:
         metrics_path: /metrics
         static_configs:
           - targets:
-              - 2.24.116.170:30005
+              - 10.254.1.20:20005

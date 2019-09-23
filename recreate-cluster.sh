@@ -45,7 +45,7 @@ systemctl restart docker
 
 
 echo Installing kubeadm, kubelet and kubectl
-sudo apt-get -y install kubelet=1.15.1-00 kubectl=1.15.1-00 kubeadm=1.15.1-00
+sudo apt-get -y install kubelet=1.16.0-00 kubectl=1.16.0-00 kubeadm=1.16.0-00
 sudo apt-mark hold kubelet
 
 echo '
@@ -58,7 +58,10 @@ mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 kubectl version
-kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
+
+# Weave staging server - has updated daemonset definition (not taken from extensions) - revert back to public server when fixed by weave.
+kubectl apply -f "https://frontend.dev.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
+# kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
 
 kubeadm completion bash > ~/.kube/kubeadm_completion.bash.inc
 # cat >>$HOME/.bash_profile <<EOF
