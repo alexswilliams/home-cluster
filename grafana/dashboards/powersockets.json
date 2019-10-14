@@ -11,13 +11,26 @@
         "name": "Annotations & Alerts",
         "showIn": 0,
         "type": "dashboard"
+      },
+      {
+        "datasource": "Prometheus",
+        "enable": true,
+        "expr": "clamp_min(clamp_max(max_over_time(power_mw{alias=\"Washing Machine\"}[1m]) < 2250 and max_over_time(power_mw{alias=\"Washing Machine\"}[90s]) >= 2250, 1), 1)",
+        "hide": false,
+        "iconColor": "#8AB8FF",
+        "limit": 100,
+        "name": "Wash Finished",
+        "showIn": 0,
+        "step": "30s",
+        "tags": [],
+        "type": "tags"
       }
     ]
   },
   "editable": true,
   "gnetId": null,
   "graphTooltip": 1,
-  "iteration": 1569779709352,
+  "iteration": 1571008303130,
   "links": [],
   "panels": [
     {
@@ -252,6 +265,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
+      "datasource": null,
       "fill": 0,
       "fillGradient": 0,
       "gridPos": {
@@ -346,6 +360,7 @@
         "rgba(237, 129, 40, 0.89)",
         "#d44a3a"
       ],
+      "datasource": null,
       "format": "none",
       "gauge": {
         "maxValue": 100,
@@ -441,6 +456,7 @@
         "rgba(237, 129, 40, 0.89)",
         "#d44a3a"
       ],
+      "datasource": null,
       "format": "watth",
       "gauge": {
         "maxValue": 100,
@@ -524,6 +540,7 @@
         "rgba(237, 129, 40, 0.89)",
         "#d44a3a"
       ],
+      "datasource": null,
       "decimals": 2,
       "format": "currencyGBP",
       "gauge": {
@@ -601,7 +618,7 @@
     }
   ],
   "refresh": "1m",
-  "schemaVersion": 19,
+  "schemaVersion": 20,
   "style": "dark",
   "tags": [],
   "templating": {
@@ -667,5 +684,5 @@
   "timezone": "browser",
   "title": "Power Sockets",
   "uid": "TRPm-skgk",
-  "version": 2
+  "version": 1
 }
