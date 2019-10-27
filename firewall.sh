@@ -73,7 +73,7 @@ start)
     iptables -A ${OUTPUT_CHAIN_NAME} -p gre -j RETURN
 
     # Default Policy
-    iptables -A ${OUTPUT_CHAIN_NAME} -j LOG --log-prefix "Outbound packet: "
+    # iptables -A ${OUTPUT_CHAIN_NAME} -j LOG --log-prefix "Outbound packet: "
     iptables -A ${OUTPUT_CHAIN_NAME} -j RETURN
 
     # Chain Installation
@@ -84,7 +84,7 @@ start)
 
     # Chain Definition
     iptables -N ${FORWARD_CHAIN_NAME} || iptables -F ${FORWARD_CHAIN_NAME}
-    iptables -A ${FORWARD_CHAIN_NAME} -j LOG --log-prefix "Forwarded packet: "
+    # iptables -A ${FORWARD_CHAIN_NAME} -j LOG --log-prefix "Forwarded packet: "
     iptables -A ${FORWARD_CHAIN_NAME} -m state --state ESTABLISHED,RELATED -j ACCEPT
 
     # Default Policy
