@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: washing-tweeter
+spec:
+  selector:
+    matchLabels:
+      app: washing-tweeter
+  strategy:
+    type: Recreate
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: washing-tweeter
+    spec:
+      containers:
+        - name: washing-tweeter
+          image: nginx:1.17.5-alpine
+          resources:
+            limits:
+              memory: "16Mi"
+              cpu: "10m"
+          ports:
+            - containerPort: 80
+              name: http

@@ -28,6 +28,10 @@ spec:
           configMap:
             name: prometheus-config
             defaultMode: 0444
+        - name: rules
+          configMap:
+            name: prometheus-rules
+            defaultMode: 0444
 
       initContainers:
         - name: prepare-volume-for-prometheus
@@ -66,6 +70,9 @@ spec:
               mountPath: /etc/prometheus/prometheus.yml
               subPath: prometheus.yml
               readOnly: true
+            - name: rules
+              mountPath: /etc/prometheus/rules/
+              readOnly: true
           args:
             - --config.file=/etc/prometheus/prometheus.yml
             - --web.external-url=/prometheus/
@@ -82,8 +89,18 @@ data:
   prometheus.yml: |
     global:
       scrape_interval:     10s
-      scrape_timeout:      10s
-      evaluation_interval: 30s
+      scrape_timeout:      8s
+      evaluation_interval: 10s
+
+    alerting:
+      alertmanagers:
+        - static_configs:
+            - targets:
+                - alertmanager:9093
+
+    rule_files:
+      - /etc/prometheus/rules/*.yaml
+      - /etc/prometheus/rules/*.yml
 
     scrape_configs:
       - job_name: node-exporter-vps
@@ -130,3 +147,30 @@ data:
         static_configs:
           - targets:
               - 10.254.1.20:20005
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prometheus-rules
+data:
+  smart-plugs.yaml: |
+    groups:
+      - name: washing-machine-status
+        rules:
+          - alert: Washing Machine Started
+            expr: clamp_min(clamp_max(max_over_time(power_mw{alias="Washing Machine"}[30s]) > 2250 and max_over_time(power_mw{alias="Washing Machine"}[30s] offset 30s) <= 2250, 1), 1)
+            labels:
+              rube_goldberg_pipeline_stage: washing-started
+          - alert: Washing Machine Finished
+            expr: clamp_min(clamp_max(max_over_time(power_mw{alias="Washing Machine"}[1m]) < 2250 and max_over_time(power_mw{alias="Washing Machine"}[90s]) >= 2250, 1), 1)
+            labels:
+              rube_goldberg_pipeline_stage: washing-finished
+
+      - name: heater-status
+        rules:
+          - alert: Some Test Rule
+            expr: current_ma{alias="Heater"} > 500
+            labels:
+              rube_goldberg_pipeline_stage: heater-on
+

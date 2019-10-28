@@ -1,0 +1,73 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: alertmanager
+spec:
+  selector:
+    matchLabels:
+      app: alertmanager
+  strategy:
+    type: Recreate
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: alertmanager
+    spec:
+      volumes:
+        - name: config
+          configMap:
+            name: alertmanager-config
+            defaultMode: 0444
+      containers:
+        - name: alertmanager
+          image: prom/alertmanager:v0.19.0
+          resources:
+            limits:
+              memory: 32Mi
+              cpu: 20m
+          ports:
+            - containerPort: 9093
+              hostPort: 9093
+              name: http
+            - containerPort: 9094
+              name: gossip
+          volumeMounts:
+            - name: config
+              mountPath: /etc/alertmanager/alertmanager.yml
+              subPath: alertmanager.yml
+              readOnly: true
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: alertmanager-config
+data:
+  alertmanager.yml: |
+    route:
+      receiver: default-receiver
+      group_wait: "30s"
+
+      group_by: ['...']
+      routes:
+        - receiver: washing-tweeter
+          group_wait: "0s"
+          match_re:
+            rube_goldberg_pipeline_stage: washing-started|washing-finished
+        - receiver: heater-tweeter
+          group_wait: "0s"
+          match:
+            rube_goldberg_pipeline_stage: heater-on
+
+    receivers:
+      - name: default-receiver
+      
+      - name: washing-tweeter
+        webhook_configs:
+          - url: 'http://washing-tweeter:80/washing-update'
+            send_resolved: false
+      - name: heater-tweeter
+        webhook_configs:
+          - url: 'http://washing-tweeter:80/heater-update'
+            send_resolved: true

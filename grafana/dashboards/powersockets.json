@@ -15,6 +15,19 @@
       {
         "datasource": "Prometheus",
         "enable": true,
+        "expr": "clamp_min(clamp_max(max_over_time(power_mw{alias=\"Washing Machine\"}[30s]) > 2250 and max_over_time(power_mw{alias=\"Washing Machine\"}[30s] offset 30s) <= 2250, 1), 1)",
+        "hide": false,
+        "iconColor": "rgba(255, 96, 96, 1)",
+        "limit": 100,
+        "name": "Wash Started",
+        "showIn": 0,
+        "step": "30s",
+        "tags": [],
+        "type": "tags"
+      },
+      {
+        "datasource": "Prometheus",
+        "enable": true,
         "expr": "clamp_min(clamp_max(max_over_time(power_mw{alias=\"Washing Machine\"}[1m]) < 2250 and max_over_time(power_mw{alias=\"Washing Machine\"}[90s]) >= 2250, 1), 1)",
         "hide": false,
         "iconColor": "#8AB8FF",
@@ -30,7 +43,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 1,
-  "iteration": 1571008303130,
+  "iteration": 1572223391976,
   "links": [],
   "panels": [
     {
