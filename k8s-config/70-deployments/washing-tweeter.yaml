@@ -17,7 +17,7 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
         - name: washing-tweeter
-          image: london.alexswilliams.co.uk:5000/washing-tweeter:node-10-alpine--20191116-2153
+          image: london.alexswilliams.co.uk:5000/washing-tweeter:node-10-alpine--20191116-2217
           livenessProbe:
               httpGet:
                 path: "/liveness"
@@ -34,14 +34,14 @@ spec:
               periodSeconds: 10
           resources:
             requests:
-              memory: "96Mi"
+              memory: "64Mi"
               cpu: "20m"
             limits:
-              memory: "96Mi"
-              cpu: "100m"
+              memory: "64Mi"
+              cpu: "40m"
           env:
             - name: WEB_MEMORY
-              value: "96"
+              value: "64"
             - name: SERVER_PORT
               value: "80"
             - name: TWITTER_CONSUMER_KEY
