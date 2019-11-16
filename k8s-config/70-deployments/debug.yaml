@@ -14,13 +14,17 @@ spec:
       labels:
         app: debug
     spec:
+      terminationGracePeriodSeconds: 5
       containers:
         - name: debug
           image: debian:buster-slim
           resources:
             requests:
               memory: "32Mi"
-              cpu: "10m"
+              cpu: "30m"
             limits:
               memory: "32Mi"
-              cpu: "10m"
+              cpu: "30m"
+          command:
+            - "sleep"
+            - "10000"
