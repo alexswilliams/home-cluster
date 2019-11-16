@@ -47,21 +47,27 @@ data:
   alertmanager.yml: |
     route:
       receiver: default-receiver
-      group_wait: "30s"
+      group_wait: "10s"
+      group_interval: "2m"
 
       group_by: ['...']
       routes:
         - receiver: washing-tweeter
           group_wait: "0s"
+          group_interval: "2m"
           match_re:
             rube_goldberg_pipeline_stage: washing-started|washing-finished
         - receiver: heater-tweeter
           group_wait: "0s"
+          group_interval: "5s"
           match:
             rube_goldberg_pipeline_stage: heater-on
 
     receivers:
       - name: default-receiver
+        webhook_configs:
+          - url: 'http://washing-tweeter:80/unknown-route'
+            send_resolved: true
       
       - name: washing-tweeter
         webhook_configs:

@@ -169,7 +169,7 @@ data:
 
       - name: heater-status
         rules:
-          - alert: Some Test Rule
+          - alert: Heater On
             expr: current_ma{alias="Heater"} > 500
             labels:
               rube_goldberg_pipeline_stage: heater-on
