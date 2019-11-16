@@ -41,11 +41,11 @@ spec:
                 - /entrypoint.sh
               resources:
                 requests:
-                  memory: 92Mi
-                  cpu: 20m
+                  memory: "92Mi"
+                  cpu: "20m"
                 limits:
-                  memory: 92Mi
-                  cpu: 20m
+                  memory: "92Mi"
+                  cpu: "20m"
 
               volumeMounts:
                 - mountPath: /fluent-logs

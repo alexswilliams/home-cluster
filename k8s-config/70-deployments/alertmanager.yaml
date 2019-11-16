@@ -24,8 +24,8 @@ spec:
           image: prom/alertmanager:v0.19.0
           resources:
             limits:
-              memory: 32Mi
-              cpu: 20m
+              memory: "32Mi"
+              cpu: "10m"
           ports:
             - containerPort: 9093
               hostPort: 9093

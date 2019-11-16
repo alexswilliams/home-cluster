@@ -59,11 +59,11 @@ spec:
             procMount: Unmasked
           resources:
             requests:
-              memory: 16Mi
-              cpu: 20m
+              memory: "16Mi"
+              cpu: "10m"
             limits:
-              memory: 16Mi
-              cpu: 20m
+              memory: "16Mi"
+              cpu: "10m"
           ports:
             - containerPort: 9100
               name: http
