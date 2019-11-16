@@ -20,10 +20,10 @@ spec:
           image: debian:buster-slim
           resources:
             requests:
-              memory: "32Mi"
+              memory: "64Mi"
               cpu: "30m"
             limits:
-              memory: "32Mi"
+              memory: "64Mi"
               cpu: "30m"
           command:
             - "sleep"
