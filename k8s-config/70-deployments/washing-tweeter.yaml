@@ -21,10 +21,12 @@ spec:
               httpGet:
                 path: "/liveness"
                 port: http
+              initialDelaySeconds: 20
           readinessProbe:
               httpGet:
                 path: "/readiness"
                 port: http
+              initialDelaySeconds: 20
           resources:
             requests:
               memory: "32Mi"
