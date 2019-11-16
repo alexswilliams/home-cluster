@@ -17,6 +17,10 @@ spec:
       containers:
         - name: washing-tweeter
           image: london.alexswilliams.co.uk:5000/washing-tweeter:node-10-alpine--20191116-2135
+          livenessProbe:
+              httpGet:
+                path: "/liveness"
+                port: http
           resources:
             requests:
               memory: "32Mi"
