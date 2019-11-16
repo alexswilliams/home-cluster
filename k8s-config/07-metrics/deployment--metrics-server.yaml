@@ -34,11 +34,11 @@ spec:
           protocol: TCP
         resources:
           requests:
-            memory: "32Mi"
-            cpu: "10m"
+            memory: "64Mi"
+            cpu: "30m"
           limits:
-            memory: "32Mi"
-            cpu: "10m"
+            memory: "64Mi"
+            cpu: "30m"
         securityContext:
           readOnlyRootFilesystem: true
           runAsNonRoot: true
