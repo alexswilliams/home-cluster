@@ -39,10 +39,10 @@ spec:
         resources:
           requests:
             memory: "64Mi"
-            cpu: "30m"
+            cpu: "20m"
           limits:
             memory: "64Mi"
-            cpu: "30m"
+            cpu: "20m"
         securityContext:
           readOnlyRootFilesystem: true
           runAsNonRoot: true
