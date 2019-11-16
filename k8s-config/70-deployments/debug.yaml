@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: debug
+spec:
+  selector:
+    matchLabels:
+      app: debug
+  strategy:
+    type: Recreate
+  replicas: 0
+  template:
+    metadata:
+      labels:
+        app: debug
+    spec:
+      containers:
+        - name: debug
+          image: debian:buster-slim
+          resources:
+            requests:
+              memory: "32Mi"
+              cpu: "10m"
+            limits:
+              memory: "32Mi"
+              cpu: "10m"

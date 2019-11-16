@@ -18,6 +18,8 @@ spec:
         k8s-app: metrics-server
     spec:
       serviceAccountName: metrics-server
+      strategy:
+        type: Recreate
       volumes:
       # mount in tmp so we can safely use from-scratch images and/or read-only containers
       - name: tmp-dir
