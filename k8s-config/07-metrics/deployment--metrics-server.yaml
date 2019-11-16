@@ -28,6 +28,8 @@ spec:
         args:
           - --cert-dir=/tmp
           - --secure-port=4443
+          - --kubelet-insecure-tls
+          - --metric-resolution=20s
         ports:
         - name: main-port
           containerPort: 4443
