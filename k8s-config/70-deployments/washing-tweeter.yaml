@@ -16,10 +16,14 @@ spec:
     spec:
       containers:
         - name: washing-tweeter
-          image: london.alexswilliams.co.uk:5000/washing-tweeter:node-10-alpine--20191116-2135
+          image: london.alexswilliams.co.uk:5000/washing-tweeter:node-10-alpine--20191116-2153
           livenessProbe:
               httpGet:
                 path: "/liveness"
+                port: http
+          readinessProbe:
+              httpGet:
+                path: "/readiness"
                 port: http
           resources:
             requests:
