@@ -30,7 +30,7 @@ app.get('/liveness', (req, res) => {
     res.status(200).send('OK')
 })
 app.get('/readiness', (req, res) => {
-    if (ready) {
+    if (!ready) {
         res.status(503).send('Service Unavailable')
     } else {
         res.status(200).send('OK')
