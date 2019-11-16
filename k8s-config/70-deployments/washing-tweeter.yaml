@@ -22,15 +22,15 @@ spec:
               httpGet:
                 path: "/liveness"
                 port: http
-              initialDelaySeconds: 20
-              failureThreshold: 3
+              initialDelaySeconds: 10
+              failureThreshold: 2
               periodSeconds: 10
           readinessProbe:
               httpGet:
                 path: "/readiness"
                 port: http
-              initialDelaySeconds: 20
-              failureThreshold: 3
+              initialDelaySeconds: 10
+              failureThreshold: 1
               periodSeconds: 10
           resources:
             requests:
