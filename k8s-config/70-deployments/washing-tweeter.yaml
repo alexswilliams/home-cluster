@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: washing-tweeter
-          image: london.alexswilliams.co.uk:5000/washing-tweeter:node-10-alpine--20191116-2112
+          image: london.alexswilliams.co.uk:5000/washing-tweeter:node-10-alpine--20191116-2135
           resources:
             requests:
               memory: "32Mi"
