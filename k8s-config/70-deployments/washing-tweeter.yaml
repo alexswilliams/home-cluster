@@ -16,14 +16,37 @@ spec:
     spec:
       containers:
         - name: washing-tweeter
-          image: nginx:1.17.5-alpine
+          image: london.alexswilliams.co.uk:5000/washing-tweeter:node-10-alpine--20191116-2112
           resources:
             requests:
-              memory: "16Mi"
+              memory: "32Mi"
               cpu: "10m"
             limits:
-              memory: "16Mi"
+              memory: "32Mi"
               cpu: "10m"
+          env:
+            - name: SERVER_PORT
+              value: 80
+            - name: TWITTER_CONSUMER_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: washing-tweeter-secrets
+                  key: consumer-key
+            - name: TWITTER_CONSUMER_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: washing-tweeter-secrets
+                  key: consumer-secret
+            - name: TWITTER_ACCESS_TOKEN_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: washing-tweeter-secrets
+                  key: access-token-key
+            - name: TWITTER_ACCESS_TOKEN_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: washing-tweeter-secrets
+                  key: access-token-secret
           ports:
             - containerPort: 80
               name: http
