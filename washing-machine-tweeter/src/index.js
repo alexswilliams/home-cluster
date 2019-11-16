@@ -3,6 +3,7 @@ const twitter = require('twitter')
 const app = express()
 const port = process.env.SERVER_PORT || 80
 
+let ready = false
 
 var client = new twitter({
   consumer_key: process.env.TWITTER_CONSUMER_KEY,
@@ -29,43 +30,13 @@ app.get('/liveness', (req, res) => {
     res.status(200).send('OK')
 })
 app.get('/readiness', (req, res) => {
-    res.status(200).send('OK')
+    if (ready) {
+        res.status(503).send('Service Unavailable')
+    } else {
+        res.status(200).send('OK')
+    }
 })
 
-
-/*
-
-
-
-[Sat Nov 16 2019 21:25:03 GMT+0000 (Coordinated Universal Time)] Remote IP: ::ffff:10.32.0.5; Url: /washing-update; Method: POST; User Agent: Alertmanager/0.19.0
-{ receiver: 'washing-tweeter',
-  status: 'firing',
-  alerts:
-   [ { status: 'firing',
-       labels: [Object],
-       annotations: {},
-       startsAt: '2019-11-16T21:24:59.85362058Z',
-       endsAt: '0001-01-01T00:00:00Z',
-       generatorURL:
-        '/prometheus/graph?g0.expr=clamp_min%28clamp_max%28max_over_time%28power_mw%7Balias%3D%22Washing+Machine%22%7D%5B30s%5D%29+%3E+2250+and+max_over_time%28power_mw%7Balias%3D%22Washing+Machine%22%7D%5B30s%5D+offset+30s%29+%3C%3D+2250%2C+1%29%2C+1%29&g0.tab=1',
-       fingerprint: '61f151ac898456e3' } ],
-  groupLabels: {},
-  commonLabels:
-   { alertname: 'Washing Machine Started',
-     alias: 'Washing Machine',
-     exported_job: 'tplink-scraper-washing-machine',
-     id: '80060C33CFF513FA251AFF1AAAD9D3281B0B8D9F',
-     instance: '10.254.1.20:20002',
-     job: '88bl-pi-push-gateway',
-     mac: 'D8:0D:17:6C:7D:35',
-     rube_goldberg_pipeline_stage: 'washing-started' },
-  commonAnnotations: {},
-  externalURL: 'http://alertmanager-56c55b89d5-ttlvb:9093',
-  version: '4',
-  groupKey:
-   '{}/{rube_goldberg_pipeline_stage=~"^(?:washing-started|washing-finished)$"}:{}' }
-[object Object]
-*/
 
 app.post('/washing-update', (req, res, next) => {
     console.log(req.body)
@@ -107,4 +78,7 @@ app.post('/test-tweet', (req, res, next) => {
 
 app.use((req, res) => { res.status(404).send('Not Found') })
 
-app.listen(port, () => console.log(`Started listening on port ${port}`))
+app.listen(port, () => {
+    console.log(`Started listening on port ${port}`)
+    ready = true
+})
