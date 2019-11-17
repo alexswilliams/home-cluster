@@ -45,7 +45,7 @@ spec:
             - name: SERVER_PORT
               value: "8080"
             - name: PROMETHEUS_URL
-              value: "http://prometheus:9090"
+              value: "http://prometheus-service:9090"
             - name: TWITTER_CONSUMER_KEY
               valueFrom:
                 secretKeyRef:
