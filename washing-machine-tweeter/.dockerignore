@@ -1,1 +1,6 @@
-src/node_modules
+node/node_modules
+node/npm-debug.log
+.dockerignore
+Dockerfile
+docker-compose.yaml
+build.sh

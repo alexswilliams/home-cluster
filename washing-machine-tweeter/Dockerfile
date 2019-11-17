@@ -1,10 +1,13 @@
-FROM node:10-alpine
+FROM node:13.1.0-alpine
 
 WORKDIR /usr/src/app
+RUN apk add --no-cache tini
 
-COPY src/package*.json ./
+COPY node/package*.json ./
 RUN npm install
 
-COPY src ./
+COPY node ./
 
-CMD [ "node", "index.js" ]
+USER node
+ENTRYPOINT [ "/sbin/tini", "--" ]
+CMD [ "node", "src/index.js" ]

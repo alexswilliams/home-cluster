@@ -9,4 +9,7 @@ docker build \
     --build-arg BUILD_DATE=$(date -u +"%Y-%m-%dT%H:%M:%SZ") \
     --build-arg VCS_REF=$(git rev-parse --short HEAD) \
     .
-docker push london.alexswilliams.co.uk:5000/washing-tweeter:$tag
+
+if [ -z "$1" ]; then
+    docker push london.alexswilliams.co.uk:5000/washing-tweeter:$tag
+fi

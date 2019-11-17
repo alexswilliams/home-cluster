@@ -1,0 +1,11 @@
+version: "3.7"
+services:
+  tweeter:
+    build: .
+    environment:
+      NODE_ENV: "production"
+      TWITTER_ENABLED: "false"
+      PROMETHEUS_URL: "https://london.alexswilliams.co.uk/prometheus"
+      BASIC_AUTH: "<redacted>"
+    ports:
+      - "8080:8080"

@@ -17,7 +17,7 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
         - name: washing-tweeter
-          image: london.alexswilliams.co.uk:5000/washing-tweeter:node-10-alpine--20191116-2217
+          image: london.alexswilliams.co.uk:5000/washing-tweeter:node-13.1.0-alpine--20191117-0411
           livenessProbe:
               httpGet:
                 path: "/liveness"
@@ -43,7 +43,9 @@ spec:
             - name: WEB_MEMORY
               value: "64"
             - name: SERVER_PORT
-              value: "80"
+              value: "8080"
+            - name: PROMETHEUS_URL
+              value: "http://prometheus:9090"
             - name: TWITTER_CONSUMER_KEY
               valueFrom:
                 secretKeyRef:
@@ -65,5 +67,5 @@ spec:
                   name: washing-tweeter-secrets
                   key: access-token-secret
           ports:
-            - containerPort: 80
+            - containerPort: 8080
               name: http
