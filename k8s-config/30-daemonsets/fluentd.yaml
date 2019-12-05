@@ -17,6 +17,7 @@ spec:
       restartPolicy: Always
       hostNetwork: true
       dnsPolicy: ClusterFirstWithHostNet
+      priorityClassName: data-recorders
 
       tolerations:
         - key: node-role.kubernetes.io/master

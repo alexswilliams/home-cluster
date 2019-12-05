@@ -15,6 +15,7 @@ spec:
         app: washing-tweeter
     spec:
       terminationGracePeriodSeconds: 5
+      priorityClassName: alerting
       containers:
         - name: washing-tweeter
           image: london.alexswilliams.co.uk:5000/washing-tweeter:node-13.1.0-alpine--20191117-0411

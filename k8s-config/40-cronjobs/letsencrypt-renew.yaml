@@ -18,6 +18,7 @@ spec:
           restartPolicy: Never
           hostNetwork: true
           dnsPolicy: ClusterFirstWithHostNet
+          priorityClassName: infrastructure
 
           volumes:
             - name: etc

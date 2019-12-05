@@ -17,6 +17,7 @@ spec:
     spec:
       hostNetwork: true
       dnsPolicy: ClusterFirstWithHostNet
+      priorityClassName: registry
 
       volumes:
       - name: letsencrypt

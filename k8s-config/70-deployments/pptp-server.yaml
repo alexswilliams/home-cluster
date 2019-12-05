@@ -21,6 +21,7 @@ spec:
       hostNetwork: true
       dnsPolicy: ClusterFirstWithHostNet
       restartPolicy: Always
+      priorityClassName: infrastructure
 
       volumes:
         - name: pptp-config

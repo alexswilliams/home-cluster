@@ -17,6 +17,7 @@ spec:
         app.kubernetes.io/name: kube-state-metrics
         app.kubernetes.io/version: v1.8.0
     spec:
+      priorityClassName: optional-metrics
       containers:
       - image: quay.io/coreos/kube-state-metrics:v1.8.0
         livenessProbe:

@@ -19,6 +19,7 @@ spec:
 
     spec:
       terminationGracePeriodSeconds: 60
+      priorityClassName: data-recorders
 
       volumes:
         - name: data

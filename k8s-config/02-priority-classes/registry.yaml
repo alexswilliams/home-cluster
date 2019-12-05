@@ -1,0 +1,7 @@
+apiVersion: scheduling.k8s.io/v1
+kind: PriorityClass
+metadata:
+  name: registry
+value: 9999
+globalDefault: false
+description: "Ensures that the registry is the highest priority"

@@ -16,7 +16,8 @@ spec:
       labels:
         app: grafana
     spec:
-
+      priorityClassName: reporting
+      
       volumes:
         - name: grafana-ini
           configMap:

@@ -14,6 +14,7 @@ spec:
       labels:
         app: alertmanager
     spec:
+      priorityClassName: alerting
       volumes:
         - name: config
           configMap:
