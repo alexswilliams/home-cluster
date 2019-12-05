@@ -2,7 +2,7 @@
 
 const fetch = require('node-fetch')
 
-const prometheusUrl = process.env.PROMETHEUS_URL || 'http://prometheus:9090'
+const prometheusUrl = process.env.PROMETHEUS_URL || 'http://prometheus-service:9090'
 
 const config = { timeout: 2000 }
 const basicAuth = process.env.BASIC_AUTH
