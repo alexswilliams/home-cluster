@@ -49,7 +49,7 @@ data:
     [global_tags]
 
     [agent]
-      interval = "30s"
+      interval = "180s"
       round_interval = true
 
       metric_batch_size = 1000
@@ -73,7 +73,7 @@ data:
         listen = ":9273"
         metric_version = 2
         path = "/metrics"
-        expiration_interval = "90s"
+        expiration_interval = "240s"
         collectors_exclude = ["gocollector", "process"]
         export_timestamp = true
         string_as_label = false
@@ -101,7 +101,7 @@ data:
 
     [[inputs.snmp]]
       agents = [ "10.254.1.10" ]
-      timeout = "25s"
+      timeout = "150s"
       retries = 3
       version = 2
       community = "public"
