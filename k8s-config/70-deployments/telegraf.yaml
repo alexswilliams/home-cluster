@@ -49,7 +49,7 @@ data:
     [global_tags]
 
     [agent]
-      interval = "180s"
+      interval = "30s"
       round_interval = true
 
       metric_batch_size = 1000
