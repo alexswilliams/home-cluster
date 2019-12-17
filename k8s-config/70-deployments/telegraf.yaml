@@ -26,14 +26,14 @@ spec:
           image: telegraf:1.13.0-alpine
           resources:
             requests:
-              memory: "32Mi"
-              cpu: "10m"
+              memory: "64Mi"
+              cpu: "20m"
             limits:
-              memory: "32Mi"
-              cpu: "10m"
+              memory: "64Mi"
+              cpu: "20m"
           ports:
             - containerPort: 9273
-              name: metrics
+              name: http-metrics
           volumeMounts:
             - name: config
               mountPath: /etc/telegraf/telegraf.conf
@@ -71,6 +71,7 @@ data:
 
     [[outputs.prometheus_client]]
         listen = ":9273"
+        metric_version = 2
         path = "/metrics"
         expiration_interval = "60s"
         collectors_exclude = ["gocollector", "process"]
