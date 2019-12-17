@@ -18,7 +18,7 @@ spec:
       priorityClassName: alerting
       containers:
         - name: washing-tweeter
-          image: london.alexswilliams.co.uk:5000/washing-tweeter:node-13.1.0-alpine--20191117-0411
+          image: london.alexswilliams.co.uk:5000/washing-tweeter:node-13.3.0-alpine--20191217-2218
           livenessProbe:
               httpGet:
                 path: "/liveness"
@@ -41,8 +41,8 @@ spec:
               memory: "64Mi"
               cpu: "40m"
           env:
-            - name: WEB_MEMORY
-              value: "64"
+            - name: NODE_OPTIONS
+              value: "--max-old-space-size=48"
             - name: SERVER_PORT
               value: "8080"
             - name: PROMETHEUS_URL
