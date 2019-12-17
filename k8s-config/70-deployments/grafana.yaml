@@ -35,7 +35,7 @@ spec:
       containers:
         - name: grafana
           # Using beta in the hope of a fix for the non-chrome bug.
-          image: grafana/grafana:6.5.0-beta1
+          image: grafana/grafana:6.5.2
           env:
             - name: GF_PATHS_CONFIG
               value: /etc/grafana/grafana.ini
