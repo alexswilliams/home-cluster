@@ -50,7 +50,7 @@ start)
 
     # Filtering
     iptables -A ${INPUT_CHAIN_NAME} -m conntrack --ctstate INVALID -j DROP
-    iptables -A ${INPUT_CHAIN_NAME} -s 10.0.0.0/8 -j DROP
+    # iptables -A ${INPUT_CHAIN_NAME} -s 10.0.0.0/8 -j DROP
     iptables -A ${INPUT_CHAIN_NAME} -s 172.16.0.0/12 -j DROP
     iptables -A ${INPUT_CHAIN_NAME} -s 192.168.0.0/16 -j DROP
     iptables -A ${INPUT_CHAIN_NAME} -s 224.0.0.0/4 -j DROP
@@ -87,6 +87,8 @@ start)
     # iptables -A ${FORWARD_CHAIN_NAME} -j LOG --log-prefix "Forwarded packet: "
     iptables -A ${FORWARD_CHAIN_NAME} -m state --state ESTABLISHED,RELATED -j ACCEPT
 
+    iptables -A ${FORWARD_CHAIN_NAME} -s 10.254.1.0/24 -j ACCEPT
+
     # Default Policy
     iptables -A ${FORWARD_CHAIN_NAME} -j RETURN
 
@@ -94,6 +96,8 @@ start)
     iptables -C FORWARD -j ${FORWARD_CHAIN_NAME} || iptables -I FORWARD 1 -j ${FORWARD_CHAIN_NAME}
 
 
+    echo "Enabling VPN masquerading"
+    iptables -t nat -A POSTROUTING -s 10.254.1.0/24 -o ${EXTERNAL_INTERFACE} -j MASQUERADE
 
     ;;
 stop)
@@ -110,6 +114,10 @@ stop)
     iptables -D FORWARD -j ${FORWARD_CHAIN_NAME} || true
     iptables -F ${FORWARD_CHAIN_NAME} || true
     iptables -X ${FORWARD_CHAIN_NAME} || true
+
+
+    echo "Removing VPN masquerading"
+    iptables -t nat -D POSTGROUTING -s 10.254.1.0/24 -o ${EXTERNAL_INTERFACE} -j MASQUERADE || true
 
     ;;
 *)
