@@ -1,4 +1,4 @@
-FROM alpine:3.10.3
+FROM alpine:3.11.2
 
 LABEL org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.name="PPTP Server" \
