@@ -46,7 +46,7 @@ spec:
               memory: 32Mi
       containers:
         - name: fluentd
-          image: london.alexswilliams.co.uk:5000/fluentd-custom:fluentd-v1.8.0-debian-1.0--20191217-2228
+          image: london.alexswilliams.co.uk:5000/fluentd-custom:fluentd-v1.8.1-debian-1.0--20200110-2328
           resources:
             requests:
               memory: "96Mi"

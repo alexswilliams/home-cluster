@@ -34,15 +34,15 @@ spec:
 
       containers:
         - name: pptp-server
-          image: london.alexswilliams.co.uk:5000/pptp-server:alpine-3.10.3--20191217-2228
+          image: london.alexswilliams.co.uk:5000/pptp-server:alpine-3.11.2--20200110-2333
           imagePullPolicy: Always
           resources:
             requests:
               memory: "16Mi"
               cpu: "10m"
             limits:
-              memory: "16Mi"
-              cpu: "10m"
+              memory: "24Mi"
+              cpu: "20m"
           ports:
             - containerPort: 1723
               name: pptp-port
