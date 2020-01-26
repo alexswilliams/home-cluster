@@ -46,8 +46,8 @@ spec:
               mountPath: /prometheus
           resources:
             requests:
-              memory: "32Mi"
-              cpu: "10m"
+              memory: "4Mi"
+              cpu: "2m"
             limits:
               memory: "32Mi"
               cpu: "10m"
@@ -56,11 +56,11 @@ spec:
           image: prom/prometheus:v2.15.2
           resources:
             requests:
-              memory: "96Mi"
-              cpu: "50m"
+              memory: "80Mi"
+              cpu: "15m"
             limits:
-              memory: "96Mi"
-              cpu: "200m"
+              memory: "128Mi"
+              cpu: "250m"
           ports:
             - containerPort: 9090
               name: http

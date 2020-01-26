@@ -65,10 +65,10 @@ spec:
 
           resources:
             requests:
-              memory: "92Mi"
-              cpu: "50m"
+              memory: "28Mi"
+              cpu: "8m"
             limits:
-              memory: "92Mi"
+              memory: "64Mi"
               cpu: "100m"
           ports:
             - containerPort: 3000

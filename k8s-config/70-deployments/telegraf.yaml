@@ -26,8 +26,8 @@ spec:
           image: telegraf:1.13.0-alpine
           resources:
             requests:
-              memory: "64Mi"
-              cpu: "20m"
+              memory: "24Mi"
+              cpu: "10m"
             limits:
               memory: "64Mi"
               cpu: "20m"

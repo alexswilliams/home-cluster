@@ -36,13 +36,13 @@ spec:
           resources:
             requests:
               memory: "64Mi"
-              cpu: "20m"
+              cpu: "2m"
             limits:
-              memory: "64Mi"
-              cpu: "40m"
+              memory: "96Mi"
+              cpu: "80m"
           env:
             - name: NODE_OPTIONS
-              value: "--max-old-space-size=48"
+              value: "--max-old-space-size=94"
             - name: SERVER_PORT
               value: "8080"
             - name: PROMETHEUS_URL
