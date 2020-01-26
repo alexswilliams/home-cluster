@@ -42,7 +42,8 @@ spec:
               cpu: "80m"
           env:
             - name: NODE_OPTIONS
-              value: "--max-old-space-size=94"
+              # https://developer.ibm.com/technologies/node-js/articles/nodejs-memory-management-in-container-environments#summary-and-recommendations
+              value: "--max-old-space-size=54"
             - name: SERVER_PORT
               value: "8080"
             - name: PROMETHEUS_URL
