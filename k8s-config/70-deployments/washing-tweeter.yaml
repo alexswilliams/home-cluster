@@ -18,7 +18,7 @@ spec:
       priorityClassName: alerting
       containers:
         - name: washing-tweeter
-          image: london.alexswilliams.co.uk:5000/washing-tweeter:node-13.3.0-alpine--20191217-2218
+          image: london.alexswilliams.co.uk:5000/washing-tweeter:node-13.7.0-alpine--20200127-0025
           livenessProbe:
               httpGet:
                 path: "/liveness"
