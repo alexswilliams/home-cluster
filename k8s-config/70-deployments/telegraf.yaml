@@ -15,6 +15,7 @@ spec:
       labels:
         app: telegraf
     spec:
+      automountServiceAccountToken: false
       priorityClassName: optional-metrics
       volumes:
         - name: config

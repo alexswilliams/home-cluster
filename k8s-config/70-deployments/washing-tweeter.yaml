@@ -14,6 +14,7 @@ spec:
       labels:
         app: washing-tweeter
     spec:
+      automountServiceAccountToken: false
       terminationGracePeriodSeconds: 5
       priorityClassName: alerting
       containers:

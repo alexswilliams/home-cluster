@@ -20,7 +20,8 @@ spec:
     spec:
       terminationGracePeriodSeconds: 60
       priorityClassName: data-recorders
-
+      automountServiceAccountToken: false
+      
       volumes:
         - name: data
           persistentVolumeClaim:

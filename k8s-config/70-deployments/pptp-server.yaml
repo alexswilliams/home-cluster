@@ -18,6 +18,7 @@ spec:
         app: pptp-server
 
     spec:
+      automountServiceAccountToken: false
       hostNetwork: true
       dnsPolicy: ClusterFirstWithHostNet
       restartPolicy: Always

@@ -18,6 +18,7 @@ spec:
       hostNetwork: true
       dnsPolicy: ClusterFirstWithHostNet
       priorityClassName: optional-metrics
+      automountServiceAccountToken: false
 
       hostPID: true
       hostIPC: true

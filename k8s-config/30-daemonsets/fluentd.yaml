@@ -18,6 +18,7 @@ spec:
       hostNetwork: true
       dnsPolicy: ClusterFirstWithHostNet
       priorityClassName: data-recorders
+      automountServiceAccountToken: false
 
       tolerations:
         - key: node-role.kubernetes.io/master

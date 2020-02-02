@@ -18,6 +18,7 @@ spec:
         app: nginx
 
     spec:
+      automountServiceAccountToken: false
       hostNetwork: true
       dnsPolicy: ClusterFirstWithHostNet
       restartPolicy: Always

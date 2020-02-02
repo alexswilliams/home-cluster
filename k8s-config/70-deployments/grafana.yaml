@@ -16,6 +16,7 @@ spec:
       labels:
         app: grafana
     spec:
+      automountServiceAccountToken: false
       priorityClassName: reporting
       
       volumes:
