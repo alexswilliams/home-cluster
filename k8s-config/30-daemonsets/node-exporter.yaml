@@ -41,21 +41,21 @@ spec:
         - name: node-exporter
           image: prom/node-exporter:v0.18.1
           volumeMounts:
-            - mountPath: /host/rootfs
+            - mountPath: /host/root
               name: root
               readOnly: true
-            - mountPath: /host/sysfs
+            - mountPath: /host/sys
               name: sys
               readOnly: true
-            - mountPath: /host/procfs
+            - mountPath: /host/proc
               name: proc
               readOnly: true
           args:
             - --web.disable-exporter-metrics
-            - --collector.filesystem.ignored-mount-points=^/(sys|proc|run|dev|host|etc|var/lib/lxcfs|var/lib/docker/.+|var/lib/kubelet/.+)($$|/)
-            - --path.procfs=/host/procfs
-            - --path.sysfs=/host/sysfs
-            - --path.rootfs=/host/rootfs
+            - --collector.filesystem.ignored-mount-points=^/(host/)?(root/)?(sys|proc|run|dev|host|etc|var/lib/lxcfs|var/lib/docker/.+|var/lib/kubelet/.+)($$|/)
+            - --path.procfs=/host/proc
+            - --path.sysfs=/host/sys
+            - --path.rootfs=/host/root
           securityContext:
             privileged: true
             runAsUser: 0

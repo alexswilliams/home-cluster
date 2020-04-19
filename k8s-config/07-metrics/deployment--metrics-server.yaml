@@ -12,7 +12,8 @@ spec:
     matchLabels:
       k8s-app: metrics-server
   strategy:
-    type: Recreate
+    rollingUpdate:
+      maxUnavailable: 0
   template:
     metadata:
       name: metrics-server
@@ -27,7 +28,8 @@ spec:
         emptyDir: {}
       containers:
       - name: metrics-server
-        image: k8s.gcr.io/metrics-server-amd64:v0.3.6
+        image: k8s.gcr.io/metrics-server:v0.3.7
+        imagePullPolicy: IfNotPresent
         args:
           - --cert-dir=/tmp
           - --secure-port=4443
@@ -37,6 +39,11 @@ spec:
         - name: main-port
           containerPort: 4443
           protocol: TCP
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: main-port
+            scheme: HTTPS
         resources:
           requests:
             memory: "64Mi"

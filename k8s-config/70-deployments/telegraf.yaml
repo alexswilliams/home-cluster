@@ -23,7 +23,7 @@ spec:
             defaultMode: 0444
       containers:
         - name: telegraf
-          image: telegraf:1.13.0-alpine
+          image: telegraf:1.14.1-alpine
           resources:
             requests:
               memory: "64Mi"
