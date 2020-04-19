@@ -18,6 +18,7 @@ spec:
       hostNetwork: true
       dnsPolicy: ClusterFirstWithHostNet
       priorityClassName: data-recorders
+      automountServiceAccountToken: false
 
       tolerations:
         - key: node-role.kubernetes.io/master
@@ -43,16 +44,16 @@ spec:
               mountPath: /var/log/fluent
           resources:
             requests:
-              memory: 32Mi
+              memory: "32Mi"
       containers:
         - name: fluentd
-          image: london.alexswilliams.co.uk:5000/fluentd-custom:fluentd-v1.8.1-debian-1.0--20200110-2328
+          image: london.alexswilliams.co.uk:5000/fluentd-custom:fluentd-v1.9.0-debian-1.0--20200127-0031
           resources:
             requests:
               memory: "96Mi"
-              cpu: "40m"
+              cpu: "5m"
             limits:
-              memory: "96Mi"
+              memory: "128Mi"
               cpu: "40m"
           env:
             - name: RUBY_GC_HEAP_OLDOBJECT_LIMIT_FACTOR

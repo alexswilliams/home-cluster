@@ -18,6 +18,7 @@ spec:
         app: nginx
 
     spec:
+      automountServiceAccountToken: false
       hostNetwork: true
       dnsPolicy: ClusterFirstWithHostNet
       restartPolicy: Always
@@ -41,8 +42,8 @@ spec:
           image: nginx:1.17.10-alpine
           resources:
             requests:
-              memory: "16Mi"
-              cpu: "10m"
+              memory: "8Mi"
+              cpu: "5m"
             limits:
               memory: "16Mi"
               cpu: "10m"

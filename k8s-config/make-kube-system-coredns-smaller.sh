@@ -9,10 +9,10 @@ spec:
       - name: coredns
         resources:
           limits:
-            memory: "64Mi"
-            cpu: "20m"
+            memory: "170Mi"
+            cpu: "100m"
           requests:
-            memory: "64Mi"
-            cpu: "20m"
+            memory: "16Mi"
+            cpu: "10m"
 '
 

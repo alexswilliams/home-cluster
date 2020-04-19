@@ -18,6 +18,7 @@ spec:
       hostNetwork: true
       dnsPolicy: ClusterFirstWithHostNet
       priorityClassName: registry
+      automountServiceAccountToken: false
 
       volumes:
       - name: letsencrypt
@@ -34,8 +35,8 @@ spec:
         image: registry:2.7.1
         resources:
           requests:
-            memory: "48Mi"
-            cpu: "10m"
+            memory: "8Mi"
+            cpu: "4m"
           limits:
             memory: "48Mi"
             cpu: "10m"

@@ -14,11 +14,12 @@ spec:
       labels:
         app: washing-tweeter
     spec:
+      automountServiceAccountToken: false
       terminationGracePeriodSeconds: 5
       priorityClassName: alerting
       containers:
         - name: washing-tweeter
-          image: london.alexswilliams.co.uk:5000/washing-tweeter:node-13.3.0-alpine--20191217-2218
+          image: london.alexswilliams.co.uk:5000/washing-tweeter:node-13.7.0-alpine--20200127-0025
           livenessProbe:
               httpGet:
                 path: "/liveness"
@@ -36,13 +37,14 @@ spec:
           resources:
             requests:
               memory: "64Mi"
-              cpu: "20m"
+              cpu: "2m"
             limits:
-              memory: "64Mi"
-              cpu: "40m"
+              memory: "96Mi"
+              cpu: "80m"
           env:
             - name: NODE_OPTIONS
-              value: "--max-old-space-size=48"
+              # https://developer.ibm.com/technologies/node-js/articles/nodejs-memory-management-in-container-environments#summary-and-recommendations
+              value: "--max-old-space-size=54"
             - name: SERVER_PORT
               value: "8080"
             - name: PROMETHEUS_URL

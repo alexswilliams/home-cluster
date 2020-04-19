@@ -15,6 +15,7 @@ spec:
         spec:
           restartPolicy: Never
           priorityClassName: backups
+          automountServiceAccountToken: false
 
           volumes:
             - name: fluent-logs

@@ -1,0 +1,13 @@
+[Unit]
+Description=Firewall startup script
+After=network.target
+
+[Service]
+Type=simple
+Restart=never
+User=root
+ExecStart=/bin/bash /home/alexw/home-cluster/firewall.sh start
+
+[Install]
+WantedBy=multi-user.target
+

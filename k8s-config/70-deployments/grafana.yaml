@@ -16,6 +16,7 @@ spec:
       labels:
         app: grafana
     spec:
+      automountServiceAccountToken: false
       priorityClassName: reporting
       
       volumes:
@@ -34,7 +35,7 @@ spec:
 
       containers:
         - name: grafana
-          image: grafana/grafana:6.7.2
+          image: grafana/grafana:6.7.2-ubuntu
           env:
             - name: GF_PATHS_CONFIG
               value: /etc/grafana/grafana.ini
@@ -65,10 +66,10 @@ spec:
 
           resources:
             requests:
-              memory: "92Mi"
-              cpu: "50m"
+              memory: "28Mi"
+              cpu: "8m"
             limits:
-              memory: "92Mi"
+              memory: "64Mi"
               cpu: "100m"
           ports:
             - containerPort: 3000
