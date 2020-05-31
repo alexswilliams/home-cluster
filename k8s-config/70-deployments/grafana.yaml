@@ -84,7 +84,7 @@ data:
     [server]
     http_port = 3000
     protocol = http
-    root_url = https://london.alexswilliams.co.uk/grafana/
+    root_url = https://falkenstein.alexswilliams.co.uk/grafana/
     enable_gzip = true
 
     [database]

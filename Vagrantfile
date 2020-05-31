@@ -21,7 +21,7 @@ sudo timedatectl set-timezone Etc/UTC
 # DEBIAN_FRONTEND=noninteractive sudo apt-get -y install kubelet=1.15.2-00 kubectl=1.15.2-00 kubeadm=1.15.2-00 docker-ce
 # DEBIAN_FRONTEND=noninteractive sudo apt-mark hold kubelet
 
-sudo kubeadm init --apiserver-cert-extra-sans london.alexswilliams.co.uk --ignore-preflight-errors=NumCPU
+sudo kubeadm init --apiserver-cert-extra-sans falkenstein.alexswilliams.co.uk --ignore-preflight-errors=NumCPU
 rm -rf $HOME/.kube
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config

@@ -21,7 +21,7 @@ spec:
         - key: kubernetes.io/hostname
           operator: In
           values:
-          - london.alexswilliams.co.uk
+          - falkenstein.alexswilliams.co.uk
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
