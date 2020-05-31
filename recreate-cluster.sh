@@ -45,7 +45,7 @@ systemctl restart docker
 
 
 echo Installing kubeadm, kubelet and kubectl
-sudo apt-get -y install kubelet=1.16.0-00 kubectl=1.16.0-00 kubeadm=1.16.0-00
+sudo apt-get -y install kubelet=1.18.3-00 kubectl=1.18.3-00 kubeadm=1.18.3-00
 sudo apt-mark hold kubelet
 
 echo '
@@ -53,7 +53,7 @@ KUBELET_EXTRA_ARGS="--cgroup-driver=cgroupfs"
 ' | sudo tee /etc/default/kubelet
 
 sudo kubeadm config images pull
-sudo kubeadm init --apiserver-cert-extra-sans london.alexswilliams.co.uk --ignore-preflight-errors=NumCPU
+sudo kubeadm init --apiserver-cert-extra-sans falkenstein.alexswilliams.co.uk --ignore-preflight-errors=NumCPU
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
@@ -79,5 +79,21 @@ source $HOME/.bash_profile
 
 kubectl taint nodes --all node-role.kubernetes.io/master:NoSchedule-
 
+
+sudo chown -R root:root /etc/kubernetes/pki/
+sudo chmod -R 644 /etc/kubernetes/pki/*.crt
+sudo chmod -R 600 /etc/kubernetes/pki/*.key
+
+
 bash ./k8s-config/make-kube-system-coredns-smaller.sh
 
+
+echo Installing kube-bench
+
+wget https://github.com/aquasecurity/kube-bench/releases/download/v0.3.0/kube-bench_0.3.0_linux_amd64.deb -O kube-bench.deb
+sudo dpkg -i kube-bench.deb
+
+
+echo Running kube-bench
+
+kube-bench master
