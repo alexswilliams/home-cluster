@@ -81,7 +81,7 @@ spec:
             - --web.route-prefix=/
             - --storage.tsdb.path=/prometheus
             - --storage.tsdb.retention.time=1y
-            - --storage.tsdb.retention.size=4GB
+            - --storage.tsdb.retention.size=8GB
 ---
 apiVersion: v1
 kind: ConfigMap
