@@ -35,7 +35,7 @@ spec:
 
       containers:
         - name: grafana
-          image: grafana/grafana:6.7.2-ubuntu
+          image: grafana/grafana:7.0.1-ubuntu
           env:
             - name: GF_PATHS_CONFIG
               value: /etc/grafana/grafana.ini
