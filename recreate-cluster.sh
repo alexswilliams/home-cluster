@@ -88,6 +88,11 @@ sudo chmod -R 600 /etc/kubernetes/pki/*.key
 bash ./k8s-config/make-kube-system-coredns-smaller.sh
 
 
+sudo mkdir -p /mnt/k8s-pv/prometheus-pv
+sudo mkdir -p /mnt/k8s-pv/certificate-pv
+sudo mkdir -p /mnt/k8s-pv/fluent-pv
+
+
 echo Installing kube-bench
 
 wget https://github.com/aquasecurity/kube-bench/releases/download/v0.3.0/kube-bench_0.3.0_linux_amd64.deb -O kube-bench.deb
