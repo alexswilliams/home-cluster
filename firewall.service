@@ -6,7 +6,7 @@ After=network.target
 Type=simple
 Restart=never
 User=root
-ExecStart=/bin/bash /home/alexw/home-cluster/firewall.sh start
+ExecStart=/bin/bash /home/alexw/git/home-cluster/firewall.sh start
 
 [Install]
 WantedBy=multi-user.target
