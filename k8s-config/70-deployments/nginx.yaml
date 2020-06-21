@@ -42,11 +42,11 @@ spec:
           image: nginx:1.18.0-alpine
           resources:
             requests:
-              memory: "8Mi"
-              cpu: "5m"
-            limits:
               memory: "16Mi"
               cpu: "10m"
+            limits:
+              memory: "32Mi"
+              cpu: "500m"
           ports:
             - containerPort: 443
               hostPort: 443
