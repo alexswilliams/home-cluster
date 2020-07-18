@@ -15,7 +15,7 @@
       {
         "datasource": "Prometheus",
         "enable": true,
-        "expr": "clamp_min(clamp_max(max_over_time(power_mw{alias=\"Washing Machine\"}[30s]) > 2250 and max_over_time(power_mw{alias=\"Washing Machine\"}[30s] offset 30s) <= 2250, 1), 1)",
+        "expr": "clamp_min(clamp_max(max_over_time(power_mw{alias=\"Washing Machine\"}[30s]) > 1000 and max_over_time(power_mw{alias=\"Washing Machine\"}[30s] offset 30s) <= 1000, 1), 1)",
         "hide": false,
         "iconColor": "rgba(255, 96, 96, 1)",
         "limit": 100,
@@ -28,7 +28,7 @@
       {
         "datasource": "Prometheus",
         "enable": true,
-        "expr": "clamp_min(clamp_max(max_over_time(power_mw{alias=\"Washing Machine\"}[1m]) < 2250 and max_over_time(power_mw{alias=\"Washing Machine\"}[90s]) >= 2250, 1), 1)",
+        "expr": "clamp_min(clamp_max(max_over_time(power_mw{alias=\"Washing Machine\"}[1m]) < 1000 and max_over_time(power_mw{alias=\"Washing Machine\"}[90s]) >= 1000, 1), 1)",
         "hide": false,
         "iconColor": "#8AB8FF",
         "limit": 100,
@@ -43,7 +43,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 1,
-  "iteration": 1595039620070,
+  "iteration": 1595108838397,
   "links": [],
   "panels": [
     {
@@ -54,7 +54,8 @@
       "datasource": "Prometheus",
       "fieldConfig": {
         "defaults": {
-          "custom": {}
+          "custom": {},
+          "links": []
         },
         "overrides": []
       },
@@ -83,10 +84,8 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
-      "options": {
-        "dataLinks": []
-      },
       "percentage": false,
+      "pluginVersion": "7.1.0",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -173,7 +172,8 @@
       "datasource": "Prometheus",
       "fieldConfig": {
         "defaults": {
-          "custom": {}
+          "custom": {},
+          "links": []
         },
         "overrides": []
       },
@@ -203,10 +203,8 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
-      "options": {
-        "dataLinks": []
-      },
       "percentage": false,
+      "pluginVersion": "7.1.0",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -295,7 +293,8 @@
       "datasource": null,
       "fieldConfig": {
         "defaults": {
-          "custom": {}
+          "custom": {},
+          "links": []
         },
         "overrides": []
       },
@@ -323,10 +322,8 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
-      "options": {
-        "dataLinks": []
-      },
       "percentage": false,
+      "pluginVersion": "7.1.0",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -669,7 +666,7 @@
     }
   ],
   "refresh": "1m",
-  "schemaVersion": 25,
+  "schemaVersion": 26,
   "style": "dark",
   "tags": [],
   "templating": {
@@ -678,9 +675,9 @@
         "allValue": null,
         "current": {
           "selected": true,
-          "text": "All",
+          "text": "Washing Machine",
           "value": [
-            "$__all"
+            "Washing Machine"
           ]
         },
         "datasource": "Prometheus",
@@ -710,7 +707,6 @@
   },
   "timepicker": {
     "refresh_intervals": [
-      "5s",
       "10s",
       "30s",
       "1m",
