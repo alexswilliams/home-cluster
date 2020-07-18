@@ -46,7 +46,7 @@ spec:
               cpu: "10m"
             limits:
               memory: "32Mi"
-              cpu: "500m"
+              cpu: "250m"
           ports:
             - containerPort: 443
               hostPort: 443
