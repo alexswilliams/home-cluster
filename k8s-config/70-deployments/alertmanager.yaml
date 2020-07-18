@@ -23,7 +23,7 @@ spec:
             defaultMode: 0444
       containers:
         - name: alertmanager
-          image: prom/alertmanager:v0.20.0
+          image: prom/alertmanager:v0.21.0
           resources:
             requests:
               memory: "24Mi"
