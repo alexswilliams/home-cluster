@@ -43,7 +43,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 1,
-  "iteration": 1595108838397,
+  "iteration": 1595235467086,
   "links": [],
   "panels": [
     {
@@ -675,9 +675,9 @@
         "allValue": null,
         "current": {
           "selected": true,
-          "text": "Washing Machine",
+          "text": "All",
           "value": [
-            "Washing Machine"
+            "$__all"
           ]
         },
         "datasource": "Prometheus",
@@ -702,7 +702,7 @@
     ]
   },
   "time": {
-    "from": "now-15m",
+    "from": "now-12h",
     "to": "now"
   },
   "timepicker": {
