@@ -47,11 +47,11 @@ spec:
               mountPath: /prometheus
           resources:
             requests:
-              memory: "4Mi"
-              cpu: "2m"
+              memory: "256Mi"
+              cpu: "5m"
             limits:
-              memory: "32Mi"
-              cpu: "10m"
+              memory: "256Mi"
+              cpu: "30m"
       containers:
         - name: prometheus
           image: prom/prometheus:v2.19.2

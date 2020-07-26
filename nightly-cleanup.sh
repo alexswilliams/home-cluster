@@ -20,7 +20,7 @@ journalctl --vacuum-time=2d
 
 echo ""
 echo "Cleaning docker"
-docker rm -f $(docker ps --all --filter "status=exited" --quiet)
+docker rm -f $(docker ps --all --filter "status=exited" --quiet) || true
 docker image prune -af
 docker volume prune -f
 docker system prune -af

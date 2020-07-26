@@ -28,7 +28,7 @@ spec:
         emptyDir: {}
       containers:
       - name: metrics-server
-        image: k8s.gcr.io/metrics-server-amd64:v0.3.7
+        image: k8s.gcr.io/metrics-server/metrics-server:v0.3.7
         imagePullPolicy: IfNotPresent
         args:
           - --cert-dir=/tmp
@@ -46,11 +46,11 @@ spec:
             scheme: HTTPS
         resources:
           requests:
-            memory: "64Mi"
-            cpu: "20m"
+            memory: "128Mi"
+            cpu: "40m"
           limits:
-            memory: "64Mi"
-            cpu: "20m"
+            memory: "128Mi"
+            cpu: "40m"
         securityContext:
           readOnlyRootFilesystem: true
           runAsNonRoot: true
