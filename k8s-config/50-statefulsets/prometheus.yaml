@@ -54,7 +54,7 @@ spec:
               cpu: "30m"
       containers:
         - name: prometheus
-          image: prom/prometheus:v2.19.2
+          image: prom/prometheus:v2.19.3
           resources:
             requests:
               memory: "80Mi"
