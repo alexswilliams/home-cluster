@@ -32,7 +32,7 @@ spec:
 
           containers:
             - name: log-sync-s3-job-container
-              image: amazon/aws-cli:2.0.31
+              image: amazon/aws-cli:2.0.42
               env:
                 - name: AWS_DEFAULT_REGION
                   value: eu-west-2
