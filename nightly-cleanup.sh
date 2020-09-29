@@ -16,7 +16,15 @@ rm -rf /etc/kubernetes/tmp/kubeadm-backup-*
 
 echo ""
 echo "Removing old journal entries..."
-journalctl --vacuum-time=2d
+journalctl --vacuum-size=32M
+
+echo ""
+echo "Forcing a log rotation..."
+systemctl restart logrotate
+
+echo ""
+echo "Removing stale prometheus temp folders..."
+rm -rf /mnt/k8s-pv/prometheus-pv/*.tmp
 
 echo ""
 echo "Cleaning docker"
