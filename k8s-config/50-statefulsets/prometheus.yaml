@@ -183,11 +183,11 @@ data:
       - name: washing-machine-status
         rules:
           - alert: Washing Machine Started
-            expr: clamp_min(clamp_max(max_over_time(power_mw{alias="Washing Machine"}[30s]) > 1000 and max_over_time(power_mw{alias="Washing Machine"}[30s] offset 30s) <= 1000, 1), 1)
+            expr: clamp_min(clamp_max(max_over_time(power_mw{alias="Washing Machine"}[30s]) > 2000 and max_over_time(power_mw{alias="Washing Machine"}[30s] offset 30s) <= 2000, 1), 1)
             labels:
               rube_goldberg_pipeline_stage: washing-started
           - alert: Washing Machine Finished
-            expr: clamp_min(clamp_max(max_over_time(power_mw{alias="Washing Machine"}[1m]) < 1000 and max_over_time(power_mw{alias="Washing Machine"}[90s]) >= 1000, 1), 1)
+            expr: clamp_min(clamp_max(max_over_time(power_mw{alias="Washing Machine"}[1m]) < 2000 and max_over_time(power_mw{alias="Washing Machine"}[90s]) >= 2000, 1), 1)
             labels:
               rube_goldberg_pipeline_stage: washing-finished
 

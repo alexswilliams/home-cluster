@@ -15,7 +15,7 @@
       {
         "datasource": "Prometheus",
         "enable": true,
-        "expr": "clamp_min(clamp_max(max_over_time(power_mw{alias=\"Washing Machine\"}[30s]) > 1000 and max_over_time(power_mw{alias=\"Washing Machine\"}[30s] offset 30s) <= 1000, 1), 1)",
+        "expr": "clamp_min(clamp_max(max_over_time(power_mw{alias=\"Washing Machine\"}[30s]) > 2000 and max_over_time(power_mw{alias=\"Washing Machine\"}[30s] offset 30s) <= 2000, 1), 1)",
         "hide": false,
         "iconColor": "rgba(255, 96, 96, 1)",
         "limit": 100,
@@ -28,7 +28,7 @@
       {
         "datasource": "Prometheus",
         "enable": true,
-        "expr": "clamp_min(clamp_max(max_over_time(power_mw{alias=\"Washing Machine\"}[1m]) < 1000 and max_over_time(power_mw{alias=\"Washing Machine\"}[90s]) >= 1000, 1), 1)",
+        "expr": "clamp_min(clamp_max(max_over_time(power_mw{alias=\"Washing Machine\"}[1m]) < 2000 and max_over_time(power_mw{alias=\"Washing Machine\"}[90s]) >= 2000, 1), 1)",
         "hide": false,
         "iconColor": "#8AB8FF",
         "limit": 100,
