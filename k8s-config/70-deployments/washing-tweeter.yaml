@@ -51,6 +51,8 @@ spec:
               value: "http://prometheus-service:9090"
             - name: TOTAL_WH_ALIAS_TAG
               value: "Washing Machine"
+            - name: COST_PER_KWH
+              value: "0.1347"
             - name: TWITTER_CONSUMER_KEY
               valueFrom:
                 secretKeyRef:
